@@ -25,8 +25,8 @@
                 <div class="profile-avatar">
                     <img src="favicon.jpg" alt="Сергей" class="avatar-img">
                 </div>
-                <h2 class="profile-name" data-ru="Сергей" data-en="Sergey">Сергей</h2>
-                <p class="profile-title" data-ru="Разработчик • Спортсмен • Фотограф" data-en="Developer • Athlete • Photographer">Разработчик • Спортсмен • Фотограф</p>
+                <h2 class="profile-name">Сергей</h2>
+                <p class="profile-title">Разработчик • Спортсмен • Фотограф</p>
             </div>
         </div>
         
@@ -37,7 +37,7 @@
                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                         <circle cx="12" cy="7" r="4"></circle>
                     </svg>
-                    <span data-ru="Обо мне" data-en="About">Обо мне</span>
+                    <span>Обо мне</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -47,7 +47,7 @@
                         <line x1="8" y1="21" x2="16" y2="21"></line>
                         <line x1="12" y1="17" x2="12" y2="21"></line>
                     </svg>
-                    <span data-ru="Разработка" data-en="Development">Разработка</span>
+                    <span>Разработка</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -55,7 +55,7 @@
                     <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
                     </svg>
-                    <span data-ru="Проекты" data-en="Projects">Проекты</span>
+                    <span>Проекты</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -63,7 +63,7 @@
                     <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
                     </svg>
-                    <span data-ru="Спорт" data-en="Sport">Спорт</span>
+                    <span>Спорт</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -72,7 +72,7 @@
                         <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
                         <circle cx="12" cy="13" r="4"></circle>
                     </svg>
-                    <span data-ru="Фотография" data-en="Photography">Фотография</span>
+                    <span>Фотография</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -80,35 +80,15 @@
                     <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
                     </svg>
-                    <span data-ru="Поддержка" data-en="Support">Поддержка</span>
+                    <span>Поддержка</span>
                 </a>
             </li>
         </ul>
 
         <div class="sidebar-footer">
-            <div class="language-switcher">
-                <button class="lang-btn active" data-lang="ru" aria-label="Русский язык">
-                    <svg class="lang-flag" viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
-                        <g fill-rule="evenodd" stroke-width="1pt">
-                            <path fill="#fff" d="M0 0h640v480H0z"/>
-                            <path fill="#0039a6" d="M0 160h640v320H0z"/>
-                            <path fill="#d52b1e" d="M0 320h640v160H0z"/>
-                        </g>
-                    </svg>
-                    <span class="lang-text">RU</span>
-                </button>
-                <button class="lang-btn" data-lang="en" aria-label="English language">
-                    <svg class="lang-flag" viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
-                        <path fill="#012169" d="M0 0h640v480H0z"/>
-                        <path fill="#FFF" d="m75 0 244 181L562 0h78v62L400 241l240 178v61h-80L320 301 81 480H0v-60l239-178L0 64V0h75z"/>
-                        <path fill="#C8102E" d="m424 281 216 159v40L369 281h55zm-184 20 6 35L54 480H0l240-179zM640 0v3L391 191l2-44L590 0h50zM0 0l239 176h-60L0 42V0z"/>
-                        <path fill="#FFF" d="M241 0v480h160V0H241zM0 160v160h640V160H0z"/>
-                        <path fill="#C8102E" d="M0 193v96h640v-96H0zM273 0v480h96V0h-96z"/>
-                    </svg>
-                    <span class="lang-text">EN</span>
-                </button>
+            <div class="time-display">
+                <div id="serverTime">Сегодня: 01.01.2024<br>Сейчас: 00:00:00</div>
             </div>
-            <div class="server-time" id="serverTime" role="timer" aria-live="polite"></div>
         </div>
     </nav>
 
