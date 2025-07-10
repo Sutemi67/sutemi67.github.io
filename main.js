@@ -260,6 +260,85 @@ const setupSectionAnimations = () => {
     });
 };
 
+// Language switching functionality
+class LanguageManager {
+    constructor() {
+        this.currentLang = 'ru';
+        this.init();
+    }
+
+    init() {
+        this.setupEventListeners();
+        this.loadSavedLanguage();
+    }
+
+    setupEventListeners() {
+        const langButtons = document.querySelectorAll('.lang-btn');
+        langButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const lang = btn.getAttribute('data-lang');
+                this.switchLanguage(lang);
+            });
+        });
+    }
+
+    switchLanguage(lang) {
+        if (lang === this.currentLang) return;
+
+        this.currentLang = lang;
+        this.updateLanguageButtons();
+        this.translatePage();
+        this.saveLanguage();
+    }
+
+    updateLanguageButtons() {
+        const langButtons = document.querySelectorAll('.lang-btn');
+        langButtons.forEach(btn => {
+            btn.classList.remove('active');
+            if (btn.getAttribute('data-lang') === this.currentLang) {
+                btn.classList.add('active');
+            }
+        });
+    }
+
+    translatePage() {
+        const elements = document.querySelectorAll('[data-ru][data-en]');
+        elements.forEach(element => {
+            const translation = element.getAttribute(`data-${this.currentLang}`);
+            if (translation) {
+                element.textContent = translation;
+            }
+        });
+
+        // Update page title and meta description
+        this.updatePageMeta();
+    }
+
+    updatePageMeta() {
+        const title = document.querySelector('title');
+        const metaDescription = document.querySelector('meta[name="description"]');
+        
+        if (this.currentLang === 'ru') {
+            title.textContent = 'Сергей - Разработчик, Спортсмен, Фотограф';
+            metaDescription.setAttribute('content', 'Сергей - Разработчик мобильных приложений, спортсмен и фотограф');
+        } else {
+            title.textContent = 'Sergey - Developer, Athlete, Photographer';
+            metaDescription.setAttribute('content', 'Sergey - Mobile app developer, athlete and photographer');
+        }
+    }
+
+    loadSavedLanguage() {
+        const savedLang = localStorage.getItem('preferred-language');
+        if (savedLang && (savedLang === 'ru' || savedLang === 'en')) {
+            this.switchLanguage(savedLang);
+        }
+    }
+
+    saveLanguage() {
+        localStorage.setItem('preferred-language', this.currentLang);
+    }
+}
+
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize time
@@ -268,6 +347,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize navigation
     const navigation = new Navigation();
+
+    // Initialize language manager
+    const languageManager = new LanguageManager();
 
     // Setup additional features
     setupSmoothScrolling();
