@@ -1,4 +1,7 @@
-// Time update functionality
+/**
+ * Обновляет время в сайдбаре
+ * @function updateTime
+ */
 const updateTime = () => {
     const now = new Date();
     const options = {
@@ -18,8 +21,14 @@ const updateTime = () => {
     }
 };
 
-// Navigation functionality
+/**
+ * Класс для управления навигацией сайта
+ * @class Navigation
+ */
 class Navigation {
+    /**
+     * @constructor
+     */
     constructor() {
         this.currentSection = 'about';
         this.sections = ['about', 'tech', 'projects', 'sport', 'photography', 'donate'];

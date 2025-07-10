@@ -26,7 +26,9 @@
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Reset and base styles */
+/* ==========================================================================
+   Reset and base styles
+   ========================================================================== */
 * {
     margin: 0;
     padding: 0;
@@ -82,7 +84,9 @@ body::before {
     background: var(--primary-light);
 }
 
-/* Layout */
+/* ==========================================================================
+   Layout Components
+   ========================================================================== */
 .sidebar {
     position: fixed;
     top: 0;
@@ -417,7 +421,7 @@ body::before {
     border-radius: var(--border-radius);
     padding: 1.5rem;
     backdrop-filter: blur(10px);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: var(--transition);
     display: flex;
     flex-direction: column;
     height: 220px;
@@ -497,7 +501,7 @@ body::before {
     margin-bottom: 1rem;
     font-size: 0.875rem;
     overflow: hidden;
-    transition: all 0.3s ease;
+    transition: var(--transition);
 }
 
 .project-card:not(.expanded) .project-description {
@@ -565,7 +569,9 @@ body::before {
     display: block;
 }
 
-/* API Endpoints */
+/* ==========================================================================
+   API Documentation Styles
+   ========================================================================== */
 .api-endpoints {
     display: grid;
     gap: 1.5rem;
@@ -685,7 +691,9 @@ body::before {
     backdrop-filter: blur(4px);
 }
 
-/* Responsive Design */
+/* ==========================================================================
+   Responsive Design
+   ========================================================================== */
 @media (max-width: 1024px) {
     .sidebar {
         transform: translateX(-100%);
@@ -770,20 +778,22 @@ body::before {
     .sidebar,
     .mobile-menu-toggle,
     .overlay {
-        display: none !important;
+        display: none;
     }
     
     .main-content {
-        margin-left: 0 !important;
+        margin-left: 0;
     }
     
     .content-section {
-        display: block !important;
+        display: block;
         page-break-inside: avoid;
     }
 }
 
-/* Sport Section */
+/* ==========================================================================
+   Sport Section Styles
+   ========================================================================== */
 .sport-intro {
     margin-bottom: 2rem;
 }
@@ -894,7 +904,9 @@ body::before {
     line-height: 1.5;
 }
 
-/* Photography Section */
+/* ==========================================================================
+   Photography Section Styles
+   ========================================================================== */
 .photography-intro {
     margin-bottom: 2rem;
 }
@@ -1274,7 +1286,9 @@ body::before {
     }
 }
 
-/* Project Background Images */
+/* ==========================================================================
+   Project Card Background Images
+   ========================================================================== */
 .project-card.working-hours {
     position: relative;
     overflow: hidden;
