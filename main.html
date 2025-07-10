@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Welcome to AppCradle Server - A platform for mobile applications development">
+    <title>Welcome to AppCradle Server</title>
+
+    <!-- Preload critical assets -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Jura:wght@300;400;500;600;700&display=swap"
+          as="style">
+    <link rel="preload" href="styles.css" as="style">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jura:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpg" href="favicon.jpg" alt="AppCradle logo">
+</head>
+<body>
+<main class="container">
+    <header>
+        <h1 class="welcome-message">Welcome to AppCradle Server!</h1>
+        <div class="server-time" id="serverTime" role="timer" aria-live="polite"></div>
+        <div class="visitor-stats">
+            <div class="stat-item">
+                <span class="stat-label">Online Users:</span>
+                <span class="stat-value" id="onlineUsers">-</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Last 30 Days:</span>
+                <span class="stat-value" id="monthlyUsers">-</span>
+            </div>
+        </div>
+    </header>
+
+    <hr class="divider" aria-hidden="true">
+
+    <section class="spoiler" role="region" aria-label="About Me">
+        <button class="spoiler-header" onclick="toggleSpoiler('spoilerContent1')" aria-expanded="false"
+                aria-controls="spoilerContent1">
+            <span>About Me</span>
+            <span class="arrow" aria-hidden="true">▼</span>
+        </button>
+        <div class="spoiler-content" id="spoilerContent1" aria-hidden="true">
+            Hi, I'm Sergey — the developer behind this platform.<br><br>
+            I specialize in building mobile applications using Kotlin with Jetpack Compose for modern, declarative UI
+            development. My projects are typically structured as full-stack solutions, with the backend powered by Ktor,
+            a lightweight asynchronous web framework for Kotlin. This architecture supports cross-platform development,
+            enabling seamless integration between Android clients and custom web interfaces through RESTful APIs or
+            WebSockets.<br><br>
+            This page serves as a welcome screen hosted by the backend server that currently powers my suite of
+            applications.<br><br>
+            <div class="contact-buttons">
+                <a href="mailto:sutemi67@gmail.com" class="contact-button email-button">
+                    <span class="button-text">Write me</span>
+                </a>
+                <a href="https://t.me/sutemi67" target="_blank" rel="noopener noreferrer"
+                   class="contact-button social-button">
+                    <span class="button-text">Telegram</span>
+                </a>
+                <a href="https://github.com/Sutemi67" target="_blank" rel="noopener noreferrer"
+                   class="contact-button social-button">
+                    <span class="button-text">GitHub</span>
+                </a>
+                <a href="https://www.linkedin.com/in/sutemi67" target="_blank" rel="noopener noreferrer"
+                   class="contact-button social-button">
+                    <span class="button-text">LinkedIn</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="spoiler" role="region" aria-label="Technology Stack">
+        <button class="spoiler-header" onclick="toggleSpoiler('spoilerContentStack')" aria-expanded="false"
+                aria-controls="spoilerContentStack">
+            <span>Technology Stack</span>
+            <span class="arrow" aria-hidden="true">▼</span>
+        </button>
+        <div class="spoiler-content" id="spoilerContentStack" aria-hidden="true">
+            <ul>
+                <li><b>Kotlin</b> (Jetpack Compose, Fragments, Custom Views, App Widgets)</li>
+                <li><b>Ktor, Retrofit2</b> (WebSockets, REST APIs, Authentication, Thymeleaf for server-side rendering)
+                </li>
+                <li><b>Clean Architecture, SOLID Principles</b> (MVI, MVVM patterns)</li>
+                <li><b>Android Components</b> (Services, BroadcastReceivers, ContentProviders for background processing,
+                    notifications, and file access)
+                </li>
+                <li><b>Firebase</b> (Crashlytics, Google Analytics)</li>
+                <li><b>Dependency Injection</b> (Koin, Dagger Hilt)</li>
+                <li><b>Kotlin Coroutines, Flow</b> (Asynchronous and reactive programming)</li>
+                <li><b>Databases</b> (Room, SQLDelight, PostgreSQL)</li>
+                <li><b>Web Technologies</b> (HTML, CSS, JavaScript – for frontend and single-page applications)</li>
+                <li><b>Git</b> (Version control, CI/CD with GitHub Actions)</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="spoiler" role="region" aria-label="Applications">
+        <button class="spoiler-header" onclick="toggleSpoiler('spoilerContent2')" aria-expanded="false"
+                aria-controls="spoilerContent2">
+            <span>Applications that already said "Hello, World!"</span>
+            <span class="arrow" aria-hidden="true">▼</span>
+        </button>
+        <div class="spoiler-content" id="spoilerContent2" aria-hidden="true">
+            <div class="link-buttons">
+                <div class="link-row">
+                    <a href="https://www.rustore.ru/catalog/app/apc.appcradle.workinghours"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="link-button">Working Hours</a>
+                    <span class="link-description">The application allows you to set shift schedules with specified periodicity and calculate payment for them.</span>
+                </div>
+                <div class="link-row">
+                    <a href="https://www.rustore.ru/catalog/app/acr.appcradle.wotcalc"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="link-button">WOT Calc</a>
+                    <span class="link-description">This application helps determine your tank's characteristics with various equipment.</span>
+                </div>
+                <div class="link-row">
+                    <a href="https://www.rustore.ru/catalog/app/apc.appcradle.kotlinjc_feelingdiary_app"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="link-button">Feeling Diary</a>
+                    <span class="link-description">This application allows you to record all the feelings you experience at the moment and would like to write down.</span>
+                </div>
+                <div class="link-row">
+                    <a href="" class="link-button disabled">AppCradle Radio</a>
+                    <span class="link-description">A player for listening to my own internet radio station, as well as existing ones and local tracks on the device.</span>
+                </div>
+                <div class="link-row">
+                    <a href="" class="link-button disabled">Money Everyday</a>
+                    <span class="link-description"> Your money spending is on your screen. Effortless.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="spoiler" role="region" aria-label="API Endpoints">
+        <button class="spoiler-header" onclick="toggleSpoiler('spoilerContent3')" aria-expanded="false"
+                aria-controls="spoilerContent3">
+            <span>API Endpoints of this server</span>
+            <span class="arrow" aria-hidden="true">▼</span>
+        </button>
+        <div class="spoiler-content" id="spoilerContent3" aria-hidden="true">
+            <div class="endpoint">POST /data</div>
+            <div class="endpoint-description">
+                Send data to the server. Accepts a JSON object with name and value fields.
+                Returns processing status and created record ID.
+            </div>
+
+            <div class="endpoint">GET /data/{id}</div>
+            <div class="endpoint-description">
+                Get data by ID. Returns a JSON object with name, value, and timestamp fields.
+            </div>
+
+            <div class="endpoint">GET /data</div>
+            <div class="endpoint-description">
+                Get a list of all data. Returns an array of JSON objects with information about each record.
+            </div>
+
+            <div class="endpoint">DELETE /data/{id}</div>
+            <div class="endpoint-description">
+                Delete data by ID. Returns operation status.
+            </div>
+        </div>
+    </section>
+    <section class="spoiler" role="region" aria-label="API Endpoints">
+        <button class="spoiler-header" onclick="toggleSpoiler('spoilerContent4')" aria-expanded="false"
+                aria-controls="spoilerContent3">
+            <span>Donations</span>
+            <span class="arrow" aria-hidden="true">▼</span>
+        </button>
+        <div class="spoiler-content" id="spoilerContent4" aria-hidden="true">
+            <iframe src="https://yoomoney.ru/quickpay/fundraise/button?billNumber=1AVR8HB4BMS.250619&" width="330" height="50" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
+        </div>
+    </section>
+</main>
+
+<script src="main.js" defer></script>
+</body>
+</html>
+
