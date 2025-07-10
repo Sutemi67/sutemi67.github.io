@@ -108,31 +108,7 @@ header {
     font-variant-numeric: tabular-nums;
 }
 
-.visitor-stats {
-    font-size: 1.2rem;
-    font-weight: 300;
-    color: var(--text-color);
-    opacity: 0.8;
-    letter-spacing: 0.5px;
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-}
 
-.stat-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.stat-label {
-    font-weight: 300;
-}
-
-.stat-value {
-    font-weight: 300;
-    color: var(--text-color);
-}
 
 /* Divider */
 .divider {

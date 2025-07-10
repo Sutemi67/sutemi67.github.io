@@ -16,33 +16,7 @@ const updateTime = () => {
     }
 };
 
-// Visitor statistics functionality
-const updateVisitorStats = async () => {
-    const onlineUsersElement = document.getElementById('onlineUsers');
-    const monthlyUsersElement = document.getElementById('monthlyUsers');
-    
-    try {
-        const response = await fetch('/api/stats/visitors');
-        if (!response.ok) throw new Error('Failed to fetch visitor stats');
-        
-        const data = await response.json();
-        
-        if (onlineUsersElement) {
-            onlineUsersElement.textContent = data.onlineUsers.toLocaleString();
-        }
-        if (monthlyUsersElement) {
-            monthlyUsersElement.textContent = data.monthlyUsers.toLocaleString();
-        }
-    } catch (error) {
-        console.error('Error fetching visitor stats:', error);
-        if (onlineUsersElement) {
-            onlineUsersElement.textContent = '0';
-        }
-        if (monthlyUsersElement) {
-            monthlyUsersElement.textContent = '0';
-        }
-    }
-};
+
 
 // Spoiler functionality
 const toggleSpoiler = (spoilerId) => {
@@ -64,8 +38,4 @@ const toggleSpoiler = (spoilerId) => {
 document.addEventListener('DOMContentLoaded', () => {
     updateTime();
     setInterval(updateTime, 1000);
-    
-    // Update visitor stats immediately and then every 30 seconds
-    updateVisitorStats();
-    setInterval(updateVisitorStats, 30000);
 }); 

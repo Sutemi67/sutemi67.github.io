@@ -23,16 +23,6 @@
     <header>
         <h1 class="welcome-message">Welcome to AppCradle Server!</h1>
         <div class="server-time" id="serverTime" role="timer" aria-live="polite"></div>
-        <div class="visitor-stats">
-            <div class="stat-item">
-                <span class="stat-label">Online Users:</span>
-                <span class="stat-value" id="onlineUsers">-</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-label">Last 30 Days:</span>
-                <span class="stat-value" id="monthlyUsers">-</span>
-            </div>
-        </div>
     </header>
 
     <hr class="divider" aria-hidden="true">
@@ -145,25 +135,15 @@
             <span class="arrow" aria-hidden="true">▼</span>
         </button>
         <div class="spoiler-content" id="spoilerContent3" aria-hidden="true">
-            <div class="endpoint">POST /data</div>
+            <div class="endpoint">POST /api/data</div>
             <div class="endpoint-description">
-                Send data to the server. Accepts a JSON object with name and value fields.
+                Send data to the server. Accepts a number value.
                 Returns processing status and created record ID.
             </div>
 
-            <div class="endpoint">GET /data/{id}</div>
+            <div class="endpoint">GET /api/data/latest</div>
             <div class="endpoint-description">
-                Get data by ID. Returns a JSON object with name, value, and timestamp fields.
-            </div>
-
-            <div class="endpoint">GET /data</div>
-            <div class="endpoint-description">
-                Get a list of all data. Returns an array of JSON objects with information about each record.
-            </div>
-
-            <div class="endpoint">DELETE /data/{id}</div>
-            <div class="endpoint-description">
-                Delete data by ID. Returns operation status.
+                Get the latest data record. Returns the most recent number value.
             </div>
         </div>
     </section>
