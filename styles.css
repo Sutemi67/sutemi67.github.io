@@ -1328,6 +1328,7 @@ body::before {
     transition: var(--transition);
 }
 
+
 .project-card.wot-calc {
     position: relative;
     overflow: hidden;
