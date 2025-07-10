@@ -523,15 +523,17 @@
 
         <div class="content-card">
             <div class="projects-grid">
-                <div class="project-card working-hours">
+                <div class="project-card working-hours" data-project="working-hours">
                     <div class="project-header">
                         <h3 class="project-title">Working Hours</h3>
                         <span class="project-status available">Доступно</span>
                     </div>
-                    <p class="project-description">
-                        Приложение позволяет устанавливать графики смен с указанной периодичностью и рассчитывать оплату
-                        за них.
-                    </p>
+                    <div class="project-content">
+                        <p class="project-description">
+                            Приложение позволяет устанавливать графики смен с указанной периодичностью и рассчитывать оплату
+                            за них. Приложение для учета рабочих часов с возможностью расчета оплаты за смены.
+                        </p>
+                    </div>
                     <div class="project-links">
                         <a href="https://www.rustore.ru/catalog/app/apc.appcradle.workinghours"
                            target="_blank" rel="noopener noreferrer" class="project-link">
@@ -544,16 +546,19 @@
                         </a>
                     </div>
                 </div>
-                <div class="project-card task-time">
+
+                <div class="project-card task-time" data-project="task-time">
                     <div class="project-header">
                         <h3 class="project-title">Task Time - трекер продуктивности</h3>
                         <span class="project-status available">Доступно</span>
                     </div>
-                    <p class="project-description">
-                        Этот простой, и в то же время эффективный таймер поможет вам сосредоточиться на работе во время
-                        активного периода, а так же будет напоминать вам о том, что необходимо сделать перерыв.
-                        Встроенный список задач поможет держать вам фокус на самом важном.
-                    </p>
+                    <div class="project-content">
+                        <p class="project-description">
+                            Этот простой, и в то же время эффективный таймер поможет вам сосредоточиться на работе во время
+                            активного периода, а так же будет напоминать вам о том, что необходимо сделать перерыв.
+                            Встроенный список задач поможет держать вам фокус на самом важном.
+                        </p>
+                    </div>
                     <div class="project-links">
                         <a href="https://www.rustore.ru/catalog/app/apc.appcradle.kotlinjc_pomodorrotimer_app"
                            target="_blank" rel="noopener noreferrer" class="project-link">
@@ -567,14 +572,17 @@
                     </div>
                 </div>
 
-                <div class="project-card wot-calc">
+                <div class="project-card wot-calc" data-project="wot-calc">
                     <div class="project-header">
                         <h3 class="project-title">WOT Calc</h3>
                         <span class="project-status available">Доступно</span>
                     </div>
-                    <p class="project-description">
-                        Это приложение помогает определить характеристики вашего танка с различным оборудованием.
-                    </p>
+                    <div class="project-content">
+                        <p class="project-description">
+                            Это приложение помогает определить характеристики вашего танка с различным оборудованием.
+                            Калькулятор характеристик танков для игры World of Tanks.
+                        </p>
+                    </div>
                     <div class="project-links">
                         <a href="https://www.rustore.ru/catalog/app/acr.appcradle.wotcalc"
                            target="_blank" rel="noopener noreferrer" class="project-link">
@@ -588,15 +596,17 @@
                     </div>
                 </div>
 
-                <div class="project-card feeling-diary">
+                <div class="project-card feeling-diary" data-project="feeling-diary">
                     <div class="project-header">
                         <h3 class="project-title">Feeling Diary</h3>
                         <span class="project-status available">Доступно</span>
                     </div>
-                    <p class="project-description">
-                        Это приложение позволяет записывать все чувства, которые вы испытываете в данный момент и хотели
-                        бы записать.
-                    </p>
+                    <div class="project-content">
+                        <p class="project-description">
+                            Это приложение позволяет записывать все чувства, которые вы испытываете в данный момент и хотели
+                            бы записать. Дневник эмоций для отслеживания психологического состояния.
+                        </p>
+                    </div>
                     <div class="project-links">
                         <a href="https://www.rustore.ru/catalog/app/apc.appcradle.kotlinjc_feelingdiary_app"
                            target="_blank" rel="noopener noreferrer" class="project-link">
@@ -610,41 +620,45 @@
                     </div>
                 </div>
 
-                <div class="project-card">
+                <div class="project-card" data-project="appcradle-radio">
                     <div class="project-header">
                         <h3 class="project-title">AppCradle Radio</h3>
                         <span class="project-status coming-soon">Скоро</span>
                     </div>
-                    <p class="project-description">
-                        Плеер для прослушивания моей собственной интернет-радиостанции, а также существующих и локальных
-                        треков на устройстве.
-                    </p>
+                    <div class="project-content">
+                        <p class="project-description">
+                            Плеер для прослушивания моей собственной интернет-радиостанции, а также существующих и локальных
+                            треков на устройстве. Музыкальный плеер с поддержкой интернет-радио и локальных файлов.
+                        </p>
+                    </div>
                     <div class="project-links">
-                            <span class="project-link disabled">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <circle cx="12" cy="12" r="10"></circle>
-                                    <polygon points="10,8 16,12 10,16 10,8"></polygon>
-                                </svg>
-                                <span>В разработке</span>
-                            </span>
+                        <span class="project-link disabled">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polygon points="10,8 16,12 10,16 10,8"></polygon>
+                            </svg>
+                            <span>В разработке</span>
+                        </span>
                     </div>
                 </div>
 
-                <div class="project-card">
+                <div class="project-card" data-project="money-everyday">
                     <div class="project-header">
                         <h3 class="project-title">Money Everyday</h3>
                         <span class="project-status coming-soon">Скоро</span>
                     </div>
-                    <p class="project-description">
-                        Ваши траты на экране. Без усилий.
-                    </p>
+                    <div class="project-content">
+                        <p class="project-description">
+                            Ваши траты на экране. Без усилий. Приложение для учета личных финансов и контроля расходов.
+                        </p>
+                    </div>
                     <div class="project-links">
-                            <span class="project-link disabled">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-                                </svg>
-                                <span>В разработке</span>
-                            </span>
+                        <span class="project-link disabled">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                            </svg>
+                            <span>В разработке</span>
+                        </span>
                     </div>
                 </div>
             </div>

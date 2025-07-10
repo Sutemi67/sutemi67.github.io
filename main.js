@@ -276,6 +276,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupAnimations();
     setupHoverEffects();
     setupSectionAnimations();
+    setupProjectCards();
 
     // Handle initial hash in URL
     const hash = window.location.hash.substring(1);
@@ -293,6 +294,61 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+// Setup interactive project cards
+const setupProjectCards = () => {
+    const projectCards = document.querySelectorAll('.project-card');
+    let expandedCard = null;
+
+    projectCards.forEach(card => {
+        card.addEventListener('click', (e) => {
+            // Don't expand if clicking on links
+            if (e.target.closest('.project-link')) {
+                return;
+            }
+
+            // If clicking on the same card, collapse it
+            if (card === expandedCard) {
+                card.classList.remove('expanded');
+                expandedCard = null;
+                return;
+            }
+
+            // Collapse previously expanded card
+            if (expandedCard) {
+                expandedCard.classList.remove('expanded');
+            }
+
+            // Expand clicked card
+            card.classList.add('expanded');
+            expandedCard = card;
+
+            // Scroll to expanded card if needed
+            setTimeout(() => {
+                card.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'nearest' 
+                });
+            }, 400);
+        });
+    });
+
+    // Collapse expanded card when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.project-card') && expandedCard) {
+            expandedCard.classList.remove('expanded');
+            expandedCard = null;
+        }
+    });
+
+    // Collapse on escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && expandedCard) {
+            expandedCard.classList.remove('expanded');
+            expandedCard = null;
+        }
+    });
+};
 
 // Add some performance optimizations
 const optimizePerformance = () => {
