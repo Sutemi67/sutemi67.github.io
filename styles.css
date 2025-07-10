@@ -390,11 +390,25 @@ body::before {
 
 /* Projects */
 .projects-grid {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr;
     gap: 1rem;
-    max-width: 600px;
+    max-width: 1200px;
     margin: 0 auto;
+}
+
+@media (min-width: 1200px) {
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+    .projects-grid {
+        max-width: 800px;
+        gap: 1.25rem;
+    }
 }
 
 .project-card {
@@ -520,6 +534,8 @@ body::before {
 .project-link {
     display: flex;
     align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
     padding: 0.5rem 1rem;
     background: var(--primary-color);
     color: white;
@@ -528,6 +544,7 @@ body::before {
     font-size: 0.875rem;
     font-weight: 500;
     transition: var(--transition);
+    line-height: 1;
 }
 
 .project-link:hover {
@@ -544,7 +561,8 @@ body::before {
 .project-link svg {
     width: 16px;
     height: 16px;
-    margin-right: 0.5rem;
+    flex-shrink: 0;
+    display: block;
 }
 
 /* API Endpoints */
@@ -710,6 +728,7 @@ body::before {
     .projects-grid {
         max-width: 100%;
         padding: 0 1rem;
+        gap: 1rem;
     }
     
     .project-card {

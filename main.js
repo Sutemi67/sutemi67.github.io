@@ -327,7 +327,8 @@ const setupProjectCards = () => {
             setTimeout(() => {
                 card.scrollIntoView({ 
                     behavior: 'smooth', 
-                    block: 'nearest' 
+                    block: 'nearest',
+                    inline: 'nearest'
                 });
             }, 400);
         });
