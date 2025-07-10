@@ -1201,6 +1201,25 @@ body::before {
     z-index: -1;
     transition: var(--transition);
 }
+.project-card.task-time {
+    position: relative;
+    overflow: hidden;
+}
+
+.project-card.task-time::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('https://static.rustore.ru/imgproxy/J8tgFf1sLXO0LvTIfFoI2JlVWI73jdxtMH0P9Kd-VAw/preset:web_app_icon_160/aHR0cHM6Ly9zdGF0aWMucnVzdG9yZS5ydS9hcGsvMjA2MzY0MTQ2Mi9jb250ZW50L0lDT04vMTRmNDdjMzctMThiZS00YWM1LWJkZmMtYjNlZDFhM2Y5YzMxLnBuZw==.webp');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.15;
+    z-index: -1;
+    transition: var(--transition);
+}
 
 .project-card.wot-calc {
     position: relative;
