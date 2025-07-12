@@ -1018,38 +1018,7 @@ body::before {
     line-height: 1.5;
 }
 
-.photo-gallery-placeholder {
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    border-radius: var(--border-radius);
-    padding: 1.5rem;
-    backdrop-filter: blur(10px);
-}
 
-.gallery-placeholder {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 200px;
-    border: 2px dashed var(--border-color);
-    border-radius: var(--border-radius-sm);
-    margin-top: 1rem;
-}
-
-.placeholder-text {
-    text-align: center;
-    color: var(--text-secondary);
-}
-
-.placeholder-text p {
-    margin-bottom: 0.5rem;
-    font-size: 1rem;
-}
-
-.placeholder-text p:last-child {
-    font-size: 0.875rem;
-    opacity: 0.8;
-}
 
 /* Responsive adjustments for new sections */
 @media (max-width: 768px) {
@@ -1082,9 +1051,7 @@ body::before {
         padding: 1rem;
     }
     
-    .gallery-placeholder {
-        min-height: 150px;
-    }
+
 }
 
 /* Smart Gallery */
@@ -1257,89 +1224,7 @@ body::before {
     }
 }
 
-/* Gallery Placeholder Images */
-.gallery-image-placeholder {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-size: cover;
-    background-position: center;
-    transition: var(--transition);
-}
 
-.gallery-item:hover .gallery-image-placeholder {
-    transform: scale(1.05);
-}
-
-.placeholder-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: white;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-.placeholder-icon {
-    font-size: 3rem;
-    margin-bottom: 0.5rem;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-}
-
-.placeholder-text {
-    font-size: 1rem;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-}
-
-/* Placeholder gradients for different photo types */
-.gallery-image-placeholder.cityscape {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
-
-.gallery-image-placeholder.portrait {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-}
-
-.gallery-image-placeholder.nature {
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-}
-
-.gallery-image-placeholder.street {
-    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-}
-
-.gallery-image-placeholder.architecture {
-    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-}
-
-.gallery-image-placeholder.macro {
-    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-}
-
-/* Responsive placeholders */
-@media (max-width: 768px) {
-    .placeholder-icon {
-        font-size: 2.5rem;
-    }
-    
-    .placeholder-text {
-        font-size: 0.9rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .placeholder-icon {
-        font-size: 2rem;
-    }
-    
-    .placeholder-text {
-        font-size: 0.8rem;
-    }
-}
 
 /* ==========================================================================
    Project Card Background Images

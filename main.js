@@ -413,47 +413,19 @@ const setupSmartGallery = () => {
 
     ];
 
-    // Создаем элементы галереи
-    photos.forEach(photoUrl => {
-        const galleryItem = document.createElement('div');
-        galleryItem.className = 'smart-gallery-item';
-        
-        galleryItem.innerHTML = `
+    // Создаем статическую галерею с реальными изображениями
+    const galleryHTML = photos.map(photoUrl => `
+        <div class="smart-gallery-item">
             <img src="${photoUrl}" alt="Фотография" class="smart-gallery-image" loading="lazy">
-        `;
+        </div>
+    `).join('');
 
-        galleryContainer.appendChild(galleryItem);
-    });
+    galleryContainer.innerHTML = galleryHTML;
 
-    // Оптимизация masonry layout после загрузки изображений
-    const images = galleryContainer.querySelectorAll('.smart-gallery-image');
-    let loadedImages = 0;
-    
-    images.forEach(img => {
-        img.addEventListener('load', () => {
-            loadedImages++;
-            if (loadedImages === images.length) {
-                // Все изображения загружены, можно применить дополнительные оптимизации
-                optimizeMasonryLayout(galleryContainer);
-            }
-        });
-        
-        img.addEventListener('error', () => {
-            loadedImages++;
-            if (loadedImages === images.length) {
-                optimizeMasonryLayout(galleryContainer);
-            }
-        });
-    });
-};
-
-// Функция для оптимизации masonry layout
-const optimizeMasonryLayout = (container) => {
-    // Добавляем небольшую задержку для стабилизации layout
+    // Анимация появления элементов
     setTimeout(() => {
-        const items = container.querySelectorAll('.smart-gallery-item');
-        items.forEach(item => {
-            // Добавляем плавную анимацию появления
+        const items = galleryContainer.querySelectorAll('.smart-gallery-item');
+        items.forEach((item, index) => {
             item.style.opacity = '0';
             item.style.transform = 'translateY(20px)';
             
@@ -461,7 +433,7 @@ const optimizeMasonryLayout = (container) => {
                 item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
                 item.style.opacity = '1';
                 item.style.transform = 'translateY(0)';
-            }, Math.random() * 300); // Случайная задержка для эффекта каскада
+            }, index * 100); // Каскадная анимация
         });
     }, 100);
 };
