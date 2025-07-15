@@ -1435,6 +1435,8 @@ body::before {
   margin: 16px 0;
 }
 .cert-item {
+  display:flex;
+  justify-content:center;
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
   border-radius: 10px;
