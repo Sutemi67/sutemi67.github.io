@@ -1334,3 +1334,97 @@ body::before {
     z-index: 1;
 }
 
+/* ===== Сертификаты: галерея в спорте ===== */
+.certificates-gallery {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: flex-start;
+    align-items: stretch;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+.certificates-gallery-item {
+    flex: 1 1 0;
+    min-width: 0;
+    cursor: pointer;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    align-items: stretch;
+}
+.certificates-gallery-item:not(:last-child) {
+    /* gap уже есть, но для старых браузеров можно добавить margin */
+}
+.certificates-gallery-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+@media (max-width: 700px) {
+    .certificates-gallery {
+        display: block;
+        width: 100%;
+        padding: 8px;
+    }
+    .certificates-gallery-item {
+        display: block;
+        width: 100%;
+        margin-bottom: 16px;
+        padding: 4px;
+    }
+    .certificates-gallery-image {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 10px;
+    }
+}
+
+/* ===== Модальное окно для увеличенного просмотра сертификата ===== */
+.certificate-modal {
+    display: none; /* Скрыто по умолчанию */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.8);
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.2s;
+}
+.certificate-modal.open {
+    display: flex;
+}
+.certificate-modal-content {
+    max-width: 90vw;
+    max-height: 90vh;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    background: #fff;
+    object-fit: contain;
+}
+.certificate-modal-close {
+    position: absolute;
+    top: 24px;
+    right: 36px;
+    color: #fff;
+    font-size: 2.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1001;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    transition: color 0.2s;
+}
+.certificate-modal-close:hover {
+    color: #ffb300;
+}
+

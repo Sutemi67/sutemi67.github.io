@@ -334,17 +334,16 @@
                 </div>
 
                 <div class="sport-category">
-                    <h3 class="sport-category-title">Достижения и цели</h3>
-                    <div class="achievements-grid">
-                        <div class="achievement-card">
-                            <div class="achievement-icon">🎯</div>
-                            <h4>Регулярность</h4>
-                            <p>Тренируюсь 4-5 раз в неделю, поддерживая постоянный график</p>
+                    <h3 class="sport-category-title">Документы о сертификации</h3>
+                    <div class="certificates-gallery">
+                        <div class="certificates-gallery-item">
+                            <img src="images/dco1.webp" alt="Сертификат 1" loading="lazy" class="certificates-gallery-image" tabindex="0">
                         </div>
-                        <div class="achievement-card">
-                            <div class="achievement-icon">📈</div>
-                            <h4>Прогресс</h4>
-                            <p>Постоянно улучшаю показатели в беге и силовых упражнениях</p>
+                        <div class="certificates-gallery-item">
+                            <img src="images/dco2.webp" alt="Сертификат 2" loading="lazy" class="certificates-gallery-image" tabindex="0">
+                        </div>
+                        <div class="certificates-gallery-item">
+                            <img src="images/dco3.webp" alt="Сертификат 3" loading="lazy" class="certificates-gallery-image" tabindex="0">
                         </div>
                     </div>
                 </div>
@@ -652,6 +651,11 @@
      Scripts
      ========================================================================== -->
 <script src="main.js" defer></script>
+<!-- Модальное окно для увеличенного просмотра сертификата -->
+<div id="certificateModal" class="certificate-modal">
+    <span class="certificate-modal-close" id="certificateModalClose">&times;</span>
+    <img class="certificate-modal-content" id="certificateModalImg" alt="Сертификат">
+</div>
 </body>
 </html>
 
