@@ -274,7 +274,7 @@ function setupCertificateModal() {
     const modal = document.getElementById('certificateModal');
     const modalImg = document.getElementById('certificateModalImg');
     const modalClose = document.getElementById('certificateModalClose');
-    const images = document.querySelectorAll('.certificates-gallery-image');
+    const images = document.querySelectorAll('.cert-img');
 
     if (!modal || !modalImg || !modalClose) return;
 
