@@ -1,7 +1,4 @@
-/**
- * Обновляет время в сайдбаре
- * @function updateTime
- */
+
 const updateTime = () => {
     const now = new Date();
     const options = {
@@ -17,18 +14,11 @@ const updateTime = () => {
     if (timeElement) {
         const timeString = now.toLocaleString('ru-RU', options);
         const [date, time] = timeString.split(', ');
-        timeElement.innerHTML = `Сегодня: ${date} <br>Сейчас: ${time}`;
+        timeElement.innerHTML = `Today: ${date} <br>Now: ${time}`;
     }
 };
 
-/**
- * Класс для управления навигацией сайта
- * @class Navigation
- */
 class Navigation {
-    /**
-     * @constructor
-     */
     constructor() {
         this.currentSection = 'about';
         this.sections = ['about', 'tech', 'projects', 'sport', 'photography', 'donate'];
