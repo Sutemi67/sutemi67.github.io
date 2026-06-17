@@ -10,7 +10,7 @@ const updateTime = () => {
         second: '2-digit',
         hour12: false
     };
-    const timeElement = document.getElementById('serverTime');
+    const timeElement = document.getElementById('clientTime');
     if (timeElement) {
         const timeString = now.toLocaleString('ru-RU', options);
         const [date, time] = timeString.split(', ');
@@ -184,52 +184,12 @@ const setupAnimations = () => {
     }, observerOptions);
 
     // Observe content cards and new elements
-    const animatedElements = document.querySelectorAll('.content-card, .project-card, .tech-item, .sport-item, .photo-item, .achievement-card, .equipment-card, .smart-gallery-item');
+    const animatedElements = document.querySelectorAll('.content-card, .project-card, .tech-item, .sport-item, .smart-gallery-item');
     animatedElements.forEach(element => {
         element.style.opacity = '0';
         element.style.transform = 'translateY(20px)';
         element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(element);
-    });
-};
-
-// Add hover effects for interactive elements
-const setupHoverEffects = () => {
-    // Add ripple effect to buttons
-    const buttons = document.querySelectorAll('.contact-button, .project-link:not(.disabled)');
-    buttons.forEach(button => {
-        button.addEventListener('mouseenter', (e) => {
-            const rect = button.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            button.style.setProperty('--ripple-x', `${x}px`);
-            button.style.setProperty('--ripple-y', `${y}px`);
-        });
-    });
-
-    // Add special hover effects for sport and photo items
-    const sportItems = document.querySelectorAll('.sport-item');
-    const photoItems = document.querySelectorAll('.photo-item');
-    
-    sportItems.forEach(item => {
-        item.addEventListener('mouseenter', () => {
-            item.style.transform = 'translateX(4px)';
-        });
-        
-        item.addEventListener('mouseleave', () => {
-            item.style.transform = 'translateX(0)';
-        });
-    });
-
-    photoItems.forEach(item => {
-        item.addEventListener('mouseenter', () => {
-            item.style.transform = 'translateX(4px)';
-        });
-        
-        item.addEventListener('mouseleave', () => {
-            item.style.transform = 'translateX(0)';
-        });
     });
 };
 
@@ -241,10 +201,7 @@ const setupSectionAnimations = () => {
             elements: '.sport-item',
             delay: 100
         },
-        'photography': {
-            elements: '.photo-item, .equipment-card',
-            delay: 150
-        },
+
         'tech': {
             elements: '.tech-item',
             delay: 120
@@ -314,7 +271,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Setup additional features
     setupSmoothScrolling();
     setupAnimations();
-    setupHoverEffects();
+
     setupSectionAnimations();
     setupProjectCards();
     optimizePerformance();
@@ -404,26 +361,6 @@ const optimizePerformance = () => {
         link.href = src;
         document.head.appendChild(link);
     });
-
-    // Lazy load non-critical images
-    if ('IntersectionObserver' in window) {
-        const imageObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    img.src = img.dataset.src;
-                    img.classList.remove('lazy');
-                    imageObserver.unobserve(img);
-                }
-            });
-        });
-
-        const lazyImages = document.querySelectorAll('img[data-src]');
-        lazyImages.forEach(img => imageObserver.observe(img));
-    }
 };
-
-// Initialize performance optimizations
-document.addEventListener('DOMContentLoaded', optimizePerformance);
 
  

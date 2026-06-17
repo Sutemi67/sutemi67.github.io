@@ -9,18 +9,13 @@
     --accent-color: #8b5cf6;
     --success-color: #10b981;
     --warning-color: #f59e0b;
-    --error-color: #ef4444;
     --border-color: rgba(255, 255, 255, 0.1);
     --glass-bg: rgba(255, 255, 255, 0.05);
     --glass-border: rgba(255, 255, 255, 0.1);
     --shadow-color: rgba(0, 0, 0, 0.3);
     --shadow-light: rgba(59, 130, 246, 0.1);
     --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-    --gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
     --sidebar-width: 280px;
-    --sidebar-collapsed-width: 80px;
-    --header-height: 80px;
     --border-radius: 12px;
     --border-radius-sm: 8px;
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -59,29 +54,28 @@ body::before {
     height: 100%;
     background-image: 
         radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 40% 40%, rgba(16, 185, 129, 0.05) 0%, transparent 50%);
+        radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.08) 0%, transparent 50%);
     z-index: -1;
     pointer-events: none;
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-    background: var(--bg-secondary);
+    background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--primary-color);
-    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--primary-light);
+    background: rgba(255, 255, 255, 0.25);
 }
 
 /* ==========================================================================
@@ -187,6 +181,18 @@ body::before {
 .nav-link.active {
     color: white;
     transform: translateX(4px);
+}
+
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 60%;
+    background: var(--accent-color);
+    border-radius: 0 2px 2px 0;
 }
 
 .nav-icon {
@@ -335,7 +341,7 @@ body::before {
 /* Technology Stack */
 .tech-grid {
     display: grid;
-    gap: 2rem;
+    gap: 1.5rem;
 }
 
 .tech-category {
@@ -344,24 +350,42 @@ body::before {
     border-radius: var(--border-radius);
     padding: 1.5rem;
     backdrop-filter: blur(10px);
+    transition: var(--transition);
+}
+
+.tech-category[data-accent="flutter"] {
+    border-color: rgba(83, 177, 253, 0.25);
+}
+
+.tech-category[data-accent="flutter"] .tech-category-title {
+    color: #53b1fd;
 }
 
 .tech-category-title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
     color: var(--primary-color);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
 }
 
 .tech-items {
     display: grid;
-    gap: 1rem;
+    gap: 0.75rem;
+    grid-template-columns: 1fr;
+}
+
+@media (min-width: 900px) {
+    .tech-items {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 .tech-item {
     display: flex;
     align-items: center;
-    padding: 1rem;
+    padding: 0.875rem 1rem;
     background: rgba(255, 255, 255, 0.02);
     border-radius: var(--border-radius-sm);
     border: 1px solid var(--border-color);
@@ -369,27 +393,30 @@ body::before {
 }
 
 .tech-item:hover {
-    background: rgba(59, 130, 246, 0.1);
+    background: rgba(59, 130, 246, 0.08);
     border-color: var(--primary-color);
+    transform: translateX(2px);
 }
 
 .tech-icon {
-    font-size: 1.5rem;
-    margin-right: 1rem;
+    width: 28px;
+    height: 28px;
     flex-shrink: 0;
+    margin-right: 1rem;
+    color: var(--primary-color);
 }
 
 .tech-info h4 {
-    font-size: 1rem;
+    font-size: 0.9375rem;
     font-weight: 600;
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.2rem;
     color: var(--text-color);
 }
 
 .tech-info p {
-    font-size: 0.875rem;
+    font-size: 0.8rem;
     color: var(--text-secondary);
-    line-height: 1.5;
+    line-height: 1.4;
 }
 
 /* Projects */
@@ -567,68 +594,6 @@ body::before {
     height: 16px;
     flex-shrink: 0;
     display: block;
-}
-
-/* ==========================================================================
-   API Documentation Styles
-   ========================================================================== */
-.api-endpoints {
-    display: grid;
-    gap: 1.5rem;
-}
-
-.endpoint-card {
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    border-radius: var(--border-radius);
-    padding: 1.5rem;
-    backdrop-filter: blur(10px);
-    transition: var(--transition);
-}
-
-.endpoint-card:hover {
-    border-color: var(--primary-color);
-    transform: translateY(-2px);
-}
-
-.endpoint-header {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
-}
-
-.endpoint-method {
-    padding: 0.25rem 0.75rem;
-    border-radius: 4px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.endpoint-method.post {
-    background: var(--success-color);
-    color: white;
-}
-
-.endpoint-method.get {
-    background: var(--primary-color);
-    color: white;
-}
-
-.endpoint-url {
-    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
-    font-size: 1rem;
-    color: var(--text-color);
-    background: rgba(255, 255, 255, 0.05);
-    padding: 0.5rem 0.75rem;
-    border-radius: 4px;
-}
-
-.endpoint-description {
-    color: var(--text-secondary);
-    line-height: 1.6;
 }
 
 /* Donate Section */
@@ -864,46 +829,6 @@ body::before {
     line-height: 1.5;
 }
 
-.achievements-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1rem;
-}
-
-.achievement-card {
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    border-radius: var(--border-radius-sm);
-    padding: 1.5rem;
-    text-align: center;
-    backdrop-filter: blur(10px);
-    transition: var(--transition);
-}
-
-.achievement-card:hover {
-    transform: translateY(-2px);
-    border-color: var(--primary-color);
-    box-shadow: 0 8px 25px var(--shadow-light);
-}
-
-.achievement-icon {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-}
-
-.achievement-card h4 {
-    font-size: 1.125rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    color: var(--text-color);
-}
-
-.achievement-card p {
-    font-size: 0.875rem;
-    color: var(--text-secondary);
-    line-height: 1.5;
-}
-
 /* ==========================================================================
    Photography Section Styles
    ========================================================================== */
@@ -923,15 +848,6 @@ body::before {
     gap: 2rem;
 }
 
-.photo-categories,
-.photo-equipment {
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    border-radius: var(--border-radius);
-    padding: 1.5rem;
-    backdrop-filter: blur(10px);
-}
-
 .photo-category-title {
     font-size: 1.25rem;
     font-weight: 600;
@@ -939,119 +855,21 @@ body::before {
     color: var(--primary-color);
 }
 
-.photo-items {
-    display: grid;
-    gap: 1rem;
-}
-
-.photo-item {
-    display: flex;
-    align-items: center;
-    padding: 1rem;
-    background: rgba(255, 255, 255, 0.02);
-    border-radius: var(--border-radius-sm);
-    border: 1px solid var(--border-color);
-    transition: var(--transition);
-}
-
-.photo-item:hover {
-    background: rgba(139, 92, 246, 0.1);
-    border-color: var(--accent-color);
-}
-
-.photo-icon {
-    font-size: 1.5rem;
-    margin-right: 1rem;
-    flex-shrink: 0;
-}
-
-.photo-info h4 {
-    font-size: 1rem;
-    font-weight: 600;
-    margin-bottom: 0.25rem;
-    color: var(--text-color);
-}
-
-.photo-info p {
-    font-size: 0.875rem;
-    color: var(--text-secondary);
-    line-height: 1.5;
-}
-
-.equipment-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1rem;
-}
-
-.equipment-card {
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    border-radius: var(--border-radius-sm);
-    padding: 1.5rem;
-    text-align: center;
-    backdrop-filter: blur(10px);
-    transition: var(--transition);
-}
-
-.equipment-card:hover {
-    transform: translateY(-2px);
-    border-color: var(--accent-color);
-    box-shadow: 0 8px 25px rgba(139, 92, 246, 0.1);
-}
-
-.equipment-icon {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-}
-
-.equipment-card h4 {
-    font-size: 1.125rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    color: var(--text-color);
-}
-
-.equipment-card p {
-    font-size: 0.875rem;
-    color: var(--text-secondary);
-    line-height: 1.5;
-}
-
-
-
 /* Responsive adjustments for new sections */
 @media (max-width: 768px) {
-    .achievements-grid,
-    .equipment-grid {
+    .sport-items {
         grid-template-columns: 1fr;
     }
     
-    .sport-items,
-    .photo-items {
-        grid-template-columns: 1fr;
-    }
-    
-    .sport-item,
-    .photo-item {
+    .sport-item {
         flex-direction: column;
         text-align: center;
     }
     
-    .sport-icon,
-    .photo-icon {
+    .sport-icon {
         margin-right: 0;
         margin-bottom: 0.5rem;
     }
-}
-
-@media (max-width: 480px) {
-    .achievement-card,
-    .equipment-card {
-        padding: 1rem;
-    }
-    
-
 }
 
 /* Smart Gallery */
@@ -1127,109 +945,6 @@ body::before {
 }
 
 
-
-.gallery-item {
-    position: relative;
-    border-radius: var(--border-radius);
-    overflow: hidden;
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    transition: var(--transition);
-    aspect-ratio: 4/3;
-}
-
-.gallery-item:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px var(--shadow-color);
-    border-color: var(--accent-color);
-}
-
-.gallery-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: var(--transition);
-}
-
-.gallery-item:hover .gallery-image {
-    transform: scale(1.05);
-}
-
-.gallery-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-    color: white;
-    padding: 1.5rem;
-    transform: translateY(100%);
-    transition: var(--transition);
-}
-
-.gallery-item:hover .gallery-overlay {
-    transform: translateY(0);
-}
-
-.gallery-overlay h4 {
-    font-size: 1.125rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-}
-
-.gallery-overlay p {
-    font-size: 0.875rem;
-    opacity: 0.9;
-    line-height: 1.4;
-}
-
-.gallery-footer {
-    text-align: center;
-    padding: 1rem;
-    border-top: 1px solid var(--border-color);
-}
-
-.gallery-link {
-    color: var(--primary-color);
-    text-decoration: none;
-    font-weight: 500;
-    transition: var(--transition);
-}
-
-.gallery-link:hover {
-    color: var(--primary-light);
-    text-decoration: underline;
-}
-
-/* Responsive gallery */
-@media (max-width: 768px) {
-    .gallery-grid {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 1rem;
-    }
-    
-    .gallery-overlay {
-        padding: 1rem;
-    }
-    
-    .gallery-overlay h4 {
-        font-size: 1rem;
-    }
-    
-    .gallery-overlay p {
-        font-size: 0.8rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .gallery-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .gallery-item {
-        aspect-ratio: 3/2;
-    }
-}
 
 
 
@@ -1353,61 +1068,9 @@ body::before {
     z-index: 1;
 }
 
-/* ===== Сертификаты: галерея в спорте ===== */
-.certificates-gallery {
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-    justify-content: flex-start;
-    align-items: stretch;
-    margin-top: 16px;
-    margin-bottom: 16px;
-    flex-wrap: wrap;
-}
-.certificates-gallery-item {
-    flex: 1 1 0;
-    min-width: 0;
-    cursor: pointer;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    transition: transform 0.2s, box-shadow 0.2s;
-    display: flex;
-    align-items: stretch;
-}
-.certificates-gallery-item:not(:last-child) {
-    /* gap уже есть, но для старых браузеров можно добавить margin */
-}
-.certificates-gallery-image {
-    width: 100%;
-    height: auto;
-    display: block;
-    object-fit: cover;
-}
-
-@media (max-width: 700px) {
-    .certificates-gallery {
-        display: block;
-        width: 100%;
-        padding: 8px;
-    }
-    .certificates-gallery-item {
-        display: block;
-        width: 100%;
-        margin-bottom: 16px;
-        padding: 4px;
-    }
-    .certificates-gallery-image {
-        width: 100%;
-        height: auto;
-        display: block;
-        border-radius: 10px;
-    }
-}
-
 /* ===== Модальное окно для увеличенного просмотра сертификата ===== */
 .certificate-modal {
-    display: none; /* Скрыто по умолчанию */
+    display: none;
     position: fixed;
     z-index: 1000;
     left: 0;
@@ -1415,7 +1078,7 @@ body::before {
     width: 100vw;
     height: 100vh;
     overflow: auto;
-    background-color: rgba(0,0,0,0.8);
+    background-color: rgba(0,0,0,0.85);
     justify-content: center;
     align-items: center;
     transition: opacity 0.2s;
@@ -1426,25 +1089,23 @@ body::before {
 .certificate-modal-content {
     max-width: 90vw;
     max-height: 90vh;
-    border-radius: 12px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-    background: #fff;
+    border-radius: var(--border-radius);
+    box-shadow: 0 8px 32px var(--shadow-color);
     object-fit: contain;
 }
 .certificate-modal-close {
     position: absolute;
     top: 24px;
     right: 36px;
-    color: #fff;
+    color: var(--text-secondary);
     font-size: 2.5rem;
     font-weight: bold;
     cursor: pointer;
     z-index: 1001;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
     transition: color 0.2s;
 }
 .certificate-modal-close:hover {
-    color: #ffb300;
+    color: var(--accent-color);
 }
 
 .certificates-gallery-static {
