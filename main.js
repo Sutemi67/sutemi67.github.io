@@ -8,13 +8,14 @@ const updateTime = () => {
         hour: '2-digit',
         minute: '2-digit',
         second: '2-digit',
-        hour12: false
+        hour12: false,
+        timeZone: 'Europe/Moscow'
     };
-    const timeElement = document.getElementById('clientTime');
+    const timeElement = document.getElementById('moscowTime');
     if (timeElement) {
         const timeString = now.toLocaleString('ru-RU', options);
         const [date, time] = timeString.split(', ');
-        timeElement.innerHTML = `Today: ${date} <br>Now: ${time}`;
+        timeElement.innerHTML = `Today: ${date}<br>Now: ${time}`;
     }
 };
 
@@ -80,7 +81,7 @@ class Navigation {
             this.showSection(sectionName);
             this.updateActiveNavLink();
             this.closeMobileMenu();
-            
+
             // Update URL hash
             history.pushState(null, null, `#${sectionName}`);
         }
@@ -122,7 +123,7 @@ class Navigation {
         if (sidebar && overlay) {
             sidebar.classList.toggle('active');
             overlay.classList.toggle('active');
-            
+
             // Update toggle button
             if (mobileMenuToggle) {
                 const isOpen = sidebar.classList.contains('active');
@@ -139,7 +140,7 @@ class Navigation {
         if (sidebar && overlay) {
             sidebar.classList.remove('active');
             overlay.classList.remove('active');
-            
+
             if (mobileMenuToggle) {
                 mobileMenuToggle.setAttribute('aria-label', 'Открыть меню');
             }
@@ -155,7 +156,7 @@ const setupSmoothScrolling = () => {
             e.preventDefault();
             const targetId = link.getAttribute('href').substring(1);
             const targetElement = document.getElementById(targetId);
-            
+
             if (targetElement) {
                 targetElement.scrollIntoView({
                     behavior: 'smooth',
@@ -324,8 +325,8 @@ const setupProjectCards = () => {
 
             // Scroll to expanded card if needed
             setTimeout(() => {
-                card.scrollIntoView({ 
-                    behavior: 'smooth', 
+                card.scrollIntoView({
+                    behavior: 'smooth',
                     block: 'nearest',
                     inline: 'nearest'
                 });
@@ -363,4 +364,3 @@ const optimizePerformance = () => {
     });
 };
 
- 
