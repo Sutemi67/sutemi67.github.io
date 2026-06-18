@@ -171,8 +171,8 @@ const setupSmoothScrolling = () => {
 const setupAnimations = () => {
     // Intersection Observer for fade-in animations
     const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
+        threshold: 0.05,
+        rootMargin: '0px 0px 0px 0px'
     };
 
     const observer = new IntersectionObserver((entries) => {
@@ -185,11 +185,11 @@ const setupAnimations = () => {
     }, observerOptions);
 
     // Observe content cards and new elements
-    const animatedElements = document.querySelectorAll('.content-card, .project-card, .tech-item, .sport-item, .smart-gallery-item');
+    const animatedElements = document.querySelectorAll('.content-card, .project-card, .tech-item, .smart-gallery-item');
     animatedElements.forEach(element => {
         element.style.opacity = '0';
         element.style.transform = 'translateY(20px)';
-        element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        element.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
         observer.observe(element);
     });
 };
@@ -199,13 +199,12 @@ const setupSectionAnimations = () => {
     // Different animation delays for different sections
     const sectionAnimations = {
         'sport': {
-            elements: '.sport-item',
-            delay: 100
+            elements: '#sport .tech-item',
+            delay: 40
         },
-
         'tech': {
-            elements: '.tech-item',
-            delay: 120
+            elements: '#tech .tech-item',
+            delay: 50
         }
     };
 
