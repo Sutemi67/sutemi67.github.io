@@ -340,16 +340,12 @@ body::before {
 }
 
 .tech-category {
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    border-radius: var(--border-radius);
-    padding: 1.5rem;
-    backdrop-filter: blur(10px);
-    transition: var(--transition);
+    padding: 0.25rem 0 1.5rem;
 }
 
-.tech-category[data-accent="flutter"] {
-    border-color: rgba(83, 177, 253, 0.25);
+.tech-category + .tech-category {
+    border-top: 1px solid var(--border-color);
+    padding-top: 1.75rem;
 }
 
 .tech-category-title {
@@ -377,9 +373,10 @@ body::before {
     display: flex;
     align-items: center;
     padding: 0.875rem 1rem;
-    background: rgba(255, 255, 255, 0.02);
+    background: var(--glass-bg);
     border-radius: var(--border-radius-sm);
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
     transition: var(--transition);
 }
 
