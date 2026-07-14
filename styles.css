@@ -839,11 +839,6 @@ body::before {
     color: var(--primary-color);
 }
 
-/* Sport accent color */
-.tech-category[data-accent="sport"] {
-    border-color: rgba(34, 197, 94, 0.25);
-}
-
 @media (max-width: 768px) {
     .sport-intro {
         flex-direction: column;
