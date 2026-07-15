@@ -167,55 +167,6 @@ const setupSmoothScrolling = () => {
     });
 };
 
-// Add loading animations
-const setupAnimations = () => {
-    // Intersection Observer for fade-in animations
-    const observerOptions = {
-        threshold: 0.05,
-        rootMargin: '0px 0px 0px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, observerOptions);
-
-    // Observe content cards and new elements
-    const animatedElements = document.querySelectorAll('.content-card, .project-card, .tech-item, .smart-gallery-item');
-    animatedElements.forEach(element => {
-        element.style.opacity = '0';
-        element.style.transform = 'translateY(20px)';
-        element.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
-        observer.observe(element);
-    });
-};
-
-// Add section-specific animations
-const setupSectionAnimations = () => {
-    // Different animation delays for different sections
-    const sectionAnimations = {
-        'sport': {
-            elements: '#sport .tech-item',
-            delay: 40
-        },
-        'tech': {
-            elements: '#tech .tech-item',
-            delay: 50
-        }
-    };
-
-    Object.entries(sectionAnimations).forEach(([section, config]) => {
-        const elements = document.querySelectorAll(config.elements);
-        elements.forEach((element, index) => {
-            element.style.transitionDelay = `${index * config.delay}ms`;
-        });
-    });
-};
-
 // ====== Сертификаты: модальное окно увеличенного просмотра ======
 function setupCertificateModal() {
     const modal = document.getElementById('certificateModal');
@@ -270,9 +221,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Setup additional features
     setupSmoothScrolling();
-    setupAnimations();
-
-    setupSectionAnimations();
     setupProjectCards();
     optimizePerformance();
     setupCertificateModal(); // <--- добавляем инициализацию модального окна сертификатов

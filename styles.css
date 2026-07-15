@@ -1,4 +1,4 @@
-:root {
+﻿:root {
     --bg-color: #1c1c1c;
     --bg-secondary: #1a1a1a;
     --text-color: #cecfc9;
@@ -20,6 +20,7 @@
     --border-radius-sm: 8px;
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
 
 /* ==========================================================================
    Reset and base styles
@@ -77,6 +78,7 @@ body::before {
 ::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 255, 255, 0.25);
 }
+
 
 /* ==========================================================================
    Layout Components
@@ -259,6 +261,7 @@ body::before {
     font-size: 1.25rem;
     color: var(--text-secondary);
     font-weight: 400;
+    text-align: center;
 }
 
 /* Content Cards */
@@ -270,13 +273,8 @@ body::before {
     padding: 2rem;
     margin-bottom: 2rem;
     box-shadow: 0 8px 32px var(--shadow-color);
-    transition: var(--transition);
 }
 
-.content-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px var(--shadow-color);
-}
 
 /* About Section */
 .about-text {
@@ -529,7 +527,7 @@ body::before {
 
 .project-card.expanded .project-description {
     display: block;
-    -webkit-line-clamp: unset;
+    -webkit-line-clamp: none;
     margin-bottom: 1rem;
 }
 
@@ -672,6 +670,7 @@ body::before {
     backdrop-filter: blur(4px);
 }
 
+
 /* ==========================================================================
    Responsive Design
    ========================================================================== */
@@ -769,9 +768,10 @@ body::before {
 
     .content-section {
         display: block;
-        page-break-inside: avoid;
+        break-inside: avoid;
     }
 }
+
 
 /* ==========================================================================
    Sport Section Styles
@@ -812,6 +812,7 @@ body::before {
     line-height: 1.8;
     color: var(--text-color);
 }
+
 
 /* ==========================================================================
    Photography Section Styles
@@ -858,7 +859,6 @@ body::before {
     padding: 1.5rem;
     backdrop-filter: blur(10px);
     width: 100%;
-    max-width: 100%;
     overflow: hidden;
 }
 
@@ -867,7 +867,6 @@ body::before {
     column-gap: 0.5rem;
     margin: 1rem 0;
     width: 100%;
-    max-width: 100%;
     overflow: hidden;
 }
 
@@ -890,8 +889,6 @@ body::before {
     object-fit: cover;
     max-width: 100%;
 }
-
-
 
 /* Responsive smart gallery */
 @media (max-width: 1200px) {
@@ -922,18 +919,9 @@ body::before {
     }
 }
 
-
-
-
-
 /* ==========================================================================
    Project Card Background Images
    ========================================================================== */
-.project-card.working-hours {
-    position: relative;
-    overflow: hidden;
-}
-
 .project-card.working-hours::before {
     content: '';
     position: absolute;
@@ -949,11 +937,6 @@ body::before {
     transition: var(--transition);
 }
 
-.project-card.task-time {
-    position: relative;
-    overflow: hidden;
-}
-
 .project-card.task-time::before {
     content: '';
     position: absolute;
@@ -967,11 +950,6 @@ body::before {
     opacity: 0.15;
     z-index: -1;
     transition: var(--transition);
-}
-
-.project-card.friends-activity {
-    position: relative;
-    overflow: hidden;
 }
 
 .project-card.friends-activity::before {
@@ -990,11 +968,6 @@ body::before {
 }
 
 
-.project-card.wot-calc {
-    position: relative;
-    overflow: hidden;
-}
-
 .project-card.wot-calc::before {
     content: '';
     position: absolute;
@@ -1008,11 +981,6 @@ body::before {
     opacity: 0.15;
     z-index: -1;
     transition: var(--transition);
-}
-
-.project-card.feeling-diary {
-    position: relative;
-    overflow: hidden;
 }
 
 .project-card.feeling-diary::before {
@@ -1030,29 +998,47 @@ body::before {
     transition: var(--transition);
 }
 
+.project-card.appcradle-player::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('https://static.rustore.ru/imgproxy/aobwy7JAO8cE9lSgFenbQpVDT_5fzjsVFkmnhYHFuIM/preset:web_app_icon_160/plain/https://static.rustore.ru/2025/10/3/1f/apk/2063662230/content/ICON/bbaf02f7-6133-4c46-a5d4-5c2ef5712229.png@webp');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.15;
+    z-index: -1;
+    transition: var(--transition);
+}
+
 /* Hover effects for project backgrounds */
+.project-card.friends-activity:hover::before,
 .project-card.working-hours:hover::before,
 .project-card.task-time:hover::before,
 .project-card.wot-calc:hover::before,
-.project-card.feeling-diary:hover::before {
+.project-card.feeling-diary:hover::before,
+.project-card.appcradle-player:hover::before {
     opacity: 0.15;
-    transform: scale(1.05);
+    transform: scale(1.15);
 }
 
 /* Ensure content stays above background */
 .project-card.working-hours>*,
 .project-card.task-time>*,
 .project-card.wot-calc>*,
-.project-card.feeling-diary>* {
+.project-card.feeling-diary>*,
+.project-card.appcradle-player>* {
     position: relative;
     z-index: 1;
 }
 
-/* ===== Модальное окно для увеличенного просмотра сертификата ===== */
+/* ===== РњРѕРґР°Р»СЊРЅРѕРµ РѕРєРЅРѕ РґР»СЏ СѓРІРµР»РёС‡РµРЅРЅРѕРіРѕ РїСЂРѕСЃРјРѕС‚СЂР° СЃРµСЂС‚РёС„РёРєР°С‚Р° ===== */
 .certificate-modal {
     display: none;
     position: fixed;
-    z-index: 1000;
+    z-index: 1002;
     left: 0;
     top: 0;
     width: 100vw;
@@ -1084,7 +1070,7 @@ body::before {
     font-size: 2.5rem;
     font-weight: bold;
     cursor: pointer;
-    z-index: 1001;
+    z-index: 1003;
     transition: color 0.2s;
 }
 
@@ -1136,3 +1122,4 @@ body::before {
         grid-template-columns: 1fr;
     }
 }
+
