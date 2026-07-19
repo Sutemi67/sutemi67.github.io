@@ -1,0 +1,181 @@
+<section class="pattern">
+  <nav class="breadcrumbs">
+    <a href="#" data-nav="home">Главная</a> /
+    <a href="#" data-nav="group" data-group="behavioral">Поведенческие</a> /
+    <span>State</span>
+  </nav>
+
+  <header class="pattern-header">
+    <span class="pattern-badge badge-behavioral">Поведенческий</span>
+    <h1>State (Состояние)</h1>
+  </header>
+
+  <div class="pattern-meta">
+    <div class="meta-item">
+      <span class="meta-label">Также известен как</span>
+      Finite State Machine
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Сложность</span>
+      ★★★☆☆
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Популярность</span>
+      ★★★☆☆
+    </div>
+  </div>
+
+  <section class="intent">
+    <h2> Назначение</h2>
+    <p>Позволяет объекту изменять своё поведение в зависимости от внутреннего состояния, создавая иллюзию смены класса.</p>
+  </section>
+
+  <section class="problem">
+    <h2> Проблема</h2>
+    <p>Заказ в интернет-магазине проходит через несколько состояний: Новый → Оплачен → Отправлен → Доставлен. В каждом состоянии доступны разные действия. Реализация через условные операторы (if/switch) приводит к раздуванию кода и сложности поддержки.</p>
+  </section>
+
+  <section class="solution">
+    <h2> Решение</h2>
+    <p>Каждое состояние выносится в отдельный класс. Контекст (заказ) делегирует выполнение действий текущему объекту-состоянию. Смена состояния — это подмена объекта состояния на другой.</p>
+  </section>
+
+  <section class="example">
+    <h2> Пример на Dart</h2>
+    <pre><code class="language-dart">abstract class OrderState {
+  void pay(OrderContext context);
+  void ship(OrderContext context);
+  void deliver(OrderContext context);
+  String get name;
+}
+
+class NewOrderState implements OrderState {
+  @override
+  String get name => 'Новый';
+
+  @override
+  void pay(OrderContext context) {
+    print('Заказ оплачен');
+    context.setState(PaidOrderState());
+  }
+
+  @override
+  void ship(OrderContext context) {
+    print('Нельзя отправить — заказ не оплачен');
+  }
+
+  @override
+  void deliver(OrderContext context) {
+    print('Нельзя доставить — заказ не оплачен');
+  }
+}
+
+class PaidOrderState implements OrderState {
+  @override
+  String get name => 'Оплачен';
+
+  @override
+  void pay(OrderContext context) => print('Заказ уже оплачен');
+
+  @override
+  void ship(OrderContext context) {
+    print('Заказ отправлен');
+    context.setState(ShippedOrderState());
+  }
+
+  @override
+  void deliver(OrderContext context) => print('Заказ ещё не отправлен');
+}
+
+class ShippedOrderState implements OrderState {
+  @override
+  String get name => 'Отправлен';
+
+  @override
+  void pay(OrderContext context) => print('Заказ уже оплачен');
+
+  @override
+  void ship(OrderContext context) => print('Заказ уже отправлен');
+
+  @override
+  void deliver(OrderContext context) {
+    print('Заказ доставлен');
+    context.setState(DeliveredOrderState());
+  }
+}
+
+class DeliveredOrderState implements OrderState {
+  @override
+  String get name => 'Доставлен';
+
+  @override
+  void pay(OrderContext context) => print('Заказ уже оплачен');
+  @override
+  void ship(OrderContext context) => print('Заказ уже доставлен');
+  @override
+  void deliver(OrderContext context) => print('Заказ уже доставлен');
+}
+
+class OrderContext {
+  OrderState _state = NewOrderState();
+
+  void setState(OrderState state) => _state = state;
+  String get status => _state.name;
+
+  void pay() => _state.pay(this);
+  void ship() => _state.ship(this);
+  void deliver() => _state.deliver(this);
+}
+
+void main() {
+  final order = OrderContext();
+  order.ship();
+  order.pay();
+  order.ship();
+  order.deliver();
+  print('Статус: ${order.status}');
+}
+</code></pre>
+  </section>
+
+  <section class="when-to-use">
+    <h2> Когда применять</h2>
+    <ul>
+      <li>Когда поведение объекта зависит от его состояния и меняется во время выполнения</li>
+      <li>Когда есть множество условных операторов, проверяющих состояние</li>
+      <li>Когда состояния имеют чёткие границы и разные правила переходов</li>
+    </ul>
+  </section>
+
+  <section class="pros-cons">
+    <div class="pros">
+      <h3> Плюсы</h3>
+      <ul>
+        <li>Избавляет от громоздких условных конструкций</li>
+        <li>Каждое состояние — отдельный класс (SRP)</li>
+        <li>Упрощает добавление новых состояний</li>
+      </ul>
+    </div>
+    <div class="cons">
+      <h3> Минусы</h3>
+      <ul>
+        <li>Может привести к большому количеству классов</li>
+        <li>Усложняет код для простых конечных автоматов</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="related">
+    <h2> Связанные паттерны</h2>
+    <ul>
+      <li><a href="#" data-nav="pattern" data-path="behavioral/21-strategy">Strategy</a> — похожая структура, но разная цель: Strategy для взаимозаменяемых алгоритмов, State для управления состоянием</li>
+      <li><a href="#" data-nav="pattern" data-path="behavioral/19-observer">Observer</a> — может уведомлять об изменении состояния</li>
+    </ul>
+  </section>
+
+  <footer class="pattern-nav">
+    <a href="#" data-nav="pattern" data-path="behavioral/19-observer" class="prev">← Предыдущий</a>
+    <a href="#" data-nav="home">На главную</a>
+    <a href="#" data-nav="pattern" data-path="behavioral/21-strategy" class="next">Следующий →</a>
+  </footer>
+</section>

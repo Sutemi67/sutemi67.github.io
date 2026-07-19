@@ -1,0 +1,126 @@
+<section class="pattern">
+  <nav class="breadcrumbs">
+    <a href="#" data-nav="home">Главная</a> /
+    <a href="#" data-nav="group" data-group="structural">Структурные</a> /
+    <span>Adapter</span>
+  </nav>
+
+  <header class="pattern-header">
+    <span class="pattern-badge badge-structural">Структурный</span>
+    <h1>Adapter (Адаптер)</h1>
+  </header>
+
+  <div class="pattern-meta">
+    <div class="meta-item">
+      <span class="meta-label">Также известен как</span>
+      Wrapper
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Сложность</span>
+      ★★☆☆☆
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Популярность</span>
+      ★★★★★
+    </div>
+  </div>
+
+  <section class="intent">
+    <h2> Назначение</h2>
+    <p>Преобразует интерфейс одного класса в другой интерфейс, ожидаемый клиентом. Адаптер обеспечивает совместную работу классов, невозможную в обычных условиях из-за несовместимости интерфейсов.</p>
+  </section>
+
+  <section class="problem">
+    <h2> Проблема</h2>
+    <p>Ваше приложение использует единый интерфейс для работы с данными, но нужно интегрировать стороннюю XML-библиотеку, которая имеет совершенно другой API. Переписывать библиотеку нельзя, менять интерфейс приложения — дорого.</p>
+  </section>
+
+  <section class="solution">
+    <h2> Решение</h2>
+    <p>Создаётся адаптер — класс-прослойка, который преобразует вызовы методов целевого интерфейса в вызовы методов адаптируемого класса. Клиент работает с адаптером через знакомый интерфейс, не зная о несовместимости.</p>
+  </section>
+
+  <section class="example">
+    <h2> Пример на Dart</h2>
+    <pre><code class="language-dart">// Целевой интерфейс
+abstract class DataProvider {
+  List<Map<String, dynamic>> fetchData();
+}
+
+// Сторонняя библиотека (несовместимый интерфейс)
+class XmlLibrary {
+  String getXml() {
+    return '<items><item><name>Item1</name></item></items>';
+  }
+}
+
+// Адаптер
+class XmlAdapter implements DataProvider {
+  final XmlLibrary _xmlLibrary;
+
+  XmlAdapter(this._xmlLibrary);
+
+  @override
+  List<Map<String, dynamic>> fetchData() {
+    final xml = _xmlLibrary.getXml();
+    return _parseXml(xml);
+  }
+
+  List<Map<String, dynamic>> _parseXml(String xml) {
+    final items = <Map<String, dynamic>>[];
+    final nameRegex = RegExp(r'<name>(.*?)</name>');
+    for (final match in nameRegex.allMatches(xml)) {
+      items.add({'name': match.group(1)});
+    }
+    return items;
+  }
+}
+
+void main() {
+  final provider = XmlAdapter(XmlLibrary());
+  final data = provider.fetchData();
+  print(data);
+}</code></pre>
+  </section>
+
+  <section class="when-to-use">
+    <h2> Когда применять</h2>
+    <ul>
+      <li>Когда нужно использовать сторонний класс с несовместимым интерфейсом</li>
+      <li>Когда нужно заменить одну библиотеку на другую без изменения клиентского кода</li>
+      <li>Когда нужно обеспечить совместимость между старой и новой частями системы</li>
+    </ul>
+  </section>
+
+  <section class="pros-cons">
+    <div class="pros">
+      <h3> Плюсы</h3>
+      <ul>
+        <li>Изолирует клиента от несовместимых интерфейсов</li>
+        <li>Не требует изменения существующего кода</li>
+        <li>Позволяет интегрировать legacy-компоненты</li>
+      </ul>
+    </div>
+    <div class="cons">
+      <h3> Минусы</h3>
+      <ul>
+        <li>Увеличивает сложность системы дополнительными классами</li>
+        <li>Может снижать производительность из-за прослойки</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="related">
+    <h2> Связанные паттерны</h2>
+    <ul>
+      <li><a href="#" data-nav="pattern" data-path="structural/07-bridge">Bridge</a> — похож по структуре, но решает другую задачу</li>
+      <li><a href="#" data-nav="pattern" data-path="structural/09-decorator">Decorator</a> — тоже обёртка, но для расширения функциональности</li>
+    </ul>
+  </section>
+
+  <footer class="pattern-nav">
+    <a href="#" data-nav="pattern" data-path="creational/05-prototype" class="prev">← Предыдущий</a>
+    <a href="#" data-nav="home">На главную</a>
+    <a href="#" data-nav="pattern" data-path="structural/07-bridge" class="next">Следующий →</a>
+  </footer>
+</section>

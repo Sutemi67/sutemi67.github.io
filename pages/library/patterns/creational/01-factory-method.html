@@ -1,0 +1,140 @@
+<section class="pattern">
+  <nav class="breadcrumbs">
+    <a href="#" data-nav="home">Главная</a> /
+    <a href="#" data-nav="group" data-group="creational">Порождающие</a> /
+    <span>Factory Method</span>
+  </nav>
+
+  <header class="pattern-header">
+    <span class="pattern-badge badge-creational">Порождающий</span>
+    <h1>Factory Method (Фабричный метод)</h1>
+  </header>
+
+  <div class="pattern-meta">
+    <div class="meta-item">
+      <span class="meta-label">Также известен как</span>
+      Virtual Constructor
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Сложность</span>
+      ★★☆☆☆
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Популярность</span>
+      ★★★★★
+    </div>
+  </div>
+
+  <section class="intent">
+    <h2> Назначение</h2>
+    <p>Определяет интерфейс для создания объекта, но позволяет подклассам изменять тип создаваемых объектов.</p>
+  </section>
+
+  <section class="problem">
+    <h2> Проблема</h2>
+    <p>Представьте, что вы пишете приложение для управления логистикой. Сначала оно работало только с наземными перевозками (грузовики), но затем появляется потребность добавить морские и воздушные перевозки. Код создания всех видов транспорта размазан по всему приложению, и каждое добавление нового типа требует изменения существующего кода.</p>
+  </section>
+
+  <section class="solution">
+    <h2> Решение</h2>
+    <p>Фабричный метод предлагает вынести код создания объектов в отдельный метод, объявленный в базовом классе (или интерфейсе). Подклассы могут переопределять этот метод, создавая объекты конкретных типов. Клиентский код работает через общий интерфейс и не зависит от конкретных классов.</p>
+  </section>
+
+  <section class="example">
+    <h2> Пример на Dart</h2>
+    <pre><code class="language-dart">abstract class Button {
+  void render();
+  void onClick(void Function() callback);
+}
+
+class WindowsButton implements Button {
+  @override
+  void render() => print('Рисуем кнопку в стиле Windows');
+
+  @override
+  void onClick(void Function() callback) {
+    print('Назначен обработчик для Windows');
+  }
+}
+
+class LinuxButton implements Button {
+  @override
+  void render() => print('Рисуем кнопку в стиле Linux');
+
+  @override
+  void onClick(void Function() callback) {
+    print('Назначен обработчик для Linux');
+  }
+}
+
+abstract class Dialog {
+  Button createButton();
+
+  void render() {
+    final button = createButton();
+    button.render();
+    button.onClick(() => print('Клик!'));
+  }
+}
+
+class WindowsDialog extends Dialog {
+  @override
+  Button createButton() => WindowsButton();
+}
+
+class LinuxDialog extends Dialog {
+  @override
+  Button createButton() => LinuxButton();
+}
+
+void main() {
+  Dialog dialog = WindowsDialog();
+  dialog.render();
+
+  dialog = LinuxDialog();
+  dialog.render();
+}</code></pre>
+  </section>
+
+  <section class="when-to-use">
+    <h2> Когда применять</h2>
+    <ul>
+      <li>Когда заранее неизвестно, экземпляры каких классов нужно создавать</li>
+      <li>Когда класс хочет, чтобы его подклассы определяли создаваемые объекты</li>
+      <li>Когда нужно локализовать код создания объектов в одном месте</li>
+    </ul>
+  </section>
+
+  <section class="pros-cons">
+    <div class="pros">
+      <h3> Плюсы</h3>
+      <ul>
+        <li>Избавляет от жёсткой привязки к конкретным классам</li>
+        <li>Код создания объектов собирается в одном месте</li>
+        <li>Упрощает добавление новых типов продуктов</li>
+        <li>Реализует принцип открытости/закрытости</li>
+      </ul>
+    </div>
+    <div class="cons">
+      <h3> Минусы</h3>
+      <ul>
+        <li>Может привести к появлению множества подклассов</li>
+        <li>Усложняет код из-за дополнительных интерфейсов</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="related">
+    <h2> Связанные паттерны</h2>
+    <ul>
+      <li><a href="#" data-nav="pattern" data-path="creational/02-abstract-factory">Abstract Factory</a> — часто реализуется через Factory Method</li>
+      <li><a href="#" data-nav="pattern" data-path="creational/03-singleton">Singleton</a> — можно сделать фабрику синглтоном</li>
+    </ul>
+  </section>
+
+  <footer class="pattern-nav">
+    <a href="#" data-nav="pattern" data-path="creational/05-prototype" class="prev">← Предыдущий</a>
+    <a href="#" data-nav="home">На главную</a>
+    <a href="#" data-nav="pattern" data-path="creational/02-abstract-factory" class="next">Следующий →</a>
+  </footer>
+</section>

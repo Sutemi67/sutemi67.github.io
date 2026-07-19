@@ -1,0 +1,149 @@
+<section class="architecture">
+  <nav class="breadcrumbs">
+    <a href="#" data-nav="home">Главная</a> /
+    <a href="#" data-nav="group" data-group="cleanArch">Clean Architecture</a> /
+    <span>Clean Architecture</span>
+  </nav>
+
+  <header class="pattern-header">
+    <span class="pattern-badge badge-arch">Архитектура</span>
+    <h1>Clean Architecture (Чистая архитектура)</h1>
+  </header>
+
+  <div class="pattern-meta">
+    <div class="meta-item">
+      <span class="meta-label">Также известен как</span>
+      Layered Architecture, Hexagonal Architecture
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Автор</span>
+      Robert C. Martin (Uncle Bob)
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Применимость</span>
+      ★★★★☆
+    </div>
+  </div>
+
+  <section class="intent">
+    <h2> Назначение</h2>
+    <p>Создание архитектуры, независимой от фреймворков, баз данных и внешних библиотек. Бизнес-логика остаётся чистой и тестируемой, а детали реализации (UI, БД, API) становятся подключаемыми модулями.</p>
+  </section>
+
+  <section class="problem">
+    <h2> Проблема</h2>
+    <p>Традиционные приложения жёстко привязаны к фреймворку или базе данных. Смена БД или UI-фреймворка требует переписывания всего приложения. Тесты становятся медленными и хрупкими, так как требуют поднятия всей инфраструктуры. Бизнес-логика размазывается по слоям представления и данных.</p>
+  </section>
+
+  <section class="solution">
+    <h2> Решение</h2>
+    <p>Архитектура разделяется на концентрические слои с железным правилом зависимости: <strong>внутренний слой не знает о внешнем</strong>. В центре — сущности и бизнес-правила (use cases), снаружи — фреймворки, драйверы, UI.</p>
+    <ul>
+      <li><strong>Entities</strong> — бизнес-сущности (Enterprise Business Rules)</li>
+      <li><strong>Use Cases</strong> — сценарии использования (Application Business Rules)</li>
+      <li><strong>Interface Adapters</strong> — адаптеры (контроллеры, презентеры)</li>
+      <li><strong>Frameworks & Drivers</strong> — внешние инструменты</li>
+      <li><strong>Dependency Rule</strong> — зависимости направлены только внутрь</li>
+    </ul>
+  </section>
+
+  <section class="example">
+    <h2> Пример на Dart</h2>
+    <p>Структура проекта по Clean Architecture:</p>
+    <pre><code class="language-dart">// ---- domain/entities ----
+class User {
+  final String id;
+  final String name;
+  final String email;
+  User(this.id, this.name, this.email);
+}
+
+// ---- domain/usecases ----
+abstract class UserRepository {
+  Future&lt;User&gt; findById(String id);
+  Future&lt;void&gt; save(User user);
+}
+
+class GetUserUseCase {
+  final UserRepository repo;
+  GetUserUseCase(this.repo);
+
+  Future&lt;User&gt; execute(String id) => repo.findById(id);
+}
+
+// ---- data/repositories ----
+class UserRepositoryImpl implements UserRepository {
+  @override
+  Future&lt;User&gt; findById(String id) async {
+    // Работа с БД или API
+    return User(id, 'Alice', 'alice@example.com');
+  }
+
+  @override
+  Future&lt;void&gt; save(User user) async {
+    print('Сохранён пользователь ${user.name}');
+  }
+}
+
+// ---- presentation/controllers ----
+class UserController {
+  final GetUserUseCase getUser;
+
+  UserController(this.getUser);
+
+  Future&lt;User?&gt; showUser(String id) async {
+    try {
+      return await getUser.execute(id);
+    } catch (e) {
+      print('Ошибка: $e');
+      return null;
+    }
+  }
+}</code></pre>
+    <p>Диаграмма зависимостей (слои):</p>
+    <pre><code class="language-dart">// Frameworks (внешний слой)
+//   ↓ depends on
+// Interface Adapters
+//   ↓ depends on
+// Use Cases
+//   ↓ depends on
+// Entities (внутренний слой)
+
+// Ни один внутренний слой не знает о внешних слоях!</code></pre>
+  </section>
+
+  <section class="pros-cons">
+    <div class="pros">
+      <h3> Плюсы</h3>
+      <ul>
+        <li>Независимость от фреймворков и библиотек</li>
+        <li>Бизнес-логика тестируется без инфраструктуры</li>
+        <li>Возможность замены внешних компонентов (БД, UI)</li>
+        <li>Чёткое разделение ответственностей</li>
+      </ul>
+    </div>
+    <div class="cons">
+      <h3> Минусы</h3>
+      <ul>
+        <li>Больше кода и файлов для простых приложений</li>
+        <li>Требует дисциплины в соблюдении границ слоёв</li>
+        <li>Может быть избыточен для небольших проектов</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="related">
+    <h2> Связанные принципы</h2>
+    <ul>
+      <li><a href="#" data-nav="item" data-path="solid/05-dependency-inversion">Dependency Inversion</a> — основа Dependency Rule</li>
+      <li><a href="#" data-nav="item" data-path="di/01-intro">Dependency Injection</a> — механизм реализации DIP</li>
+      <li><a href="#" data-nav="item" data-path="ddd/01-intro">Domain-Driven Design</a> — тесно связан с Clean Architecture</li>
+    </ul>
+  </section>
+
+  <footer class="pattern-nav">
+    <a href="#" data-nav="item" data-path="principles/04-yagni" class="prev">← Предыдущий</a>
+    <a href="#" data-nav="home">На главную</a>
+    <a href="#" data-nav="item" data-path="cqrs/01-intro" class="next">Следующий →</a>
+  </footer>
+</section>

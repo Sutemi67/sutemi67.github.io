@@ -1,0 +1,121 @@
+<section class="architecture">
+  <nav class="breadcrumbs">
+    <a href="#" data-nav="home">Главная</a> /
+    <a href="#" data-nav="group" data-group="solid">SOLID</a> /
+    <span>Interface Segregation</span>
+  </nav>
+
+  <header class="pattern-header">
+    <span class="pattern-badge badge-solid">SOLID</span>
+    <h1>I. Interface Segregation (Принцип разделения интерфейсов)</h1>
+  </header>
+
+  <div class="pattern-meta">
+    <div class="meta-item">
+      <span class="meta-label">Также известен как</span>
+      ISP
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Сложность</span>
+      ★★☆☆☆
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Применимость</span>
+      ★★★★☆
+    </div>
+  </div>
+
+  <section class="intent">
+    <h2> Назначение</h2>
+    <p>Много специализированных интерфейсов лучше, чем один универсальный. Клиенты не должны зависеть от методов, которые они не используют.</p>
+  </section>
+
+  <section class="problem">
+    <h2> Проблема</h2>
+    <p>«Толстый» интерфейс (fat interface) содержит множество методов. Классы, реализующие его, вынуждены определять методы, которые им не нужны. Это приводит к пустым реализациям, выбросу исключений или возврату <code>null</code>, что нарушает LSP и увеличивает связанность.</p>
+  </section>
+
+  <section class="solution">
+    <h2> Решение</h2>
+    <p>Разделить «толстый» интерфейс на несколько узких, каждый для конкретной группы клиентов. Каждый класс реализует только те интерфейсы, которые ему действительно нужны.</p>
+  </section>
+
+  <section class="example">
+    <h2> Пример на Dart</h2>
+    <p>Нарушение ISP — один «толстый» интерфейс:</p>
+    <pre><code class="language-dart">abstract class Worker {
+  void work();
+  void eat();
+  void sleep();
+}
+
+class Human implements Worker {
+  @override void work() => print('Человек работает');
+  @override void eat() => print('Человек ест');
+  @override void sleep() => print('Человек спит');
+}
+
+// Робот вынужден реализовывать eat и sleep, которые ему не нужны
+class Robot implements Worker {
+  @override void work() => print('Робот работает');
+  @override void eat() => throw UnimplementedError('Робот не ест');
+  @override void sleep() => throw UnimplementedError('Робот не спит');
+}</code></pre>
+    <p>Решение — разделить на узкие интерфейсы:</p>
+    <pre><code class="language-dart">abstract class Workable {
+  void work();
+}
+
+abstract class Eatable {
+  void eat();
+}
+
+abstract class Sleepable {
+  void sleep();
+}
+
+class Human implements Workable, Eatable, Sleepable {
+  @override void work() => print('Человек работает');
+  @override void eat() => print('Человек ест');
+  @override void sleep() => print('Человек спит');
+}
+
+// Робот реализует только то, что нужно
+class Robot implements Workable {
+  @override void work() => print('Робот работает');
+}</code></pre>
+  </section>
+
+  <section class="pros-cons">
+    <div class="pros">
+      <h3> Плюсы</h3>
+      <ul>
+        <li>Классы реализуют только то, что им действительно нужно</li>
+        <li>Снижается связанность между компонентами</li>
+        <li>Упрощается тестирование и мокирование</li>
+        <li>Повышается читаемость и понятность кода</li>
+      </ul>
+    </div>
+    <div class="cons">
+      <h3> Минусы</h3>
+      <ul>
+        <li>Увеличивается количество интерфейсов</li>
+        <li>Требуется продумывать границы интерфейсов заранее</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="related">
+    <h2> Связанные принципы</h2>
+    <ul>
+      <li><a href="#" data-nav="item" data-path="solid/03-liskov-substitution">Liskov Substitution</a> — ISP помогает соблюдать LSP</li>
+      <li><a href="#" data-nav="item" data-path="solid/01-single-responsibility">Single Responsibility</a> — ISP — это SRP для интерфейсов</li>
+    </ul>
+  </section>
+
+  <footer class="pattern-nav">
+    <a href="#" data-nav="item" data-path="solid/03-liskov-substitution" class="prev">← Предыдущий</a>
+    <a href="#" data-nav="home">На главную</a>
+    <a href="#" data-nav="item" data-path="solid/05-dependency-inversion" class="next">Следующий →</a>
+  </footer>
+</section>

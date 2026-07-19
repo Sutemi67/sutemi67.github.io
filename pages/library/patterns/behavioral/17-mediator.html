@@ -1,0 +1,142 @@
+<section class="pattern">
+  <nav class="breadcrumbs">
+    <a href="#" data-nav="home">Главная</a> /
+    <a href="#" data-nav="group" data-group="behavioral">Поведенческие</a> /
+    <span>Mediator</span>
+  </nav>
+
+  <header class="pattern-header">
+    <span class="pattern-badge badge-behavioral">Поведенческий</span>
+    <h1>Mediator (Посредник)</h1>
+  </header>
+
+  <div class="pattern-meta">
+    <div class="meta-item">
+      <span class="meta-label">Также известен как</span>
+      Controller, Mediator
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Сложность</span>
+      ★★☆☆☆
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Популярность</span>
+      ★★★★☆
+    </div>
+  </div>
+
+  <section class="intent">
+    <h2> Назначение</h2>
+    <p>Уменьшает связанность множества взаимодействующих классов, заставляя их общаться через объект-посредник, вместо прямой связи друг с другом.</p>
+  </section>
+
+  <section class="problem">
+    <h2> Проблема</h2>
+    <p>В чат-комнате каждый пользователь может отправлять сообщения всем остальным. Если каждый пользователь будет знать о каждом, то при добавлении нового пользователя придётся обновлять всех. Связность становится слишком высокой.</p>
+  </section>
+
+  <section class="solution">
+    <h2> Решение</h2>
+    <p>Создаётся посредник (ChatRoom), который управляет коммуникацией. Пользователи отправляют сообщения посреднику, а он рассылает их остальным. Пользователи не знают друг о друге — они знают только посредника.</p>
+  </section>
+
+  <section class="example">
+    <h2> Пример на Dart</h2>
+    <pre><code class="language-dart">abstract class User {
+  final String name;
+  ChatRoom? mediator;
+
+  User(this.name);
+
+  void send(String message);
+  void receive(String message, String from);
+}
+
+class ChatUser extends User {
+  ChatUser(String name) : super(name);
+
+  @override
+  void send(String message) {
+    mediator?.sendMessage(this, message);
+  }
+
+  @override
+  void receive(String message, String from) {
+    print('[$name] получил от [$from]: $message');
+  }
+}
+
+class ChatRoom {
+  final List<User> _users = [];
+
+  void addUser(User user) {
+    _users.add(user);
+    user.mediator = this;
+  }
+
+  void sendMessage(User sender, String message) {
+    for (final user in _users) {
+      if (user != sender) {
+        user.receive(message, sender.name);
+      }
+    }
+  }
+}
+
+void main() {
+  final chat = ChatRoom();
+  final alice = ChatUser('Alice');
+  final bob = ChatUser('Bob');
+  final charlie = ChatUser('Charlie');
+
+  chat.addUser(alice);
+  chat.addUser(bob);
+  chat.addUser(charlie);
+
+  alice.send('Привет всем!');
+  bob.send('Привет, Alice!');
+}
+</code></pre>
+  </section>
+
+  <section class="when-to-use">
+    <h2> Когда применять</h2>
+    <ul>
+      <li>Когда множество объектов взаимодействуют сложным образом</li>
+      <li>Когда хочется уменьшить связанность между компонентами</li>
+      <li>Когда взаимодействие между объектами можно централизовать</li>
+    </ul>
+  </section>
+
+  <section class="pros-cons">
+    <div class="pros">
+      <h3> Плюсы</h3>
+      <ul>
+        <li>Уменьшает связанность между компонентами</li>
+        <li>Централизует управление коммуникацией</li>
+        <li>Упрощает поддержку и изменение взаимодействий</li>
+      </ul>
+    </div>
+    <div class="cons">
+      <h3> Минусы</h3>
+      <ul>
+        <li>Посредник может стать «божественным объектом»</li>
+        <li>Снижает производительность из-за дополнительного уровня</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="related">
+    <h2> Связанные паттерны</h2>
+    <ul>
+      <li><a href="#" data-nav="pattern" data-path="behavioral/19-observer">Observer</a> — посредник может использовать Observer для уведомлений</li>
+      <li><a href="#" data-nav="pattern" data-path="behavioral/13-chain-of-responsibility">Chain of Responsibility</a> — передаёт по цепочке, Mediator управляет централизованно</li>
+    </ul>
+  </section>
+
+  <footer class="pattern-nav">
+    <a href="#" data-nav="pattern" data-path="behavioral/16-iterator" class="prev">← Предыдущий</a>
+    <a href="#" data-nav="home">На главную</a>
+    <a href="#" data-nav="pattern" data-path="behavioral/18-memento" class="next">Следующий →</a>
+  </footer>
+</section>

@@ -1,0 +1,171 @@
+<section class="architecture">
+  <nav class="breadcrumbs">
+    <a href="#" data-nav="home">Главная</a> /
+    <a href="#" data-nav="group" data-group="cqrs">CQRS</a> /
+    <span>CQRS и Event Sourcing</span>
+  </nav>
+
+  <header class="pattern-header">
+    <span class="pattern-badge badge-cqrs">CQRS</span>
+    <h1>CQRS и Event Sourcing</h1>
+  </header>
+
+  <div class="pattern-meta">
+    <div class="meta-item">
+      <span class="meta-label">Также известен как</span>
+      Command Query Responsibility Segregation
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Сложность</span>
+      ★★★★☆
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Применимость</span>
+      ★★★☆☆
+    </div>
+  </div>
+
+  <section class="intent">
+    <h2> Назначение</h2>
+    <p><strong>CQRS</strong> разделяет операции чтения и записи данных на разные модели. <strong>Event Sourcing</strong> хранит не текущее состояние, а последовательность событий, которые к нему привели. Вместе они образуют мощную архитектуру для сложных доменов.</p>
+  </section>
+
+  <section class="problem">
+    <h2> Проблема</h2>
+    <p>В традиционных CRUD-приложениях одна модель используется и для чтения, и для записи. Это приводит к компромиссам: сложным запросам, проблемам с производительностью и ограниченной аудируемости. При этом часто теряется информация о том, какие действия привели к текущему состоянию.</p>
+  </section>
+
+  <section class="solution">
+    <h2> Решение</h2>
+    <p><strong>CQRS</strong>: Команды (Command) изменяют состояние, запросы (Query) читают данные. У каждой операции — своя модель. Команды интенциональны (выражают намерение), запросы возвращают данные без побочных эффектов.</p>
+    <p><strong>Event Sourcing</strong>: Вместо хранения текущего состояния хранится поток событий. Текущее состояние восстанавливается воспроизведением (replay) событий. Это даёт полный аудит и возможность «путешествия во времени».</p>
+  </section>
+
+  <section class="example">
+    <h2> Пример на Dart</h2>
+    <p>Команды и запросы:</p>
+    <pre><code class="language-dart">// ---- Commands (изменение состояния) ----
+abstract class Command {}
+
+class DepositMoney implements Command {
+  final String accountId;
+  final double amount;
+  DepositMoney(this.accountId, this.amount);
+}
+
+class WithdrawMoney implements Command {
+  final String accountId;
+  final double amount;
+  WithdrawMoney(this.accountId, this.amount);
+}
+
+// ---- Events (факты) ----
+abstract class Event {}
+
+class MoneyDeposited implements Event {
+  final String accountId;
+  final double amount;
+  final DateTime timestamp;
+  MoneyDeposited(this.accountId, this.amount, this.timestamp);
+}
+
+class MoneyWithdrawn implements Event {
+  final String accountId;
+  final double amount;
+  final DateTime timestamp;
+  MoneyWithdrawn(this.accountId, this.amount, this.timestamp);
+}
+
+// ---- Event Store ----
+class EventStore {
+  final List&lt;Event&gt; _events = [];
+
+  void save(Event event) => _events.add(event);
+
+  List&lt;Event&gt; getEvents(String accountId) =>
+      _events.where((e) =>
+        (e is MoneyDeposited && e.accountId == accountId) ||
+        (e is MoneyWithdrawn && e.accountId == accountId)
+      ).toList();
+}
+
+// ---- Read Model (Query) ----
+class AccountBalanceQuery {
+  final EventStore store;
+
+  AccountBalanceQuery(this.store);
+
+  double getBalance(String accountId) {
+    double balance = 0;
+    for (final event in store.getEvents(accountId)) {
+      if (event is MoneyDeposited) balance += event.amount;
+      if (event is MoneyWithdrawn) balance -= event.amount;
+    }
+    return balance;
+  }
+}
+
+// ---- Command Handler ----
+class AccountCommandHandler {
+  final EventStore store;
+
+  AccountCommandHandler(this.store);
+
+  void handle(Command command) {
+    if (command is DepositMoney) {
+      store.save(MoneyDeposited(
+        command.accountId, command.amount, DateTime.now()));
+    } else if (command is WithdrawMoney) {
+      store.save(MoneyWithdrawn(
+        command.accountId, command.amount, DateTime.now()));
+    }
+  }
+}
+
+void main() {
+  final store = EventStore();
+  final handler = AccountCommandHandler(store);
+  final query = AccountBalanceQuery(store);
+
+  handler.handle(DepositMoney('acc1', 1000));
+  handler.handle(WithdrawMoney('acc1', 200));
+
+  print('Баланс: ${query.getBalance('acc1')}'); // 800.0
+}</code></pre>
+  </section>
+
+  <section class="pros-cons">
+    <div class="pros">
+      <h3> Плюсы</h3>
+      <ul>
+        <li>Полный аудит всех изменений</li>
+        <li>Модели чтения могут быть оптимизированы независимо</li>
+        <li>Возможность восстановить состояние на любой момент</li>
+        <li>Хорошая масштабируемость (CQRS)</li>
+      </ul>
+    </div>
+    <div class="cons">
+      <h3> Минусы</h3>
+      <ul>
+        <li>Значительно увеличивает сложность системы</li>
+        <li>Требует обработки событийной согласованности (eventual consistency)</li>
+        <li>Избыточен для простых CRUD-приложений</li>
+        <li>Сложность управления версиями событий</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="related">
+    <h2> Связанные принципы</h2>
+    <ul>
+      <li><a href="#" data-nav="item" data-path="ddd/01-intro">Domain-Driven Design</a> — CQRS и Event Sourcing часто применяются в DDD</li>
+      <li><a href="#" data-nav="item" data-path="patterns/behavioral/19-observer">Observer</a> — событийная модель лежит в основе Event Sourcing</li>
+    </ul>
+  </section>
+
+  <footer class="pattern-nav">
+    <a href="#" data-nav="item" data-path="clean-architecture/01-intro" class="prev">← Предыдущий</a>
+    <a href="#" data-nav="home">На главную</a>
+    <a href="#" data-nav="item" data-path="di/01-intro" class="next">Следующий →</a>
+  </footer>
+</section>

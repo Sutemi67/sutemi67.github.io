@@ -1,0 +1,153 @@
+<section class="pattern">
+  <nav class="breadcrumbs">
+    <a href="#" data-nav="home">Главная</a> /
+    <a href="#" data-nav="group" data-group="behavioral">Поведенческие</a> /
+    <span>Template Method</span>
+  </nav>
+
+  <header class="pattern-header">
+    <span class="pattern-badge badge-behavioral">Поведенческий</span>
+    <h1>Template Method (Шаблонный метод)</h1>
+  </header>
+
+  <div class="pattern-meta">
+    <div class="meta-item">
+      <span class="meta-label">Также известен как</span>
+      Template Method
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Сложность</span>
+      ★☆☆☆☆
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Популярность</span>
+      ★★★☆☆
+    </div>
+  </div>
+
+  <section class="intent">
+    <h2> Назначение</h2>
+    <p>Определяет скелет алгоритма в базовом классе, позволяя подклассам переопределять отдельные шаги без изменения структуры алгоритма.</p>
+  </section>
+
+  <section class="problem">
+    <h2> Проблема</h2>
+    <p>Нужно реализовать парсеры данных разных форматов (CSV, JSON, XML). Алгоритм парсинга одинаков: открыть файл, прочитать данные, разобрать, обработать ошибки, закрыть файл. Отличается только этап разбора. Если копировать весь алгоритм для каждого формата, код будет дублироваться.</p>
+  </section>
+
+  <section class="solution">
+    <h2> Решение</h2>
+    <p>Базовый класс определяет шаблонный метод с последовательностью шагов. Некоторые шаги — абстрактные (должны быть реализованы в подклассах), другие — имеют реализацию по умолчанию. Подклассы переопределяют только необходимые шаги.</p>
+  </section>
+
+  <section class="example">
+    <h2> Пример на Dart</h2>
+    <pre><code class="language-dart">abstract class DataParser {
+  void parse(String filepath) {
+    openFile(filepath);
+    final rawData = readFile();
+    final parsedData = parseData(rawData);
+    processData(parsedData);
+    closeFile();
+  }
+
+  void openFile(String path) {
+    print('Открытие файла: $path');
+  }
+
+  String readFile() {
+    print('Чтение данных из файла');
+    return 'raw data';
+  }
+
+  void closeFile() {
+    print('Закрытие файла');
+  }
+
+  List<Map<String, dynamic>> parseData(String data);
+
+  void processData(List<Map<String, dynamic>> data) {
+    print('Обработано ${data.length} записей');
+  }
+}
+
+class CsvParser extends DataParser {
+  @override
+  List<Map<String, dynamic>> parseData(String data) {
+    print('Разбор CSV: разделение по запятым');
+    return [
+      {'name': 'Alice', 'age': 30},
+      {'name': 'Bob', 'age': 25},
+    ];
+  }
+}
+
+class JsonParser extends DataParser {
+  @override
+  List<Map<String, dynamic>> parseData(String data) {
+    print('Разбор JSON: декодирование строки');
+    return [
+      {'name': 'Charlie', 'age': 35},
+    ];
+  }
+
+  @override
+  void processData(List<Map<String, dynamic>> data) {
+    print('JSON-валидация пройдена');
+    super.processData(data);
+  }
+}
+
+void main() {
+  final csvParser = CsvParser();
+  csvParser.parse('data.csv');
+
+  print('---');
+
+  final jsonParser = JsonParser();
+  jsonParser.parse('data.json');
+}
+</code></pre>
+  </section>
+
+  <section class="when-to-use">
+    <h2> Когда применять</h2>
+    <ul>
+      <li>Когда несколько классов имеют одинаковый алгоритм, но разную реализацию отдельных шагов</li>
+      <li>Когда нужно избежать дублирования кода в подклассах</li>
+      <li>Когда нужно контролировать, какие шаги обязательны, а какие опциональны</li>
+    </ul>
+  </section>
+
+  <section class="pros-cons">
+    <div class="pros">
+      <h3> Плюсы</h3>
+      <ul>
+        <li>Избегает дублирования кода (DRY)</li>
+        <li>Позволяет подклассам переопределять только нужные шаги</li>
+        <li>Контролирует структуру алгоритма из базового класса</li>
+      </ul>
+    </div>
+    <div class="cons">
+      <h3> Минусы</h3>
+      <ul>
+        <li>Ограничивает гибкость — подклассы следуют жёсткому скелету</li>
+        <li>Может нарушать принцип подстановки Лисков (LSP)</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="related">
+    <h2> Связанные паттерны</h2>
+    <ul>
+      <li><a href="#" data-nav="pattern" data-path="behavioral/21-strategy">Strategy</a> — заменяет целые алгоритмы; Template Method задаёт скелет с переопределяемыми шагами</li>
+      <li><a href="#" data-nav="pattern" data-path="creational/01-factory-method">Factory Method</a> — частный случай Template Method</li>
+    </ul>
+  </section>
+
+  <footer class="pattern-nav">
+    <a href="#" data-nav="pattern" data-path="behavioral/21-strategy" class="prev">← Предыдущий</a>
+    <a href="#" data-nav="home">На главную</a>
+    <a href="#" data-nav="pattern" data-path="behavioral/23-visitor" class="next">Следующий →</a>
+  </footer>
+</section>

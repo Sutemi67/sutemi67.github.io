@@ -1,0 +1,207 @@
+<section class="architecture">
+  <nav class="breadcrumbs">
+    <a href="#" data-nav="home">Главная</a> /
+    <a href="#" data-nav="group" data-group="ddd">Domain-Driven Design</a> /
+    <span>Domain-Driven Design</span>
+  </nav>
+
+  <header class="pattern-header">
+    <span class="pattern-badge badge-ddd">DDD</span>
+    <h1>Domain-Driven Design (Предметно-ориентированное проектирование)</h1>
+  </header>
+
+  <div class="pattern-meta">
+    <div class="meta-item">
+      <span class="meta-label">Также известен как</span>
+      DDD
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Автор</span>
+      Eric Evans
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Применимость</span>
+      ★★★☆☆
+    </div>
+  </div>
+
+  <section class="intent">
+    <h2> Назначение</h2>
+    <p>DDD — это подход к проектированию сложного программного обеспечения, в котором основной фокус направлен на предметную область (domain) и её логику. Код строится вокруг модели предметной области, а не вокруг технических деталей.</p>
+  </section>
+
+  <section class="problem">
+    <h2> Проблема</h2>
+    <p>Сложные бизнес-приложения часто страдают от разрыва между моделью в голове экспертов и реализацией в коде. Разработчики и бизнес-эксперты говорят на разных языках. Технические детали (БД, UI) смешиваются с бизнес-логикой, делая её непонятной и хрупкой.</p>
+  </section>
+
+  <section class="solution">
+    <h2> Решение</h2>
+    <p>DDD предлагает набор стратегических и тактических паттернов:</p>
+    <ul>
+      <li><strong>Ubiquitous Language (Единый язык)</strong> — единая терминология между разработчиками и экспертами</li>
+      <li><strong>Bounded Context (Ограниченный контекст)</strong> — чёткие границы каждой модели</li>
+      <li><strong>Entity (Сущность)</strong> — объект с уникальным идентификатором и жизненным циклом</li>
+      <li><strong>Value Object (Объект-значение)</strong> — неизменяемый объект, определяемый своими атрибутами</li>
+      <li><strong>Aggregate (Агрегат)</strong> — группа объектов с единой точкой входа (Aggregate Root)</li>
+      <li><strong>Repository (Репозиторий)</strong> — абстракция хранилища для агрегатов</li>
+      <li><strong>Domain Service (Доменный сервис)</strong> — логика, не вписывающаяся в сущности</li>
+      <li><strong>Domain Event (Доменное событие)</strong> — значимое событие в домене</li>
+    </ul>
+  </section>
+
+  <section class="example">
+    <h2> Пример на Dart</h2>
+    <p>Модель заказа в интернет-магазине с использованием DDD:</p>
+    <pre><code class="language-dart">// ---- Value Object ----
+class Money {
+  final double amount;
+  final String currency;
+
+  const Money(this.amount, this.currency);
+
+  Money operator +(Money other) {
+    if (currency != other.currency) {
+      throw ArgumentError('Разные валюты');
+    }
+    return Money(amount + other.amount, currency);
+  }
+
+  @override
+  bool operator ==(Object other) =>
+    other is Money && amount == other.amount && currency == other.currency;
+
+  @override
+  int get hashCode => Object.hash(amount, currency);
+}
+
+// ---- Entity ----
+class Product {
+  final String id;
+  final String name;
+  final Money price;
+
+  Product(this.id, this.name, this.price);
+
+  @override
+  bool operator ==(Object other) =>
+    other is Product && id == other.id;
+
+  @override
+  int get hashCode => id.hashCode;
+}
+
+// ---- Value Object ----
+class OrderLine {
+  final Product product;
+  final int quantity;
+  final Money total;
+
+  OrderLine(this.product, this.quantity)
+    : total = Money(product.price.amount * quantity, product.price.currency);
+}
+
+// ---- Aggregate Root ----
+class Order {
+  final String id;
+  final List&lt;OrderLine&gt; _lines = [];
+  OrderStatus _status;
+  final DateTime createdAt;
+
+  Order(this.id, {DateTime? createdAt})
+    : _status = OrderStatus.draft,
+      createdAt = createdAt ?? DateTime.now();
+
+  OrderStatus get status => _status;
+  List&lt;OrderLine&gt; get lines => List.unmodifiable(_lines);
+
+  Money get total => _lines.fold(
+    Money(0, 'USD'),
+    (sum, line) => sum + line.total,
+  );
+
+  void addProduct(Product product, int quantity) {
+    if (_status != OrderStatus.draft) {
+      throw StateError('Нельзя изменить подтверждённый заказ');
+    }
+    _lines.add(OrderLine(product, quantity));
+  }
+
+  void confirm() {
+    if (_lines.isEmpty) throw StateError('Пустой заказ нельзя подтвердить');
+    _status = OrderStatus.confirmed;
+  }
+
+  void cancel() {
+    _status = OrderStatus.cancelled;
+  }
+}
+
+enum OrderStatus { draft, confirmed, shipped, delivered, cancelled }
+
+// ---- Domain Event ----
+class OrderConfirmed {
+  final String orderId;
+  final DateTime confirmedAt;
+  OrderConfirmed(this.orderId, this.confirmedAt);
+}
+
+// ---- Repository (interface) ----
+abstract class OrderRepository {
+  Future&lt;Order?&gt; findById(String id);
+  Future&lt;void&gt; save(Order order);
+}
+
+// ---- Domain Service ----
+class OrderService {
+  final OrderRepository repository;
+
+  OrderService(this.repository);
+
+  Future&lt;void&gt; confirmOrder(String orderId) async {
+    final order = await repository.findById(orderId);
+    if (order == null) throw ArgumentError('Заказ не найден');
+
+    order.confirm();
+    await repository.save(order);
+    // Публикация доменного события:
+    print('Событие: OrderConfirmed(${order.id}, ${DateTime.now()})');
+  }
+}</code></pre>
+  </section>
+
+  <section class="pros-cons">
+    <div class="pros">
+      <h3> Плюсы</h3>
+      <ul>
+        <li>Код отражает реальную бизнес-логику</li>
+        <li>Единый язык между разработчиками и экспертами</li>
+        <li>Чёткие границы контекстов и агрегатов</li>
+        <li>Код проще поддерживать при сложной бизнес-логике</li>
+      </ul>
+    </div>
+    <div class="cons">
+      <h3> Минусы</h3>
+      <ul>
+        <li>Избыточен для простых CRUD-приложений</li>
+        <li>Требует тесного взаимодействия с экспертами домена</li>
+        <li>Высокий порог входа для команды</li>
+        <li>Сложность внедрения в существующий проект</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="related">
+    <h2> Связанные принципы</h2>
+    <ul>
+      <li><a href="#" data-nav="item" data-path="clean-architecture/01-intro">Clean Architecture</a> — DDD и Clean Architecture отлично дополняют друг друга</li>
+      <li><a href="#" data-nav="item" data-path="cqrs/01-intro">CQRS / Event Sourcing</a> — часто применяются вместе с DDD</li>
+      <li><a href="#" data-nav="item" data-path="di/01-intro">Dependency Injection</a> — необходим для внедрения репозиториев и сервисов</li>
+    </ul>
+  </section>
+
+  <footer class="pattern-nav">
+    <a href="#" data-nav="item" data-path="di/01-intro" class="prev">← Предыдущий</a>
+    <a href="#" data-nav="home">На главную</a>
+  </footer>
+</section>

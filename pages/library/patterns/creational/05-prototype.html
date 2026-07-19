@@ -1,0 +1,144 @@
+<section class="pattern">
+  <nav class="breadcrumbs">
+    <a href="#" data-nav="home">Главная</a> /
+    <a href="#" data-nav="group" data-group="creational">Порождающие</a> /
+    <span>Prototype</span>
+  </nav>
+
+  <header class="pattern-header">
+    <span class="pattern-badge badge-creational">Порождающий</span>
+    <h1>Prototype (Прототип)</h1>
+  </header>
+
+  <div class="pattern-meta">
+    <div class="meta-item">
+      <span class="meta-label">Также известен как</span>
+      Клон
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Сложность</span>
+      ★★☆☆☆
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Популярность</span>
+      ★★★☆☆
+    </div>
+  </div>
+
+  <section class="intent">
+    <h2> Назначение</h2>
+    <p>Позволяет копировать объекты, не вдаваясь в подробности их реализации, путём делегирования операции клонирования самим копируемым объектам.</p>
+  </section>
+
+  <section class="problem">
+    <h2> Проблема</h2>
+    <p>У вас есть сложный конфигурационный объект, который нужно использовать как шаблон для создания множества похожих объектов с небольшими отличиями. Создание каждого объекта с нуля через конструктор требует повторения одних и тех же шагов.</p>
+  </section>
+
+  <section class="solution">
+    <h2> Решение</h2>
+    <p>Определяется общий интерфейс с методом clone(). Каждый класс реализует клонирование, создавая копию своего объекта. В Dart можно использовать встроенный оператор каскада или реализовать метод clone() вручную.</p>
+  </section>
+
+  <section class="example">
+    <h2> Пример на Dart</h2>
+    <pre><code class="language-dart">class AppConfig {
+  String apiUrl;
+  int timeout;
+  bool retryOnError;
+  Map<String, String> headers;
+
+  AppConfig({
+    required this.apiUrl,
+    this.timeout = 30,
+    this.retryOnError = true,
+    Map<String, String>? headers,
+  }) : headers = headers ?? {};
+
+  AppConfig clone() {
+    return AppConfig(
+      apiUrl: apiUrl,
+      timeout: timeout,
+      retryOnError: retryOnError,
+      headers: Map.from(headers),
+    );
+  }
+}
+
+class Shape {
+  int x, y;
+  String color;
+
+  Shape(this.x, this.y, this.color);
+
+  Shape clone() => Shape(x, y, color);
+}
+
+class Circle extends Shape {
+  int radius;
+
+  Circle(int x, int y, String color, this.radius) : super(x, y, color);
+
+  @override
+  Circle clone() => Circle(x, y, color, radius);
+}
+
+void main() {
+  final baseConfig = AppConfig(
+    apiUrl: 'https://api.example.com',
+    timeout: 30,
+    retryOnError: true,
+    headers: {'Content-Type': 'application/json'},
+  );
+
+  final devConfig = baseConfig.clone();
+  devConfig.apiUrl = 'https://dev.api.example.com';
+  devConfig.timeout = 60;
+
+  final circle = Circle(10, 20, 'red', 15);
+  final clonedCircle = circle.clone();
+  print(clonedCircle.radius); // 15
+}</code></pre>
+  </section>
+
+  <section class="when-to-use">
+    <h2> Когда применять</h2>
+    <ul>
+      <li>Когда копирование объекта эффективнее создания нового через конструктор</li>
+      <li>Когда нужно избежать множества подклассов фабрики</li>
+      <li>Когда объекты имеют множество общих полей с небольшими отличиями</li>
+    </ul>
+  </section>
+
+  <section class="pros-cons">
+    <div class="pros">
+      <h3> Плюсы</h3>
+      <ul>
+        <li>Позволяет клонировать объекты без привязки к их конкретным классам</li>
+        <li>Может быть альтернативой наследованию при создании объектов</li>
+        <li>Позволяет создавать новые объекты динамически</li>
+      </ul>
+    </div>
+    <div class="cons">
+      <h3> Минусы</h3>
+      <ul>
+        <li>Сложно клонировать объекты с циклическими ссылками</li>
+        <li>Требует внимания при глубоком vs поверхностном копировании</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="related">
+    <h2> Связанные паттерны</h2>
+    <ul>
+      <li><a href="#" data-nav="pattern" data-path="creational/02-abstract-factory">Abstract Factory</a> — может хранить прототипы для клонирования</li>
+      <li><a href="#" data-nav="pattern" data-path="structural/09-decorator">Decorator</a> — используется для динамического расширения клонов</li>
+    </ul>
+  </section>
+
+  <footer class="pattern-nav">
+    <a href="#" data-nav="pattern" data-path="creational/04-builder" class="prev">← Предыдущий</a>
+    <a href="#" data-nav="home">На главную</a>
+    <a href="#" data-nav="pattern" data-path="structural/06-adapter" class="next">Следующий →</a>
+  </footer>
+</section>

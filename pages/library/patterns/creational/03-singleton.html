@@ -1,0 +1,146 @@
+<section class="pattern">
+  <nav class="breadcrumbs">
+    <a href="#" data-nav="home">Главная</a> /
+    <a href="#" data-nav="group" data-group="creational">Порождающие</a> /
+    <span>Singleton</span>
+  </nav>
+
+  <header class="pattern-header">
+    <span class="pattern-badge badge-creational">Порождающий</span>
+    <h1>Singleton (Одиночка)</h1>
+  </header>
+
+  <div class="pattern-meta">
+    <div class="meta-item">
+      <span class="meta-label">Также известен как</span>
+      Одиночка
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Сложность</span>
+      ★☆☆☆☆
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Популярность</span>
+      ★★★★★
+    </div>
+  </div>
+
+  <section class="intent">
+    <h2> Назначение</h2>
+    <p>Гарантирует, что класс имеет только один экземпляр, и предоставляет глобальную точку доступа к этому экземпляру.</p>
+  </section>
+
+  <section class="problem">
+    <h2> Проблема</h2>
+    <p>В приложении нужен единый объект для управления конфигурацией, логированием или подключением к базе данных. Если создать несколько экземпляров, это приведёт к конфликтам, избыточному использованию ресурсов или несогласованному состоянию.</p>
+  </section>
+
+  <section class="solution">
+    <h2> Решение</h2>
+    <p>Класс сам контролирует создание своего единственного экземпляра. Конструктор делается приватным, а доступ к экземпляру — через статический метод. В Dart это можно реализовать через factory-конструктор или статическое поле.</p>
+  </section>
+
+  <section class="example">
+    <h2> Пример на Dart</h2>
+    <pre><code class="language-dart">class AppConfig {
+  static final AppConfig _instance = AppConfig._internal();
+
+  factory AppConfig() => _instance;
+
+  AppConfig._internal();
+
+  String apiUrl = 'https://api.example.com';
+  int timeout = 30;
+  bool debugMode = false;
+
+  void load() {
+    print('Загрузка конфигурации...');
+  }
+}
+
+class Logger {
+  static Logger? _instance;
+
+  Logger._();
+
+  static Logger get instance {
+    _instance ??= Logger._();
+    return _instance!;
+  }
+
+  void log(String message) {
+    print('[LOG] $message');
+  }
+}
+
+class DatabaseConnection {
+  static DatabaseConnection? _instance;
+  bool _connected = false;
+
+  DatabaseConnection._();
+
+  static DatabaseConnection getInstance() {
+    _instance ??= DatabaseConnection._();
+    return _instance!;
+  }
+
+  void connect() {
+    if (!_connected) {
+      print('Подключение к БД...');
+      _connected = true;
+    }
+  }
+}
+
+void main() {
+  final config1 = AppConfig();
+  final config2 = AppConfig();
+  print(identical(config1, config2)); // true
+
+  Logger.instance.log('Приложение запущено');
+  DatabaseConnection.getInstance().connect();
+}</code></pre>
+  </section>
+
+  <section class="when-to-use">
+    <h2> Когда применять</h2>
+    <ul>
+      <li>Когда нужен ровно один экземпляр класса (логгер, конфиг, пул соединений)</li>
+      <li>Когда требуется строгий контроль над доступом к общему ресурсу</li>
+      <li>Когда создание объекта дорого и его нужно отложить до первого использования</li>
+    </ul>
+  </section>
+
+  <section class="pros-cons">
+    <div class="pros">
+      <h3> Плюсы</h3>
+      <ul>
+        <li>Гарантирует единственность экземпляра</li>
+        <li>Ленивая инициализация (создание при первом обращении)</li>
+        <li>Глобальная точка доступа</li>
+      </ul>
+    </div>
+    <div class="cons">
+      <h3> Минусы</h3>
+      <ul>
+        <li>Нарушает принцип единственной ответственности</li>
+        <li>Создаёт глобальное состояние, усложняя тестирование</li>
+        <li>Может привести к скрытым зависимостям</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="related">
+    <h2> Связанные паттерны</h2>
+    <ul>
+      <li><a href="#" data-nav="pattern" data-path="creational/01-factory-method">Factory Method</a> — фабрика может быть реализована как синглтон</li>
+      <li><a href="#" data-nav="pattern" data-path="structural/12-proxy">Proxy</a> — может управлять доступом к объекту-одиночке</li>
+    </ul>
+  </section>
+
+  <footer class="pattern-nav">
+    <a href="#" data-nav="pattern" data-path="creational/02-abstract-factory" class="prev">← Предыдущий</a>
+    <a href="#" data-nav="home">На главную</a>
+    <a href="#" data-nav="pattern" data-path="creational/04-builder" class="next">Следующий →</a>
+  </footer>
+</section>

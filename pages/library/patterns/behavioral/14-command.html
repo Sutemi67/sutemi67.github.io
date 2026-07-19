@@ -1,0 +1,156 @@
+<section class="pattern">
+  <nav class="breadcrumbs">
+    <a href="#" data-nav="home">Главная</a> /
+    <a href="#" data-nav="group" data-group="behavioral">Поведенческие</a> /
+    <span>Command</span>
+  </nav>
+
+  <header class="pattern-header">
+    <span class="pattern-badge badge-behavioral">Поведенческий</span>
+    <h1>Command (Команда)</h1>
+  </header>
+
+  <div class="pattern-meta">
+    <div class="meta-item">
+      <span class="meta-label">Также известен как</span>
+      Action, Transaction
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Сложность</span>
+      ★★☆☆☆
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Популярность</span>
+      ★★★★☆
+    </div>
+  </div>
+
+  <section class="intent">
+    <h2> Назначение</h2>
+    <p>Превращает запросы в объекты, позволяя передавать их как аргументы, ставить в очередь, логировать, а также поддерживать отмену операций (undo).</p>
+  </section>
+
+  <section class="problem">
+    <h2> Проблема</h2>
+    <p>В текстовом редакторе есть операции: вставка текста, удаление, копирование, вставка. Нужно реализовать отмену (undo/redo) и историю действий. Если каждая операция напрямую вызывает методы редактора, сложно отслеживать историю.</p>
+  </section>
+
+  <section class="solution">
+    <h2> Решение</h2>
+    <p>Каждая операция представляется отдельным объектом-командой с методами execute() и undo(). Команды хранятся в истории. Для отмены вызывается undo() последней команды. Команды можно ставить в очередь, логировать, передавать как параметры.</p>
+  </section>
+
+  <section class="example">
+    <h2> Пример на Dart</h2>
+    <pre><code class="language-dart">abstract class Command {
+  void execute();
+  void undo();
+}
+
+class TextEditor {
+  String text = '';
+
+  void insert(String at, String content) {
+    final pos = text.indexOf(at);
+    text = text.substring(0, pos) + content + text.substring(pos);
+  }
+
+  void delete(int start, int length) {
+    text = text.substring(0, start) + text.substring(start + length);
+  }
+}
+
+class InsertCommand implements Command {
+  final TextEditor editor;
+  final String at;
+  final String content;
+  late int _insertPos;
+
+  InsertCommand(this.editor, this.at, this.content);
+
+  @override
+  void execute() {
+    _insertPos = editor.text.indexOf(at);
+    editor.insert(at, content);
+  }
+
+  @override
+  void undo() {
+    editor.delete(_insertPos, content.length);
+  }
+}
+
+class CommandHistory {
+  final List<Command> _history = [];
+  int _current = -1;
+
+  void execute(Command command) {
+    command.execute();
+    _history.add(command);
+    _current++;
+  }
+
+  void undo() {
+    if (_current >= 0) {
+      _history[_current].undo();
+      _current--;
+    }
+  }
+}
+
+void main() {
+  final editor = TextEditor();
+  editor.text = 'Hello World!';
+  final history = CommandHistory();
+
+  final cmd = InsertCommand(editor, 'World', ' beautiful');
+  history.execute(cmd);
+  print(editor.text); // Hello beautiful World!
+
+  history.undo();
+  print(editor.text); // Hello World!
+}
+</code></pre>
+  </section>
+
+  <section class="when-to-use">
+    <h2> Когда применять</h2>
+    <ul>
+      <li>Когда нужна отмена (undo/redo) операций</li>
+      <li>Когда нужно ставить операции в очередь или логировать их</li>
+      <li>Когда нужно параметризовать объекты выполняемыми действиями</li>
+    </ul>
+  </section>
+
+  <section class="pros-cons">
+    <div class="pros">
+      <h3> Плюсы</h3>
+      <ul>
+        <li>Отделяет отправителя от получателя</li>
+        <li>Поддержка undo/redo «из коробки»</li>
+        <li>Возможность составлять сложные команды из простых</li>
+      </ul>
+    </div>
+    <div class="cons">
+      <h3> Минусы</h3>
+      <ul>
+        <li>Множество мелких классов команд</li>
+        <li>Усложнение кода для простых операций</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="related">
+    <h2> Связанные паттерны</h2>
+    <ul>
+      <li><a href="#" data-nav="pattern" data-path="behavioral/18-memento">Memento</a> — альтернативный способ реализации undo</li>
+      <li><a href="#" data-nav="pattern" data-path="behavioral/19-observer">Observer</a> — может уведомлять об изменении состояния после выполнения команды</li>
+    </ul>
+  </section>
+
+  <footer class="pattern-nav">
+    <a href="#" data-nav="pattern" data-path="behavioral/13-chain-of-responsibility" class="prev">← Предыдущий</a>
+    <a href="#" data-nav="home">На главную</a>
+    <a href="#" data-nav="pattern" data-path="behavioral/15-interpreter" class="next">Следующий →</a>
+  </footer>
+</section>

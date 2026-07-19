@@ -1,0 +1,173 @@
+<section class="architecture">
+  <nav class="breadcrumbs">
+    <a href="#" data-nav="home">Главная</a> /
+    <a href="#" data-nav="group" data-group="di">Dependency Injection</a> /
+    <span>Dependency Injection</span>
+  </nav>
+
+  <header class="pattern-header">
+    <span class="pattern-badge badge-di">DI</span>
+    <h1>Dependency Injection (Внедрение зависимостей)</h1>
+  </header>
+
+  <div class="pattern-meta">
+    <div class="meta-item">
+      <span class="meta-label">Также известен как</span>
+      DI, IoC (Inversion of Control)
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Сложность</span>
+      ★★☆☆☆
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Применимость</span>
+      ★★★★★
+    </div>
+  </div>
+
+  <section class="intent">
+    <h2> Назначение</h2>
+    <p>Объекты не создают свои зависимости самостоятельно — они получают их извне. Это позволяет сделать код слабо связанным, тестируемым и гибким. DI — это реализация принципа инверсии зависимостей (DIP).</p>
+  </section>
+
+  <section class="problem">
+    <h2> Проблема</h2>
+    <p>Когда класс сам создаёт свои зависимости (через <code>new</code>), он жёстко привязывается к конкретным реализациям. Это делает невозможным: подмену реализации для тестов, переиспользование класса в другом контексте, изменение поведения без изменения кода класса.</p>
+  </section>
+
+  <section class="solution">
+    <h2> Решение</h2>
+    <p>Зависимости «внедряются» в класс через конструктор, сеттер или интерфейс. Класс не знает о конкретной реализации — он работает через абстракцию. Сборкой зависимостей занимается специальный компонент: DI-контейнер или композиционный корень (composition root).</p>
+    <p>Три способа внедрения:</p>
+    <ul>
+      <li><strong>Constructor Injection</strong> — зависимости передаются через конструктор (самый распространённый)</li>
+      <li><strong>Setter Injection</strong> — зависимости устанавливаются через сеттеры</li>
+      <li><strong>Interface Injection</strong> — зависимости передаются через метод интерфейса</li>
+    </ul>
+  </section>
+
+  <section class="example">
+    <h2> Пример на Dart</h2>
+    <p>Без DI — класс сам создаёт зависимости:</p>
+    <pre><code class="language-dart">class OrderService {
+  final _logger = ConsoleLogger(); // жёсткая связь
+  final _repository = PostgresOrderRepository(); // жёсткая связь
+
+  void process(Order order) {
+    _logger.log('Обработка заказа ${order.id}');
+    _repository.save(order);
+  }
+}
+
+// При тестировании нельзя подменить логгер или репозиторий!
+// При смене БД нужно менять код OrderService</code></pre>
+    <p>С DI — зависимости внедряются через конструктор:</p>
+    <pre><code class="language-dart">abstract class Logger {
+  void log(String message);
+}
+
+abstract class OrderRepository {
+  void save(Order order);
+}
+
+class ConsoleLogger implements Logger {
+  @override
+  void log(String message) => print(message);
+}
+
+class PostgresOrderRepository implements OrderRepository {
+  @override
+  void save(Order order) => print('Сохранение заказа ${order.id}');
+}
+
+class OrderService {
+  final Logger logger;
+  final OrderRepository repository;
+
+  OrderService(this.logger, this.repository);
+
+  void process(Order order) {
+    logger.log('Обработка заказа ${order.id}');
+    repository.save(order);
+  }
+}
+
+// ---- Composition Root ----
+void main() {
+  final logger = ConsoleLogger();
+  final repository = PostgresOrderRepository();
+  final service = OrderService(logger, repository);
+
+  service.process(Order(1, 'Заказ 1'));
+
+  // Для тестов легко подменить:
+  // final testService = OrderService(MockLogger(), MockRepository());
+}</code></pre>
+    <p>Простой DI-контейнер:</p>
+    <pre><code class="language-dart">class Container {
+  final _factories = &lt;Type, Function&gt;{};
+
+  void register&lt;T&gt;(Function factory) {
+    _factories[T] = factory;
+  }
+
+  T resolve&lt;T&gt;() {
+    final factory = _factories[T];
+    if (factory == null) throw ArgumentError('${T} не зарегистрирован');
+    return factory() as T;
+  }
+}
+
+void setupContainer(Container container) {
+  container.register&lt;Logger&gt;(() => ConsoleLogger());
+  container.register&lt;OrderRepository&gt;(() => PostgresOrderRepository());
+  container.register&lt;OrderService&gt;(() =>
+    OrderService(
+      container.resolve&lt;Logger&gt;(),
+      container.resolve&lt;OrderRepository&gt;(),
+    ));
+}
+
+void main() {
+  final container = Container();
+  setupContainer(container);
+  final service = container.resolve&lt;OrderService&gt;();
+  service.process(Order(1, 'Заказ 1'));
+}</code></pre>
+  </section>
+
+  <section class="pros-cons">
+    <div class="pros">
+      <h3> Плюсы</h3>
+      <ul>
+        <li>Слабая связанность между классами</li>
+        <li>Простое тестирование (замена реализаций)</li>
+        <li>Гибкость и расширяемость</li>
+        <li>Централизованное управление зависимостями</li>
+      </ul>
+    </div>
+    <div class="cons">
+      <h3> Минусы</h3>
+      <ul>
+        <li>Усложняет код на ранних этапах (нужен composition root)</li>
+        <li>Может скрывать сложность графа зависимостей</li>
+        <li>Переусложнение для очень простых проектов</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="related">
+    <h2> Связанные принципы</h2>
+    <ul>
+      <li><a href="#" data-nav="item" data-path="solid/05-dependency-inversion">Dependency Inversion</a> — DI это реализация DIP</li>
+      <li><a href="#" data-nav="item" data-path="clean-architecture/01-intro">Clean Architecture</a> — DI необходим для соблюдения Dependency Rule</li>
+      <li><a href="#" data-nav="item" data-path="patterns/creational/03-singleton">Singleton</a> — DI-контейнеры часто управляют временем жизни объектов</li>
+    </ul>
+  </section>
+
+  <footer class="pattern-nav">
+    <a href="#" data-nav="item" data-path="cqrs/01-intro" class="prev">← Предыдущий</a>
+    <a href="#" data-nav="home">На главную</a>
+    <a href="#" data-nav="item" data-path="ddd/01-intro" class="next">Следующий →</a>
+  </footer>
+</section>

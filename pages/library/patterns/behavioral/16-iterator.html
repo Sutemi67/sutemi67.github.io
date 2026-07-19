@@ -1,0 +1,145 @@
+<section class="pattern">
+  <nav class="breadcrumbs">
+    <a href="#" data-nav="home">Главная</a> /
+    <a href="#" data-nav="group" data-group="behavioral">Поведенческие</a> /
+    <span>Iterator</span>
+  </nav>
+
+  <header class="pattern-header">
+    <span class="pattern-badge badge-behavioral">Поведенческий</span>
+    <h1>Iterator (Итератор)</h1>
+  </header>
+
+  <div class="pattern-meta">
+    <div class="meta-item">
+      <span class="meta-label">Также известен как</span>
+      Cursor
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Сложность</span>
+      ★☆☆☆☆
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Популярность</span>
+      ★★★★★
+    </div>
+  </div>
+
+  <section class="intent">
+    <h2> Назначение</h2>
+    <p>Даёт возможность последовательно обходить элементы составных объектов, не раскрывая их внутреннее представление.</p>
+  </section>
+
+  <section class="problem">
+    <h2> Проблема</h2>
+    <p>У вас есть коллекция (дерево, граф, кастомная структура), и нужно предоставить способ последовательного обхода её элементов без раскрытия внутренней структуры. При изменении способа хранения данных придётся менять весь код, который их обходит.</p>
+  </section>
+
+  <section class="solution">
+    <h2> Решение</h2>
+    <p>Создаётся класс-итератор, который инкапсулирует логику обхода. Коллекция возвращает итератор, а клиент использует его методы (hasNext/next) для обхода. В Dart для этого можно использовать Iterable и Iterator.</p>
+  </section>
+
+  <section class="example">
+    <h2> Пример на Dart</h2>
+    <pre><code class="language-dart">class TreeNode<T> {
+  T value;
+  List<TreeNode<T>> children = [];
+
+  TreeNode(this.value);
+
+  void add(TreeNode<T> child) => children.add(child);
+}
+
+class DepthFirstIterator<T> implements Iterator<T> {
+  final List<TreeNode<T>> _stack = [];
+  TreeNode<T>? _current;
+
+  DepthFirstIterator(TreeNode<T> root) {
+    _stack.add(root);
+  }
+
+  @override
+  T get current => _current!.value;
+
+  @override
+  bool moveNext() {
+    if (_stack.isEmpty) return false;
+    _current = _stack.removeLast();
+    for (final child in _current!.children.reversed) {
+      _stack.add(child);
+    }
+    return true;
+  }
+}
+
+class TreeIterable<T> extends Iterable<T> {
+  final TreeNode<T> root;
+  TreeIterable(this.root);
+
+  @override
+  Iterator<T> get iterator => DepthFirstIterator(root);
+}
+
+void main() {
+  final root = TreeNode(1);
+  final child1 = TreeNode(2);
+  final child2 = TreeNode(3);
+  root.add(child1);
+  root.add(child2);
+  child1.add(TreeNode(4));
+  child1.add(TreeNode(5));
+
+  for (final value in TreeIterable(root)) {
+    print(value); // 1, 2, 4, 5, 3
+  }
+
+  final iter = DepthFirstIterator(root);
+  while (iter.moveNext()) {
+    print(iter.current);
+  }
+}
+</code></pre>
+  </section>
+
+  <section class="when-to-use">
+    <h2> Когда применять</h2>
+    <ul>
+      <li>Когда коллекция имеет сложную внутреннюю структуру</li>
+      <li>Когда нужно несколько способов обхода одной коллекции</li>
+      <li>Когда нужно единообразно обходить разные типы коллекций</li>
+    </ul>
+  </section>
+
+  <section class="pros-cons">
+    <div class="pros">
+      <h3> Плюсы</h3>
+      <ul>
+        <li>Скрывает внутреннюю структуру коллекции</li>
+        <li>Позволяет реализовать разные стратегии обхода</li>
+        <li>Упрощает API коллекций</li>
+      </ul>
+    </div>
+    <div class="cons">
+      <h3> Минусы</h3>
+      <ul>
+        <li>Избыточен для простых коллекций (списков, массивов)</li>
+        <li>Создание итератора может быть затратным</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="related">
+    <h2> Связанные паттерны</h2>
+    <ul>
+      <li><a href="#" data-nav="pattern" data-path="structural/08-composite">Composite</a> — итераторы часто используются для обхода деревьев Composite</li>
+      <li><a href="#" data-nav="pattern" data-path="creational/01-factory-method">Factory Method</a> — может создавать специфические итераторы</li>
+    </ul>
+  </section>
+
+  <footer class="pattern-nav">
+    <a href="#" data-nav="pattern" data-path="behavioral/15-interpreter" class="prev">← Предыдущий</a>
+    <a href="#" data-nav="home">На главную</a>
+    <a href="#" data-nav="pattern" data-path="behavioral/17-mediator" class="next">Следующий →</a>
+  </footer>
+</section>

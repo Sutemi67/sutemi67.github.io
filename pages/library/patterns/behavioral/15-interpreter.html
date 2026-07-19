@@ -1,0 +1,145 @@
+<section class="pattern">
+  <nav class="breadcrumbs">
+    <a href="#" data-nav="home">Главная</a> /
+    <a href="#" data-nav="group" data-group="behavioral">Поведенческие</a> /
+    <span>Interpreter</span>
+  </nav>
+
+  <header class="pattern-header">
+    <span class="pattern-badge badge-behavioral">Поведенческий</span>
+    <h1>Interpreter (Интерпретатор)</h1>
+  </header>
+
+  <div class="pattern-meta">
+    <div class="meta-item">
+      <span class="meta-label">Также известен как</span>
+      Interpreter
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Сложность</span>
+      ★★★☆☆
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Популярность</span>
+      ★★☆☆☆
+    </div>
+  </div>
+
+  <section class="intent">
+    <h2> Назначение</h2>
+    <p>Для заданного языка определяет представление его грамматики и интерпретатор предложений этого языка.</p>
+  </section>
+
+  <section class="problem">
+    <h2> Проблема</h2>
+    <p>Нужно реализовать простой калькулятор, который разбирает и вычисляет арифметические выражения, например «5 + 3 * 2». Прямой разбор строки с числами и операторами требует сложной логики, которую сложно расширять.</p>
+  </section>
+
+  <section class="solution">
+    <h2> Решение</h2>
+    <p>Определяется грамматика выражений и для каждого правила создаётся класс. AST строится из объектов этих классов. Каждый класс реализует метод interpret(), возвращающий результат вычисления для своей подветки.</p>
+  </section>
+
+  <section class="example">
+    <h2> Пример на Dart</h2>
+    <pre><code class="language-dart">abstract class Expression {
+  int interpret(Map<String, int> context);
+}
+
+class NumberExpression implements Expression {
+  final int value;
+  NumberExpression(this.value);
+
+  @override
+  int interpret(Map<String, int> context) => value;
+}
+
+class VariableExpression implements Expression {
+  final String name;
+  VariableExpression(this.name);
+
+  @override
+  int interpret(Map<String, int> context) => context[name] ?? 0;
+}
+
+class AddExpression implements Expression {
+  final Expression left, right;
+  AddExpression(this.left, this.right);
+
+  @override
+  int interpret(Map<String, int> context) =>
+      left.interpret(context) + right.interpret(context);
+}
+
+class SubtractExpression implements Expression {
+  final Expression left, right;
+  SubtractExpression(this.left, this.right);
+
+  @override
+  int interpret(Map<String, int> context) =>
+      left.interpret(context) - right.interpret(context);
+}
+
+class MultiplyExpression implements Expression {
+  final Expression left, right;
+  MultiplyExpression(this.left, this.right);
+
+  @override
+  int interpret(Map<String, int> context) =>
+      left.interpret(context) * right.interpret(context);
+}
+
+void main() {
+  final expression = AddExpression(
+    MultiplyExpression(NumberExpression(5), NumberExpression(3)),
+    NumberExpression(2),
+  );
+  print(expression.interpret({})); // 17
+
+  final context = {'x': 10, 'y': 5};
+  final withVars = AddExpression(VariableExpression('x'), VariableExpression('y'));
+  print(withVars.interpret(context)); // 15
+}
+</code></pre>
+  </section>
+
+  <section class="when-to-use">
+    <h2> Когда применять</h2>
+    <ul>
+      <li>Когда грамматика языка относительно проста и стабильна</li>
+      <li>Когда нужно разбирать и вычислять DSL-выражения</li>
+      <li>Когда эффективность не является главным приоритетом</li>
+    </ul>
+  </section>
+
+  <section class="pros-cons">
+    <div class="pros">
+      <h3> Плюсы</h3>
+      <ul>
+        <li>Простота реализации и расширения грамматики</li>
+        <li>Хорошо подходит для DSL (domain-specific languages)</li>
+      </ul>
+    </div>
+    <div class="cons">
+      <h3> Минусы</h3>
+      <ul>
+        <li>Сложные грамматики приводят к большому числу классов</li>
+        <li>Низкая производительность для сложных выражений</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="related">
+    <h2> Связанные паттерны</h2>
+    <ul>
+      <li><a href="#" data-nav="pattern" data-path="structural/08-composite">Composite</a> — AST-дерево строится по принципу Composite</li>
+      <li><a href="#" data-nav="pattern" data-path="behavioral/22-template-method">Template Method</a> — может использоваться для шаблонизации интерпретации</li>
+    </ul>
+  </section>
+
+  <footer class="pattern-nav">
+    <a href="#" data-nav="pattern" data-path="behavioral/14-command" class="prev">← Предыдущий</a>
+    <a href="#" data-nav="home">На главную</a>
+    <a href="#" data-nav="pattern" data-path="behavioral/16-iterator" class="next">Следующий →</a>
+  </footer>
+</section>

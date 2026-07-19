@@ -1,0 +1,151 @@
+<section class="pattern">
+  <nav class="breadcrumbs">
+    <a href="#" data-nav="home">Главная</a> /
+    <a href="#" data-nav="group" data-group="structural">Структурные</a> /
+    <span>Bridge</span>
+  </nav>
+
+  <header class="pattern-header">
+    <span class="pattern-badge badge-structural">Структурный</span>
+    <h1>Bridge (Мост)</h1>
+  </header>
+
+  <div class="pattern-meta">
+    <div class="meta-item">
+      <span class="meta-label">Также известен как</span>
+      Handle/Body
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Сложность</span>
+      ★★★☆☆
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Популярность</span>
+      ★★★☆☆
+    </div>
+  </div>
+
+  <section class="intent">
+    <h2> Назначение</h2>
+    <p>Разделяет абстракцию и реализацию так, чтобы они могли изменяться независимо друг от друга.</p>
+  </section>
+
+  <section class="problem">
+    <h2> Проблема</h2>
+    <p>Есть пульт дистанционного управления, который должен работать с разными устройствами: TV, Radio, проектором. Если наследовать пульты для каждого устройства, получится взрыв классов. Изменение пульта потребует правок во всех наследниках.</p>
+  </section>
+
+  <section class="solution">
+    <h2> Решение</h2>
+    <p>Вместо наследования абстракция (Remote) хранит ссылку на реализацию (Device). Абстракция делегирует вызовы методам реализации. Теперь иерархии пультов и устройств независимы — можно добавлять новые типы пультов и устройств без изменения друг друга.</p>
+  </section>
+
+  <section class="example">
+    <h2> Пример на Dart</h2>
+    <pre><code class="language-dart">abstract class Device {
+  bool isEnabled();
+  void enable();
+  void disable();
+  int getVolume();
+  void setVolume(int volume);
+}
+
+class TV implements Device {
+  bool _on = false;
+  int _volume = 50;
+
+  @override
+  bool isEnabled() => _on;
+  @override
+  void enable() { _on = true; print('TV включён'); }
+  @override
+  void disable() { _on = false; print('TV выключен'); }
+  @override
+  int getVolume() => _volume;
+  @override
+  void setVolume(int volume) { _volume = volume; }
+}
+
+class Radio implements Device {
+  bool _on = false;
+  int _volume = 30;
+
+  @override
+  bool isEnabled() => _on;
+  @override
+  void enable() { _on = true; print('Radio включено'); }
+  @override
+  void disable() { _on = false; print('Radio выключено'); }
+  @override
+  int getVolume() => _volume;
+  @override
+  void setVolume(int volume) { _volume = volume; }
+}
+
+class Remote {
+  final Device device;
+
+  Remote(this.device);
+
+  void togglePower() {
+    if (device.isEnabled()) {
+      device.disable();
+    } else {
+      device.enable();
+    }
+  }
+
+  void volumeUp() => device.setVolume(device.getVolume() + 10);
+  void volumeDown() => device.setVolume(device.getVolume() - 10);
+}
+
+void main() {
+  final tv = TV();
+  final remote = Remote(tv);
+  remote.togglePower();
+  remote.volumeUp();
+}
+</code></pre>
+  </section>
+
+  <section class="when-to-use">
+    <h2> Когда применять</h2>
+    <ul>
+      <li>Когда нужно избежать жёсткой привязки абстракции к реализации</li>
+      <li>Когда абстракция и реализация должны расширяться независимо</li>
+      <li>Когда изменения в реализации не должны влиять на клиентский код</li>
+    </ul>
+  </section>
+
+  <section class="pros-cons">
+    <div class="pros">
+      <h3> Плюсы</h3>
+      <ul>
+        <li>Независимое расширение абстракций и реализаций</li>
+        <li>Соблюдение принципа единственной ответственности</li>
+        <li>Поддержка разных платформ и устройств</li>
+      </ul>
+    </div>
+    <div class="cons">
+      <h3> Минусы</h3>
+      <ul>
+        <li>Усложняет код из-за дополнительных интерфейсов</li>
+        <li>Требует продуманного разделения на абстракцию и реализацию</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="related">
+    <h2> Связанные паттерны</h2>
+    <ul>
+      <li><a href="#" data-nav="pattern" data-path="structural/06-adapter">Adapter</a> — делает совместимыми интерфейсы; Bridge разделяет абстракцию и реализацию</li>
+      <li><a href="#" data-nav="pattern" data-path="structural/08-composite">Composite</a> — может использоваться вместе с Bridge</li>
+    </ul>
+  </section>
+
+  <footer class="pattern-nav">
+    <a href="#" data-nav="pattern" data-path="structural/06-adapter" class="prev">← Предыдущий</a>
+    <a href="#" data-nav="home">На главную</a>
+    <a href="#" data-nav="pattern" data-path="structural/08-composite" class="next">Следующий →</a>
+  </footer>
+</section>

@@ -1,0 +1,144 @@
+<section class="pattern">
+  <nav class="breadcrumbs">
+    <a href="#" data-nav="home">Главная</a> /
+    <a href="#" data-nav="group" data-group="behavioral">Поведенческие</a> /
+    <span>Memento</span>
+  </nav>
+
+  <header class="pattern-header">
+    <span class="pattern-badge badge-behavioral">Поведенческий</span>
+    <h1>Memento (Снимок)</h1>
+  </header>
+
+  <div class="pattern-meta">
+    <div class="meta-item">
+      <span class="meta-label">Также известен как</span>
+      Snapshot
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Сложность</span>
+      ★★☆☆☆
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Популярность</span>
+      ★★★☆☆
+    </div>
+  </div>
+
+  <section class="intent">
+    <h2> Назначение</h2>
+    <p>Позволяет сохранять и восстанавливать состояние объекта, не раскрывая его внутреннюю структуру.</p>
+  </section>
+
+  <section class="problem">
+    <h2> Проблема</h2>
+    <p>В игре есть система чекпоинтов: игрок может сохранить прогресс и вернуться к нему позже. Нужно сохранять состояние игровых объектов, но при этом не нарушать инкапсуляцию и не раскрывать внутренние поля.</p>
+  </section>
+
+  <section class="solution">
+    <h2> Решение</h2>
+    <p>Объект-создатель (originator) создаёт снимок (memento) своего состояния. Снимок хранит состояние в неизменяемом виде, доступном только создателю. Опекун (caretaker) хранит снимки и может восстановить состояние, передав снимок обратно создателю.</p>
+  </section>
+
+  <section class="example">
+    <h2> Пример на Dart</h2>
+    <pre><code class="language-dart">class GameState {
+  int health;
+  int level;
+  String position;
+
+  GameState(this.health, this.level, this.position);
+
+  GameMemento save() => GameMemento._(health, level, position);
+
+  void restore(GameMemento memento) {
+    health = memento._health;
+    level = memento._level;
+    position = memento._position;
+  }
+
+  @override
+  String toString() => 'HP: $health, Level: $level, Pos: $position';
+}
+
+class GameMemento {
+  final int _health;
+  final int _level;
+  final String _position;
+
+  GameMemento._(this._health, this._level, this._position);
+}
+
+class SaveManager {
+  final List<GameMemento> _history = [];
+
+  void save(GameState state) => _history.add(state.save());
+
+  void load(GameState state, int index) {
+    if (index < _history.length) {
+      state.restore(_history[index]);
+    }
+  }
+}
+
+void main() {
+  final game = GameState(100, 1, 'start');
+  final saves = SaveManager();
+
+  game.health = 80;
+  game.level = 2;
+  game.position = 'forest';
+  saves.save(game);
+  print(game); // HP: 80, Level: 2, Pos: forest
+
+  game.health = 30;
+  game.position = 'boss';
+  print(game); // HP: 30, Level: 2, Pos: boss
+
+  saves.load(game, 0);
+  print(game); // HP: 80, Level: 2, Pos: forest
+}
+</code></pre>
+  </section>
+
+  <section class="when-to-use">
+    <h2> Когда применять</h2>
+    <ul>
+      <li>Когда нужно сохранять и восстанавливать состояние объекта</li>
+      <li>Когда нужна поддержка отмены операций (undo) через сохранение состояний</li>
+      <li>Когда прямое сохранение состояния нарушает инкапсуляцию</li>
+    </ul>
+  </section>
+
+  <section class="pros-cons">
+    <div class="pros">
+      <h3> Плюсы</h3>
+      <ul>
+        <li>Не нарушает инкапсуляцию исходного объекта</li>
+        <li>Упрощает реализацию отмены операций</li>
+        <li>Позволяет хранить историю изменений</li>
+      </ul>
+    </div>
+    <div class="cons">
+      <h3> Минусы</h3>
+      <ul>
+        <li>Требует много памяти при частых сохранениях</li>
+        <li>Усложняет код из-за дополнительного класса снимка</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="related">
+    <h2> Связанные паттерны</h2>
+    <ul>
+      <li><a href="#" data-nav="pattern" data-path="behavioral/14-command">Command</a> — может использовать Memento для реализации undo</li>
+      <li><a href="#" data-nav="pattern" data-path="behavioral/16-iterator">Iterator</a> — может обходить историю снимков</li>
+    </ul>
+  </section>
+
+  <footer class="pattern-nav">
+    <a href="#" data-nav="pattern" data-path="behavioral/17-mediator" class="prev">← Предыдущий</a>
+    <a href="#" data-nav="home">На главную</a>
+    <a href="#" data-nav="pattern" data-path="behavioral/19-observer" class="next">Следующий →</a>
+  </footer>
+</section>

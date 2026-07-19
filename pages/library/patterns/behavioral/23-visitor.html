@@ -1,0 +1,176 @@
+<section class="pattern">
+  <nav class="breadcrumbs">
+    <a href="#" data-nav="home">Главная</a> /
+    <a href="#" data-nav="group" data-group="behavioral">Поведенческие</a> /
+    <span>Visitor</span>
+  </nav>
+
+  <header class="pattern-header">
+    <span class="pattern-badge badge-behavioral">Поведенческий</span>
+    <h1>Visitor (Посетитель)</h1>
+  </header>
+
+  <div class="pattern-meta">
+    <div class="meta-item">
+      <span class="meta-label">Также известен как</span>
+      Visitor
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Сложность</span>
+      ★★★☆☆
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Популярность</span>
+      ★★★☆☆
+    </div>
+  </div>
+
+  <section class="intent">
+    <h2> Назначение</h2>
+    <p>Позволяет добавлять новые операции к объектам, не изменяя их классы, вынося операции в отдельные объекты-посетители.</p>
+  </section>
+
+  <section class="problem">
+    <h2> Проблема</h2>
+    <p>Есть дерево AST (абстрактного синтаксического дерева) компилятора с разными типами узлов: числа, переменные, бинарные операции. Нужно реализовать несколько операций: вывод кода, оптимизация, подсчёт выражений. Добавление каждой новой операции требует изменения всех классов узлов.</p>
+  </section>
+
+  <section class="solution">
+    <h2> Решение</h2>
+    <p>Каждый класс узла реализует метод accept(visitor), который вызывает соответствующий метод посетителя. Посетитель содержит метод для каждого типа узла. Добавление новой операции — создание нового посетителя без изменения узлов.</p>
+  </section>
+
+  <section class="example">
+    <h2> Пример на Dart</h2>
+    <pre><code class="language-dart">abstract class Expression {
+  void accept(ExpressionVisitor visitor);
+}
+
+class NumberExpr implements Expression {
+  final int value;
+  NumberExpr(this.value);
+
+  @override
+  void accept(ExpressionVisitor visitor) => visitor.visitNumber(this);
+}
+
+class VariableExpr implements Expression {
+  final String name;
+  VariableExpr(this.name);
+
+  @override
+  void accept(ExpressionVisitor visitor) => visitor.visitVariable(this);
+}
+
+class AddExpr implements Expression {
+  final Expression left, right;
+  AddExpr(this.left, this.right);
+
+  @override
+  void accept(ExpressionVisitor visitor) => visitor.visitAdd(this);
+}
+
+abstract class ExpressionVisitor {
+  void visitNumber(NumberExpr expr);
+  void visitVariable(VariableExpr expr);
+  void visitAdd(AddExpr expr);
+}
+
+class EvalVisitor implements ExpressionVisitor {
+  final Map<String, int> context;
+
+  EvalVisitor(this.context);
+
+  int? result;
+
+  @override
+  void visitNumber(NumberExpr expr) => result = expr.value;
+
+  @override
+  void visitVariable(VariableExpr expr) => result = context[expr.name];
+
+  @override
+  void visitAdd(AddExpr expr) {
+    expr.left.accept(this);
+    final leftVal = result!;
+    expr.right.accept(this);
+    final rightVal = result!;
+    result = leftVal + rightVal;
+  }
+}
+
+class PrintVisitor implements ExpressionVisitor {
+  String? result;
+
+  @override
+  void visitNumber(NumberExpr expr) => result = '${expr.value}';
+
+  @override
+  void visitVariable(VariableExpr expr) => result = expr.name;
+
+  @override
+  void visitAdd(AddExpr expr) {
+    expr.left.accept(this);
+    final leftStr = result!;
+    expr.right.accept(this);
+    final rightStr = result!;
+    result = '($leftStr + $rightStr)';
+  }
+}
+
+void main() {
+  final expr = AddExpr(NumberExpr(5), VariableExpr('x'));
+  final context = {'x': 10};
+
+  final eval = EvalVisitor(context);
+  expr.accept(eval);
+  print(eval.result); // 15
+
+  final printer = PrintVisitor();
+  expr.accept(printer);
+  print(printer.result); // (5 + x)
+}
+</code></pre>
+  </section>
+
+  <section class="when-to-use">
+    <h2> Когда применять</h2>
+    <ul>
+      <li>Когда нужно выполнить операции над всеми элементами сложной структуры</li>
+      <li>Когда классы объектов редко меняются, но часто добавляются новые операции</li>
+      <li>Когда нужно собрать связанные операции в одном месте</li>
+    </ul>
+  </section>
+
+  <section class="pros-cons">
+    <div class="pros">
+      <h3> Плюсы</h3>
+      <ul>
+        <li>Новые операции добавляются без изменения существующих классов</li>
+        <li>Связанные операции собраны в одном месте</li>
+        <li>Накапливает состояние при обходе структуры</li>
+      </ul>
+    </div>
+    <div class="cons">
+      <h3> Минусы</h3>
+      <ul>
+        <li>Добавление нового типа элемента требует изменения всех посетителей</li>
+        <li>Может нарушать инкапсуляцию элементов</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="related">
+    <h2> Связанные паттерны</h2>
+    <ul>
+      <li><a href="#" data-nav="pattern" data-path="behavioral/16-iterator">Iterator</a> — обходит структуру; Visitor выполняет операции над элементами</li>
+      <li><a href="#" data-nav="pattern" data-path="structural/08-composite">Composite</a> — Visitor часто применяется для обхода деревьев Composite</li>
+    </ul>
+  </section>
+
+  <footer class="pattern-nav">
+    <a href="#" data-nav="pattern" data-path="behavioral/22-template-method" class="prev">← Предыдущий</a>
+    <a href="#" data-nav="home">На главную</a>
+    <a href="#" data-nav="pattern" data-path="creational/01-factory-method" class="next">Следующий →</a>
+  </footer>
+</section>

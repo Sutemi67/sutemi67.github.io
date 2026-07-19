@@ -7,24 +7,22 @@
     <meta name="description" content="Sergey's personal website">
     <title>Sergey Boykov — personal website</title>
 
-    <!-- Preload critical assets -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap"
-        as="style">
-    <link rel="preload" href="styles.css" as="style">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap">
 
-    <!-- Styles -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/modals.css">
+    <link rel="stylesheet" href="css/library.css">
 
-    <!-- Favicon -->
     <link rel="icon" type="image/jpg" href="favicon.jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/styles/atom-one-dark.min.css">
 </head>
 
 <body>
-    <!-- ==========================================================================
-     Sidebar Navigation
-     ========================================================================== -->
     <nav class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <div class="profile-info">
@@ -75,8 +73,7 @@
             <li class="nav-item">
                 <a href="#photography" class="nav-link" data-section="photography">
                     <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z">
-                        </path>
+                        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
                         <circle cx="12" cy="13" r="4"></circle>
                     </svg>
                     <span>Photography</span>
@@ -90,6 +87,20 @@
                     <span>Support</span>
                 </a>
             </li>
+
+            <li class="nav-divider"></li>
+
+            <li class="nav-item nav-item-library" id="navLibrary">
+                <a href="#library" class="nav-link" data-section="library">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                    </svg>
+                    <span>Library</span>
+                    <span class="library-toggle-arrow">▶</span>
+                </a>
+                <div class="library-nav-tree" id="libraryNavTree"></div>
+            </li>
         </ul>
 
         <div class="sidebar-footer">
@@ -99,9 +110,6 @@
         </div>
     </nav>
 
-    <!-- ==========================================================================
-     Mobile Menu Toggle
-     ========================================================================== -->
     <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Open menu">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <line x1="3" y1="6" x2="21" y2="6"></line>
@@ -110,723 +118,18 @@
         </svg>
     </button>
 
-    <!-- ==========================================================================
-     Main Content
-     ========================================================================== -->
     <main class="main-content">
-        <!-- ==========================================================================
-         About Section
-         ========================================================================== -->
-        <section id="about" class="content-section active">
-            <div class="section-header">
-                <h1 class="section-title">Hi, I am Sergey</h1>
-                <p class="section-subtitle">Developer, athlete and photographer</p>
-            </div>
-
-            <div class="content-card">
-                <div class="card-content">
-                    <p class="about-text">
-                        Hello! This is my personal page dedicated to my capabilities and interests. My path includes
-                        mobile application development, active sports and passion for
-                        photography. For any questions and suggestions, you can contact me in any of the
-                        ways presented.
-                    </p>
-                </div>
-
-                <div class="contact-section">
-                    <h3 class="contact-title">Contact me:</h3>
-                    <div class="contact-buttons">
-                        <a href="mailto:sutemi67@gmail.com" class="contact-button email-button">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
-                                </path>
-                                <polyline points="22,6 12,13 2,6"></polyline>
-                            </svg>
-                            <span>Email</span>
-                        </a>
-                        <a href="https://t.me/sutemi67" target="_blank" rel="noopener noreferrer"
-                            class="contact-button social-button">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path
-                                    d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-.697.064-1.226-.461-1.901-.903-1.056-.692-1.653-1.123-2.678-1.799-1.185-.781-.417-1.21.258-1.911.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.139-5.062 3.345-.48.33-.913.49-1.302.481-.428-.008-1.252-.241-1.865-.44-.752-.244-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.831-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635.099-.002.321.023.465.178.164.174.213.408.227.573.014.165-.009.371-.024.521z" />
-                            </svg>
-                            <span>Telegram</span>
-                        </a>
-                        <a href="https://github.com/Sutemi67" target="_blank" rel="noopener noreferrer"
-                            class="contact-button social-button">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path
-                                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                            </svg>
-                            <span>GitHub</span>
-                        </a>
-                        <a href="https://www.linkedin.com/in/sutemi67" target="_blank" rel="noopener noreferrer"
-                            class="contact-button social-button">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path
-                                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                            </svg>
-                            <span>LinkedIn</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ==========================================================================
-         Technology Section
-         ========================================================================== -->
-        <section id="tech" class="content-section">
-            <div class="section-header">
-                <h1 class="section-title">App Development</h1>
-                <p class="section-subtitle">Android & Flutter development with a full-stack mindset — from Kotlin and
-                    Dart to
-                    backend APIs and Linux servers.</p>
-            </div>
-
-            <div class="content-card">
-                <div class="tech-grid">
-
-                    <!-- Android -->
-                    <div class="tech-category" data-accent="android">
-                        <h3 class="tech-category-title">Android</h3>
-                        <div class="tech-items">
-                            <div class="tech-item">
-                                <svg class="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M16 4l-8 16" />
-                                    <path d="M10 4l6 4-6 4" />
-                                </svg>
-                                <div class="tech-info">
-                                    <h4>Kotlin</h4>
-                                    <p>Jetpack Compose, Fragments, Custom Views, App Widgets</p>
-                                </div>
-                            </div>
-                            <div class="tech-item">
-                                <svg class="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M2 6l10-4 10 4" />
-                                    <path d="M2 12l10-4 10 4" />
-                                    <path d="M2 18l10-4 10 4" />
-                                </svg>
-                                <div class="tech-info">
-                                    <h4>App Architecture</h4>
-                                    <p>Clean Architecture, SOLID, MVI, MVVM, Compose Navigation</p>
-                                </div>
-                            </div>
-                            <div class="tech-item">
-                                <svg class="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <rect x="3" y="3" width="8" height="8" rx="1.5" />
-                                    <rect x="13" y="3" width="8" height="8" rx="1.5" />
-                                    <rect x="3" y="13" width="8" height="8" rx="1.5" />
-                                    <rect x="13" y="13" width="8" height="8" rx="1.5" />
-                                </svg>
-                                <div class="tech-info">
-                                    <h4>Android Components</h4>
-                                    <p>Services, BroadcastReceivers, ContentProviders</p>
-                                </div>
-                            </div>
-                            <div class="tech-item">
-                                <svg class="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z" />
-                                </svg>
-                                <div class="tech-info">
-                                    <h4>Async tasks</h4>
-                                    <p>Kotlin Coroutines, Flow</p>
-                                </div>
-                            </div>
-                            <div class="tech-item">
-                                <svg class="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <rect x="4" y="12" width="16" height="8" rx="2" />
-                                    <path d="M12 2v10" />
-                                    <path d="M8 8l4-4 4 4" />
-                                </svg>
-                                <div class="tech-info">
-                                    <h4>Dependency Injection</h4>
-                                    <p>Koin, Dagger Hilt</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Flutter & Dart -->
-                    <div class="tech-category" data-accent="flutter">
-                        <h3 class="tech-category-title">Flutter &amp; Dart</h3>
-                        <div class="tech-items">
-                            <div class="tech-item">
-                                <svg class="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M12 2l8 10-8 10L4 12l8-10z" />
-                                    <path d="M12 7l4 5-4 5-4-5 4-5z" />
-                                </svg>
-                                <div class="tech-info">
-                                    <h4>Flutter Framework</h4>
-                                    <p>Dart, Widgets, Material Design, Cupertino</p>
-                                </div>
-                            </div>
-                            <div class="tech-item">
-                                <svg class="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <rect x="3" y="2" width="6" height="14" rx="1" />
-                                    <rect x="15" y="4" width="6" height="12" rx="1" />
-                                </svg>
-                                <div class="tech-info">
-                                    <h4>Cross-platform</h4>
-                                    <p>Mobile, Web, Desktop — single codebase</p>
-                                </div>
-                            </div>
-                            <div class="tech-item">
-                                <svg class="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <circle cx="6" cy="12" r="2" />
-                                    <circle cx="18" cy="12" r="2" />
-                                    <path d="M10 12h6" />
-                                    <path d="M14 9l3 3-3 3" />
-                                </svg>
-                                <div class="tech-info">
-                                    <h4>State Management</h4>
-                                    <p>Riverpod, Bloc, Provider</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Backend & API -->
-                    <div class="tech-category">
-                        <h3 class="tech-category-title">Backend &amp; API</h3>
-                        <div class="tech-items">
-                            <div class="tech-item">
-                                <svg class="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M12 16V4" />
-                                    <path d="M8 8l4-4 4 4" />
-                                    <path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2" />
-                                </svg>
-                                <div class="tech-info">
-                                    <h4>Ktor &amp; Retrofit2</h4>
-                                    <p>WebSockets, REST APIs, Authentication, Thymeleaf</p>
-                                </div>
-                            </div>
-                            <div class="tech-item">
-                                <svg class="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <ellipse cx="12" cy="5" rx="9" ry="3" />
-                                    <path d="M3 5v14a9 3 0 0018 0V5" />
-                                    <path d="M3 12a9 3 0 0018 0" />
-                                </svg>
-                                <div class="tech-info">
-                                    <h4>Databases</h4>
-                                    <p>Room, SQLDelight, PostgreSQL</p>
-                                </div>
-                            </div>
-                            <div class="tech-item">
-                                <svg class="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h6" />
-                                    <polygon points="18 2 22 6 12 16 8 16 8 12 18 2" />
-                                </svg>
-                                <div class="tech-info">
-                                    <h4>Dart Server</h4>
-                                    <p>shelf, WebSockets, REST APIs, Serverpod, JSON serialization</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Tools & Platforms -->
-                    <div class="tech-category">
-                        <h3 class="tech-category-title">Tools &amp; Platforms</h3>
-                        <div class="tech-items">
-                            <div class="tech-item">
-                                <svg class="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M12 3c-4 5-7 8-7 12a7 7 0 0014 0c0-4-3-7-7-12z" />
-                                    <path d="M12 16a2 2 0 100-4 2 2 0 000 4z" />
-                                </svg>
-                                <div class="tech-info">
-                                    <h4>Firebase</h4>
-                                    <p>Crashlytics, Google Analytics</p>
-                                </div>
-                            </div>
-
-                            <div class="tech-item">
-                                <svg class="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <rect x="2" y="4" width="20" height="16" rx="2" />
-                                    <path d="M2 8h20" />
-                                    <path d="M6 6h.01M10 6h.01M14 6h.01" />
-                                </svg>
-                                <div class="tech-info">
-                                    <h4>Web</h4>
-                                    <p>HTML, CSS, JavaScript</p>
-                                </div>
-                            </div>
-                            <div class="tech-item">
-                                <svg class="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <circle cx="6" cy="6" r="3" />
-                                    <circle cx="18" cy="6" r="3" />
-                                    <circle cx="18" cy="18" r="3" />
-                                    <path d="M6 9v9a3 3 0 003 3h6" />
-                                    <path d="M15 9v-3" />
-                                </svg>
-                                <div class="tech-info">
-                                    <h4>Version control</h4>
-                                    <p>Git, CI/CD with GitHub Actions</p>
-                                </div>
-                            </div>
-                            <div class="tech-item">
-                                <svg class="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M4 17l6-6-6-6" />
-                                    <path d="M14 19h6" />
-                                </svg>
-                                <div class="tech-info">
-                                    <h4>Server administration</h4>
-                                    <p>Linux, command line, SSH</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- Sport Section -->
-        <section id="sport" class="content-section">
-            <div class="section-header">
-                <h1 class="section-title">Sport</h1>
-                <p class="section-subtitle">About my activity</p>
-            </div>
-
-            <div class="content-card">
-                <div class="sport-intro">
-                    <div class="sport-intro-image">
-                        <img src="images/photo22.webp" alt="Sport activity">
-                    </div>
-                    <div class="sport-intro-text">
-                        <p>
-                            Sport is an integral part of my life. Regular training helps me to stay in shape, develop
-                            discipline
-                            and find a balance between work and personal life. I am happy to help those who want to keep
-                            me
-                            company.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="tech-grid">
-                    <div class="tech-category" data-accent="sport">
-                        <h3 class="tech-category-title">Main areas:</h3>
-                        <div class="tech-items">
-                            <div class="tech-item">
-                                <svg class="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <circle cx="15" cy="5" r="2" />
-                                    <path d="M12 8l-4 12 2 1 3-6 3 5 2-1-2-6 4-3" />
-                                </svg>
-                                <div class="tech-info">
-                                    <h4>Running</h4>
-                                    <p>I run regularly and work on my overall endurance.</p>
-                                </div>
-                            </div>
-                            <div class="tech-item">
-                                <svg class="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <rect x="2" y="10" width="4" height="4" rx="1" />
-                                    <rect x="18" y="10" width="4" height="4" rx="1" />
-                                    <line x1="6" y1="12" x2="18" y2="12" />
-                                    <line x1="8" y1="10" x2="8" y2="14" />
-                                    <line x1="16" y1="10" x2="16" y2="14" />
-                                </svg>
-                                <div class="tech-info">
-                                    <h4>Strength training</h4>
-                                    <p>Gym training, working with your own weight, developing strength and muscle mass
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="tech-item">
-                                <svg class="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <circle cx="12" cy="12" r="9" />
-                                    <path d="M12 3a9 9 0 0 1 9 9" />
-                                    <path d="M12 21a9 9 0 0 1-9-9" />
-                                    <circle cx="12" cy="12" r="3" />
-                                </svg>
-                                <div class="tech-info">
-                                    <h4>Aikido</h4>
-                                    <p>I have been doing it for quite a long time and I would be glad to see those
-                                        people who are also interested in it.</p>
-                                </div>
-                            </div>
-                            <div class="tech-item">
-                                <svg class="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <circle cx="12" cy="12" r="10" />
-                                    <path d="M12 8v8" />
-                                    <path d="M8 12h8" />
-                                </svg>
-                                <div class="tech-info">
-                                    <h4>Physical therapy</h4>
-                                    <p>Massage, physiotherapy, exercises to correct deviations.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tech-category">
-                        <h3 class="tech-category-title">Certification documents</h3>
-                        <div class="certificates-gallery-static">
-                            <div class="cert-item">
-                                <img src="images/dco1.webp" alt="Сертификат 1" class="cert-img" tabindex="0">
-                            </div>
-                            <div class="cert-item">
-                                <img src="images/dco2.webp" alt="Сертификат 2" class="cert-img" tabindex="0">
-                            </div>
-                            <div class="cert-item">
-                                <img src="images/dco3.webp" alt="Сертификат 3" class="cert-img" tabindex="0">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Photography Section -->
-        <section id="photography" class="content-section">
-            <div class="section-header">
-                <h1 class="section-title">Photography</h1>
-                <p class="section-subtitle">My view of the world through the lens</p>
-            </div>
-
-            <div class="content-card">
-                <div class="photography-intro">
-                    <p class="photography-text">
-                        Photography for me is a way to capture moments that you want to remember. Noticing details and
-                        enjoying the current moment makes the hustle and bustle of the business world feel
-                        different.<br>
-                        I can help you capture what you yourself want to remember and relive.
-                    </p>
-                </div>
-
-                <div class="photography-content">
-                    <div class="smart-gallery-container">
-                        <h3 class="photo-category-title">Gallery</h3>
-                        <div class="smart-gallery" id="smartGallery">
-                            <div class="smart-gallery-item">
-                                <img src="images/photo1.webp" alt="Фотография 1" loading="lazy"
-                                    class="smart-gallery-image">
-                            </div>
-                            <div class="smart-gallery-item">
-                                <img src="images/photo2.webp" alt="Фотография 2" loading="lazy"
-                                    class="smart-gallery-image">
-                            </div>
-                            <div class="smart-gallery-item">
-                                <img src="images/photo3.webp" alt="Фотография 3" loading="lazy"
-                                    class="smart-gallery-image">
-                            </div>
-                            <div class="smart-gallery-item">
-                                <img src="images/photo4.webp" alt="Фотография 4" loading="lazy"
-                                    class="smart-gallery-image">
-                            </div>
-                            <div class="smart-gallery-item">
-                                <img src="images/photo5.webp" alt="Фотография 5" loading="lazy"
-                                    class="smart-gallery-image">
-                            </div>
-                            <div class="smart-gallery-item">
-                                <img src="images/photo6.webp" alt="Фотография 6" loading="lazy"
-                                    class="smart-gallery-image">
-                            </div>
-                            <div class="smart-gallery-item">
-                                <img src="images/photo7.webp" alt="Фотография 7" loading="lazy"
-                                    class="smart-gallery-image">
-                            </div>
-                            <div class="smart-gallery-item">
-                                <img src="images/photo8.webp" alt="Фотография 8" loading="lazy"
-                                    class="smart-gallery-image">
-                            </div>
-                            <div class="smart-gallery-item">
-                                <img src="images/photo9.webp" alt="Фотография 9" loading="lazy"
-                                    class="smart-gallery-image">
-                            </div>
-                            <div class="smart-gallery-item">
-                                <img src="images/photo10.webp" alt="Фотография 10" loading="lazy"
-                                    class="smart-gallery-image">
-                            </div>
-                            <div class="smart-gallery-item">
-                                <img src="images/photo11.webp" alt="Фотография 11" loading="lazy"
-                                    class="smart-gallery-image">
-                            </div>
-                            <div class="smart-gallery-item">
-                                <img src="images/photo12.webp" alt="Фотография 12" loading="lazy"
-                                    class="smart-gallery-image">
-                            </div>
-                            <div class="smart-gallery-item">
-                                <img src="images/photo13.webp" alt="Фотография 13" loading="lazy"
-                                    class="smart-gallery-image">
-                            </div>
-                            <div class="smart-gallery-item">
-                                <img src="images/photo14.webp" alt="Фотография 14" loading="lazy"
-                                    class="smart-gallery-image">
-                            </div>
-                            <div class="smart-gallery-item">
-                                <img src="images/photo15.webp" alt="Фотография 15" loading="lazy"
-                                    class="smart-gallery-image">
-                            </div>
-                            <div class="smart-gallery-item">
-                                <img src="images/photo16.webp" alt="Фотография 16" loading="lazy"
-                                    class="smart-gallery-image">
-                            </div>
-                            <div class="smart-gallery-item">
-                                <img src="images/photo17.webp" alt="Фотография 17" loading="lazy"
-                                    class="smart-gallery-image">
-                            </div>
-                            <div class="smart-gallery-item">
-                                <img src="images/photo18.webp" alt="Фотография 18" loading="lazy"
-                                    class="smart-gallery-image">
-                            </div>
-                            <div class="smart-gallery-item">
-                                <img src="images/photo19.webp" alt="Фотография 19" loading="lazy"
-                                    class="smart-gallery-image">
-                            </div>
-                            <div class="smart-gallery-item">
-                                <img src="images/photo20.webp" alt="Фотография 20" loading="lazy"
-                                    class="smart-gallery-image">
-                            </div>
-                            <div class="smart-gallery-item">
-                                <img src="images/photo21.webp" alt="Фотография 21" loading="lazy"
-                                    class="smart-gallery-image">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ==========================================================================
-         Projects Section
-         ========================================================================== -->
-        <section id="projects" class="content-section">
-            <div class="section-header">
-                <h1 class="section-title">My Projects</h1>
-                <p class="section-subtitle">Apps that have already said "Hello, World!"</p>
-            </div>
-
-            <div class="content-card">
-                <div class="projects-grid">
-                    <div class="project-card friends-activity" data-project="friends-activity">
-                        <div class="project-header">
-                            <h3 class="project-title">Friends Activity</h3>
-                            <span class="project-status available">Available</span>
-                        </div>
-                        <div class="project-content">
-                            <p class="project-description">
-                                Step counter with a rating system among your friends.
-                            </p>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://www.rustore.ru/catalog/app/apc.appcradle.kotlinjc_friendsactivity_app"
-                                target="_blank" rel="noopener noreferrer" class="project-link">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                    <polyline points="15,3 21,3 21,9"></polyline>
-                                    <line x1="10" y1="14" x2="21" y2="3"></line>
-                                </svg>
-                                <span>Open in RuStore</span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="project-card working-hours" data-project="working-hours">
-                        <div class="project-header">
-                            <h3 class="project-title">Working Hours</h3>
-                            <span class="project-status available">Available</span>
-                        </div>
-                        <div class="project-content">
-                            <p class="project-description">
-                                The application allows you to set shift schedules with a specified frequency and
-                                calculate
-                                payment for them.
-                            </p>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://www.rustore.ru/catalog/app/apc.appcradle.workinghours" target="_blank"
-                                rel="noopener noreferrer" class="project-link">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                    <polyline points="15,3 21,3 21,9"></polyline>
-                                    <line x1="10" y1="14" x2="21" y2="3"></line>
-                                </svg>
-                                <span>Open in RuStore</span>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="project-card task-time" data-project="task-time">
-                        <div class="project-header">
-                            <h3 class="project-title">Task Time - productivity tracker</h3>
-                            <span class="project-status available">Available</span>
-                        </div>
-                        <div class="project-content">
-                            <p class="project-description">
-                                This simple yet effective timer will help you focus on your work during your busy
-                                period,
-                                and will also remind you to take a break.
-                                The built-in task list will help you keep your focus on the most important things.
-                            </p>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://www.rustore.ru/catalog/app/apc.appcradle.kotlinjc_pomodorrotimer_app"
-                                target="_blank" rel="noopener noreferrer" class="project-link">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                    <polyline points="15,3 21,3 21,9"></polyline>
-                                    <line x1="10" y1="14" x2="21" y2="3"></line>
-                                </svg>
-                                <span>Open in RuStore</span>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="project-card wot-calc" data-project="wot-calc">
-                        <div class="project-header">
-                            <h3 class="project-title">WOT Calc</h3>
-                            <span class="project-status available">Available</span>
-                        </div>
-                        <div class="project-content">
-                            <p class="project-description">
-                                This application helps to determine the characteristics of your tank with different
-                                equipment.
-                                Automatic recalculation of characteristics with new data.
-                            </p>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://www.rustore.ru/catalog/app/acr.appcradle.wotcalc" target="_blank"
-                                rel="noopener noreferrer" class="project-link">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                    <polyline points="15,3 21,3 21,9"></polyline>
-                                    <line x1="10" y1="14" x2="21" y2="3"></line>
-                                </svg>
-                                <span>Open in RuStore</span>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="project-card feeling-diary" data-project="feeling-diary">
-                        <div class="project-header">
-                            <h3 class="project-title">Feeling Diary</h3>
-                            <span class="project-status available">Available</span>
-                        </div>
-                        <div class="project-content">
-                            <p class="project-description">
-                                This app allows you to write down all the feelings that you are experiencing at the
-                                moment
-                                and would like to write down.
-                            </p>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://www.rustore.ru/catalog/app/apc.appcradle.kotlinjc_feelingdiary_app"
-                                target="_blank" rel="noopener noreferrer" class="project-link">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                    <polyline points="15,3 21,3 21,9"></polyline>
-                                    <line x1="10" y1="14" x2="21" y2="3"></line>
-                                </svg>
-                                <span>Open in RuStore</span>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="project-card appcradle-player" data-project="appcradle-player">
-                        <div class="project-header">
-                            <h3 class="project-title">AppCradle Player</h3>
-                            <span class="project-status available">Available</span>
-                        </div>
-                        <div class="project-content">
-                            <p class="project-description">
-                                Player for listening your own local tracks on the device.
-                            </p>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://www.rustore.ru/catalog/app/apc.appcradle.radioappcradle" target="_blank"
-                                rel="noopener noreferrer" class="project-link">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                    <polyline points="15,3 21,3 21,9"></polyline>
-                                    <line x1="10" y1="14" x2="21" y2="3"></line>
-                                </svg>
-                                <span>Open in RuStore</span>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="project-card" data-project="money-everyday">
-                        <div class="project-header">
-                            <h3 class="project-title">Money Everyday</h3>
-                            <span class="project-status coming-soon">Soon</span>
-                        </div>
-                        <div class="project-content">
-                            <p class="project-description">
-                                Your expenses on the screen. Without effort. An application for automatic accounting of
-                                personal finances and control of expenses using incoming notifications.
-                            </p>
-                        </div>
-                        <div class="project-links">
-                            <span class="project-link disabled">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-                                </svg>
-                                <span>Preparing for publication</span>
-                            </span>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- ==========================================================================
-         Donate Section
-         ========================================================================== -->
-        <section id="donate" class="content-section">
-            <div class="section-header">
-                <h1 class="section-title">Support</h1>
-                <p class="section-subtitle">If you like my projects, you can support their development</p>
-            </div>
-
-            <div class="content-card">
-                <div class="donate-content">
-                    <div class="donate-text">
-                        <p>My apps are completely free and have no ads, so you can support me using the button below</p>
-                    </div>
-                    <div class="donate-widget">
-                        <a href="https://yoomoney.ru/to/410017351998063" target="_blank" rel="noopener noreferrer"
-                            class="donate-button">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-                            </svg>
-                            <span>Support with YooMoney</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <section id="about" class="content-section active"></section>
+        <section id="tech" class="content-section"></section>
+        <section id="sport" class="content-section"></section>
+        <section id="photography" class="content-section"></section>
+        <section id="projects" class="content-section"></section>
+        <section id="donate" class="content-section"></section>
+        <section id="library" class="content-section"></section>
     </main>
 
-    <!-- ==========================================================================
-     Overlay for mobile menu
-     ========================================================================== -->
     <div class="overlay" id="overlay"></div>
 
-    <!-- ==========================================================================
-     Scripts
-     ========================================================================== -->
-    <script src="main.js" defer></script>
     <div id="certificateModal" class="certificate-modal">
         <span class="certificate-modal-close" id="certificateModalClose">&times;</span>
         <img class="certificate-modal-content" id="certificateModalImg" alt="Сертификат">
@@ -841,6 +144,9 @@
             <div class="project-modal-action" id="projectModalAction"></div>
         </div>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/highlight.min.js"></script>
+    <script type="module" src="js/app.js"></script>
 </body>
 
 </html>

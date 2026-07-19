@@ -1,0 +1,110 @@
+<section class="architecture">
+  <nav class="breadcrumbs">
+    <a href="#" data-nav="home">Главная</a> /
+    <a href="#" data-nav="group" data-group="solid">SOLID</a> /
+    <span>Single Responsibility</span>
+  </nav>
+
+  <header class="pattern-header">
+    <span class="pattern-badge badge-solid">SOLID</span>
+    <h1>S. Single Responsibility (Принцип единственной ответственности)</h1>
+  </header>
+
+  <div class="pattern-meta">
+    <div class="meta-item">
+      <span class="meta-label">Также известен как</span>
+      SRP
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Сложность</span>
+      ★☆☆☆☆
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Применимость</span>
+      ★★★★★
+    </div>
+  </div>
+
+  <section class="intent">
+    <h2> Назначение</h2>
+    <p>Каждый класс должен иметь только одну причину для изменения. Это означает, что класс должен отвечать только за одну строго определённую часть функциональности программы.</p>
+  </section>
+
+  <section class="problem">
+    <h2> Проблема</h2>
+    <p>Когда класс берёт на себя несколько обязанностей, изменение одной из них может привести к поломке других. Такой класс сложно тестировать, поддерживать и расширять. Например, класс <code>OrderProcessor</code>, который и вычисляет итоговую сумму, и сохраняет заказ в базу данных, и отправляет email — нарушает SRP.</p>
+  </section>
+
+  <section class="solution">
+    <h2> Решение</h2>
+    <p>Разделить класс на несколько, каждый со своей зоной ответственности. Выделить в отдельные классы: бизнес-логику (расчёт суммы), работу с хранилищем (сохранение), отправку уведомлений (email). Каждый такой класс будет иметь только одну причину для изменения.</p>
+  </section>
+
+  <section class="example">
+    <h2> Пример на Dart</h2>
+    <p>Нарушение SRP — всё в одном классе:</p>
+    <pre><code class="language-dart">class OrderProcessor {
+  double calculateTotal(Order order) {
+    return order.items.fold(0, (sum, item) => sum + item.price);
+  }
+
+  void saveToDatabase(Order order) {
+    print('Сохранение заказа ${order.id} в БД');
+  }
+
+  void sendEmailNotification(Order order) {
+    print('Отправка email о заказе ${order.id}');
+  }
+}</code></pre>
+    <p>После применения SRP — каждая ответственность в своём классе:</p>
+    <pre><code class="language-dart">class OrderCalculator {
+  double calculateTotal(Order order) {
+    return order.items.fold(0, (sum, item) => sum + item.price);
+  }
+}
+
+class OrderRepository {
+  void save(Order order) {
+    print('Сохранение заказа ${order.id} в БД');
+  }
+}
+
+class EmailService {
+  void sendOrderConfirmation(Order order) {
+    print('Отправка email о заказе ${order.id}');
+  }
+}</code></pre>
+  </section>
+
+  <section class="pros-cons">
+    <div class="pros">
+      <h3> Плюсы</h3>
+      <ul>
+        <li>Код проще поддерживать и изменять</li>
+        <li>Каждый класс легче тестировать изолированно</li>
+        <li>Снижается связанность (coupling) между компонентами</li>
+        <li>Упрощается понимание кода новыми разработчиками</li>
+      </ul>
+    </div>
+    <div class="cons">
+      <h3> Минусы</h3>
+      <ul>
+        <li>Увеличивается количество классов в проекте</li>
+        <li>Требуется более тщательное проектирование архитектуры</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="related">
+    <h2> Связанные принципы</h2>
+    <ul>
+      <li><a href="#" data-nav="item" data-path="solid/02-open-closed">Open-Closed</a> — SRP помогает достичь OCP, так как классы с одной ответственностью проще расширять</li>
+      <li><a href="#" data-nav="item" data-path="di/01-intro">Dependency Injection</a> — разделение ответственностей упрощает внедрение зависимостей</li>
+    </ul>
+  </section>
+
+  <footer class="pattern-nav">
+    <a href="#" data-nav="home">На главную</a>
+    <a href="#" data-nav="item" data-path="solid/02-open-closed" class="next">Следующий →</a>
+  </footer>
+</section>

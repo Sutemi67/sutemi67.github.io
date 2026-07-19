@@ -1,0 +1,164 @@
+<section class="pattern">
+  <nav class="breadcrumbs">
+    <a href="#" data-nav="home">Главная</a> /
+    <a href="#" data-nav="group" data-group="structural">Структурные</a> /
+    <span>Decorator</span>
+  </nav>
+
+  <header class="pattern-header">
+    <span class="pattern-badge badge-structural">Структурный</span>
+    <h1>Decorator (Декоратор)</h1>
+  </header>
+
+  <div class="pattern-meta">
+    <div class="meta-item">
+      <span class="meta-label">Также известен как</span>
+      Wrapper
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Сложность</span>
+      ★★☆☆☆
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Популярность</span>
+      ★★★★★
+    </div>
+  </div>
+
+  <section class="intent">
+    <h2> Назначение</h2>
+    <p>Динамически добавляет новые поведения объектам, оборачивая их в классы-декораторы. Является гибкой альтернативой наследованию для расширения функциональности.</p>
+  </section>
+
+  <section class="problem">
+    <h2> Проблема</h2>
+    <p>Есть класс для работы с данными, который может читать и записывать данные. Нужно добавить функциональность: сжатие, шифрование, логирование. Создание всех комбинаций через наследование приводит к взрыву подклассов.</p>
+  </section>
+
+  <section class="solution">
+    <h2> Решение</h2>
+    <p>Создаётся базовый декоратор, который содержит ссылку на оборачиваемый объект и делегирует ему вызовы. Конкретные декораторы переопределяют методы, добавляя поведение до или после делегирования.</p>
+  </section>
+
+  <section class="example">
+    <h2> Пример на Dart</h2>
+    <pre><code class="language-dart">abstract class DataSource {
+  void writeData(String data);
+  String readData();
+}
+
+class FileDataSource implements DataSource {
+  final String filename;
+  String _data = '';
+
+  FileDataSource(this.filename);
+
+  @override
+  void writeData(String data) {
+    _data = data;
+    print('Записано в $filename: $data');
+  }
+
+  @override
+  String readData() => _data;
+}
+
+class DataSourceDecorator implements DataSource {
+  final DataSource wrappee;
+
+  DataSourceDecorator(this.wrappee);
+
+  @override
+  void writeData(String data) => wrappee.writeData(data);
+  @override
+  String readData() => wrappee.readData();
+}
+
+class EncryptionDecorator extends DataSourceDecorator {
+  EncryptionDecorator(DataSource wrappee) : super(wrappee);
+
+  @override
+  void writeData(String data) {
+    final encrypted = _encrypt(data);
+    super.writeData(encrypted);
+  }
+
+  @override
+  String readData() {
+    return _decrypt(super.readData());
+  }
+
+  String _encrypt(String data) => data.split('').reversed.join();
+  String _decrypt(String data) => data.split('').reversed.join();
+}
+
+class CompressionDecorator extends DataSourceDecorator {
+  CompressionDecorator(DataSource wrappee) : super(wrappee);
+
+  @override
+  void writeData(String data) {
+    final compressed = _compress(data);
+    super.writeData(compressed);
+  }
+
+  @override
+  String readData() {
+    return _decompress(super.readData());
+  }
+
+  String _compress(String data) => data.substring(0, data.length ~/ 2);
+  String _decompress(String data) => data + data;
+}
+
+void main() {
+  DataSource source = FileDataSource('test.txt');
+  source = EncryptionDecorator(source);
+  source = CompressionDecorator(source);
+
+  source.writeData('Hello, World!');
+  print(source.readData());
+}
+</code></pre>
+  </section>
+
+  <section class="when-to-use">
+    <h2> Когда применять</h2>
+    <ul>
+      <li>Когда нужно добавлять обязанности динамически и прозрачно</li>
+      <li>Когда невозможно расширение через наследование</li>
+      <li>Когда нужно избежать появления множества подклассов для каждой комбинации</li>
+    </ul>
+  </section>
+
+  <section class="pros-cons">
+    <div class="pros">
+      <h3> Плюсы</h3>
+      <ul>
+        <li>Гибкая альтернатива наследованию</li>
+        <li>Динамическое добавление/удаление поведения</li>
+        <li>Комбинирование нескольких декораторов</li>
+      </ul>
+    </div>
+    <div class="cons">
+      <h3> Минусы</h3>
+      <ul>
+        <li>Множество мелких классов усложняет отладку</li>
+        <li>Порядок декораторов может влиять на результат</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="related">
+    <h2> Связанные паттерны</h2>
+    <ul>
+      <li><a href="#" data-nav="pattern" data-path="structural/06-adapter">Adapter</a> — меняет интерфейс, Decorator расширяет поведение</li>
+      <li><a href="#" data-nav="pattern" data-path="structural/08-composite">Composite</a> — похож по структуре, но решает другую задачу</li>
+    </ul>
+  </section>
+
+  <footer class="pattern-nav">
+    <a href="#" data-nav="pattern" data-path="structural/08-composite" class="prev">← Предыдущий</a>
+    <a href="#" data-nav="home">На главную</a>
+    <a href="#" data-nav="pattern" data-path="structural/10-facade" class="next">Следующий →</a>
+  </footer>
+</section>

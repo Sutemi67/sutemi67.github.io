@@ -1,0 +1,139 @@
+<section class="pattern">
+  <nav class="breadcrumbs">
+    <a href="#" data-nav="home">Главная</a> /
+    <a href="#" data-nav="group" data-group="behavioral">Поведенческие</a> /
+    <span>Strategy</span>
+  </nav>
+
+  <header class="pattern-header">
+    <span class="pattern-badge badge-behavioral">Поведенческий</span>
+    <h1>Strategy (Стратегия)</h1>
+  </header>
+
+  <div class="pattern-meta">
+    <div class="meta-item">
+      <span class="meta-label">Также известен как</span>
+      Policy
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Сложность</span>
+      ★★☆☆☆
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Популярность</span>
+      ★★★★★
+    </div>
+  </div>
+
+  <section class="intent">
+    <h2> Назначение</h2>
+    <p>Определяет семейство взаимозаменяемых алгоритмов и позволяет подставлять их в контекст, не изменяя клиентский код.</p>
+  </section>
+
+  <section class="problem">
+    <h2> Проблема</h2>
+    <p>Приложение должно поддерживать разные алгоритмы сортировки (пузырьковая, быстрая, слиянием) или разные стратегии валидации данных. Код должен легко переключаться между алгоритмами без громоздких условных конструкций.</p>
+  </section>
+
+  <section class="solution">
+    <h2> Решение</h2>
+    <p>Каждый алгоритм выносится в отдельный класс, реализующий общий интерфейс. Контекст хранит ссылку на текущую стратегию и делегирует ей выполнение. Стратегию можно менять во время выполнения.</p>
+  </section>
+
+  <section class="example">
+    <h2> Пример на Dart</h2>
+    <pre><code class="language-dart">abstract class SortStrategy {
+  List<int> sort(List<int> data);
+}
+
+class BubbleSort implements SortStrategy {
+  @override
+  List<int> sort(List<int> data) {
+    final list = List<int>.from(data);
+    for (var i = 0; i < list.length; i++) {
+      for (var j = 0; j < list.length - i - 1; j++) {
+        if (list[j] > list[j + 1]) {
+          final temp = list[j];
+          list[j] = list[j + 1];
+          list[j + 1] = temp;
+        }
+      }
+    }
+    return list;
+  }
+}
+
+class QuickSort implements SortStrategy {
+  @override
+  List<int> sort(List<int> data) {
+    if (data.length <= 1) return data;
+    final pivot = data[data.length ~/ 2];
+    final less = data.where((x) => x < pivot).toList();
+    final equal = data.where((x) => x == pivot).toList();
+    final greater = data.where((x) => x > pivot).toList();
+    return [...sort(less), ...equal, ...sort(greater)];
+  }
+}
+
+class Sorter {
+  SortStrategy strategy;
+
+  Sorter(this.strategy);
+
+  void setStrategy(SortStrategy strategy) => this.strategy = strategy;
+
+  List<int> sort(List<int> data) => strategy.sort(data);
+}
+
+void main() {
+  final data = [5, 3, 8, 1, 9, 2];
+  final sorter = Sorter(BubbleSort());
+  print(sorter.sort(data));
+
+  sorter.setStrategy(QuickSort());
+  print(sorter.sort(data));
+}
+</code></pre>
+  </section>
+
+  <section class="when-to-use">
+    <h2> Когда применять</h2>
+    <ul>
+      <li>Когда есть несколько вариантов алгоритма, которые могут меняться</li>
+      <li>Когда нужно избежать условных операторов для выбора алгоритма</li>
+      <li>Когда алгоритмы должны быть взаимозаменяемыми</li>
+    </ul>
+  </section>
+
+  <section class="pros-cons">
+    <div class="pros">
+      <h3> Плюсы</h3>
+      <ul>
+        <li>Алгоритмы можно менять на лету</li>
+        <li>Изолирует код алгоритмов от клиентского кода</li>
+        <li>Позволяет легко добавлять новые алгоритмы</li>
+      </ul>
+    </div>
+    <div class="cons">
+      <h3> Минусы</h3>
+      <ul>
+        <li>Клиент должен знать, какую стратегию выбрать</li>
+        <li>Увеличивает количество классов</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="related">
+    <h2> Связанные паттерны</h2>
+    <ul>
+      <li><a href="#" data-nav="pattern" data-path="behavioral/20-state">State</a> — похожая структура, но State меняет поведение при смене состояния, а Strategy — при смене алгоритма</li>
+      <li><a href="#" data-nav="pattern" data-path="behavioral/22-template-method">Template Method</a> — задаёт скелет алгоритма, Strategy — заменяет целый алгоритм</li>
+    </ul>
+  </section>
+
+  <footer class="pattern-nav">
+    <a href="#" data-nav="pattern" data-path="behavioral/20-state" class="prev">← Предыдущий</a>
+    <a href="#" data-nav="home">На главную</a>
+    <a href="#" data-nav="pattern" data-path="behavioral/22-template-method" class="next">Следующий →</a>
+  </footer>
+</section>

@@ -1,0 +1,150 @@
+<section class="pattern">
+  <nav class="breadcrumbs">
+    <a href="#" data-nav="home">Главная</a> /
+    <a href="#" data-nav="group" data-group="structural">Структурные</a> /
+    <span>Composite</span>
+  </nav>
+
+  <header class="pattern-header">
+    <span class="pattern-badge badge-structural">Структурный</span>
+    <h1>Composite (Компоновщик)</h1>
+  </header>
+
+  <div class="pattern-meta">
+    <div class="meta-item">
+      <span class="meta-label">Также известен как</span>
+      Дерево
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Сложность</span>
+      ★★★☆☆
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Популярность</span>
+      ★★★★☆
+    </div>
+  </div>
+
+  <section class="intent">
+    <h2> Назначение</h2>
+    <p>Позволяет сгруппировать объекты в древовидную структуру и работать с отдельными объектами и их группами единообразно.</p>
+  </section>
+
+  <section class="problem">
+    <h2> Проблема</h2>
+    <p>Нужно представить файловую систему: файлы и папки. Папки могут содержать как файлы, так и другие папки. Клиентский код должен одинаково работать и с файлами, и с папками — например, вычислять общий размер или выводить содержимое.</p>
+  </section>
+
+  <section class="solution">
+    <h2> Решение</h2>
+    <p>Определяется общий интерфейс Component с методами, общими для листьев (файлов) и контейнеров (папок). Листья реализуют поведение напрямую, а контейнеры делегируют работу своим дочерним элементам.</p>
+  </section>
+
+  <section class="example">
+    <h2> Пример на Dart</h2>
+    <pre><code class="language-dart">abstract class FileSystemComponent {
+  String get name;
+  int getSize();
+  void display(String indent);
+}
+
+class File implements FileSystemComponent {
+  @override
+  final String name;
+  final int size;
+
+  File(this.name, this.size);
+
+  @override
+  int getSize() => size;
+
+  @override
+  void display(String indent) {
+    print('$indent $name ($size KB)');
+  }
+}
+
+class Folder implements FileSystemComponent {
+  @override
+  final String name;
+  final List<FileSystemComponent> children = [];
+
+  Folder(this.name);
+
+  void add(FileSystemComponent component) => children.add(component);
+  void remove(FileSystemComponent component) => children.remove(component);
+
+  @override
+  int getSize() {
+    return children.fold(0, (sum, child) => sum + child.getSize());
+  }
+
+  @override
+  void display(String indent) {
+    print('$indent $name/');
+    for (final child in children) {
+      child.display('$indent  ');
+    }
+  }
+}
+
+void main() {
+  final root = Folder('root');
+  final docs = Folder('documents');
+  final pics = Folder('pictures');
+
+  docs.add(File('resume.pdf', 200));
+  docs.add(File('notes.txt', 50));
+  pics.add(File('photo.jpg', 1500));
+  pics.add(File('logo.png', 300));
+
+  root.add(docs);
+  root.add(pics);
+  root.add(File('readme.md', 10));
+
+  root.display('');
+  print('Общий размер: ${root.getSize()} KB');
+}</code></pre>
+  </section>
+
+  <section class="when-to-use">
+    <h2> Когда применять</h2>
+    <ul>
+      <li>Когда нужно представить иерархию «часть-целое»</li>
+      <li>Когда клиенты должны единообразно работать с простыми и составными объектами</li>
+      <li>Когда структура объектов может быть рекурсивной</li>
+    </ul>
+  </section>
+
+  <section class="pros-cons">
+    <div class="pros">
+      <h3> Плюсы</h3>
+      <ul>
+        <li>Упрощает клиентский код (одинаковая работа с листьями и контейнерами)</li>
+        <li>Позволяет легко добавлять новые типы компонентов</li>
+        <li>Реализует рекурсивную обработку</li>
+      </ul>
+    </div>
+    <div class="cons">
+      <h3> Минусы</h3>
+      <ul>
+        <li>Может сделать систему слишком обобщённой</li>
+        <li>Трудно наложить ограничения на типы дочерних элементов</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="related">
+    <h2> Связанные паттерны</h2>
+    <ul>
+      <li><a href="#" data-nav="pattern" data-path="structural/09-decorator">Decorator</a> — похож по структуре, но добавляет функциональность, а не группирует</li>
+      <li><a href="#" data-nav="pattern" data-path="behavioral/16-iterator">Iterator</a> — часто используется для обхода дерева Composite</li>
+    </ul>
+  </section>
+
+  <footer class="pattern-nav">
+    <a href="#" data-nav="pattern" data-path="structural/07-bridge" class="prev">← Предыдущий</a>
+    <a href="#" data-nav="home">На главную</a>
+    <a href="#" data-nav="pattern" data-path="structural/09-decorator" class="next">Следующий →</a>
+  </footer>
+</section>

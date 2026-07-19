@@ -1,0 +1,124 @@
+<section class="pattern">
+  <nav class="breadcrumbs">
+    <a href="#" data-nav="home">Главная</a> /
+    <a href="#" data-nav="group" data-group="structural">Структурные</a> /
+    <span>Facade</span>
+  </nav>
+
+  <header class="pattern-header">
+    <span class="pattern-badge badge-structural">Структурный</span>
+    <h1>Facade (Фасад)</h1>
+  </header>
+
+  <div class="pattern-meta">
+    <div class="meta-item">
+      <span class="meta-label">Также известен как</span>
+      Facade
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Сложность</span>
+      ★☆☆☆☆
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Популярность</span>
+      ★★★★★
+    </div>
+  </div>
+
+  <section class="intent">
+    <h2> Назначение</h2>
+    <p>Предоставляет простой интерфейс к сложной системе классов, библиотеке или набору подсистем, скрывая внутреннюю сложность.</p>
+  </section>
+
+  <section class="problem">
+    <h2> Проблема</h2>
+    <p>Для конвертации видеофайла приложению нужно работать с несколькими подсистемами: чтение файла, декодирование, обработка звука, кодирование, запись. Клиентский код вынужден знать все детали и порядок вызовов каждой подсистемы.</p>
+  </section>
+
+  <section class="solution">
+    <h2> Решение</h2>
+    <p>Создаётся фасад — класс, который предоставляет простой метод для выполнения сложной операции, скрывая за собой взаимодействие с подсистемами. Клиент вызывает один метод фасада, а тот за кулисами управляет всеми подсистемами.</p>
+  </section>
+
+  <section class="example">
+    <h2> Пример на Dart</h2>
+    <pre><code class="language-dart">class VideoFile {
+  final String filename;
+  VideoFile(this.filename);
+}
+
+class Codec {
+  void decode(VideoFile file) => print('Декодирование ${file.filename}');
+  void encode(VideoFile file) => print('Кодирование ${file.filename}');
+}
+
+class AudioMixer {
+  void process() => print('Обработка аудиодорожки');
+}
+
+class FileWriter {
+  void save(String filename) => print('Сохранение файла $filename');
+}
+
+class VideoConverter {
+  final Codec _codec = Codec();
+  final AudioMixer _mixer = AudioMixer();
+  final FileWriter _writer = FileWriter();
+
+  void convert(String filename, String format) {
+    final file = VideoFile(filename);
+    _codec.decode(file);
+    _mixer.process();
+    _codec.encode(file);
+    _writer.save('${filename.split('.').first}.$format');
+  }
+}
+
+void main() {
+  final converter = VideoConverter();
+  converter.convert('video.avi', 'mp4');
+}
+</code></pre>
+  </section>
+
+  <section class="when-to-use">
+    <h2> Когда применять</h2>
+    <ul>
+      <li>Когда нужно предоставить простой интерфейс к сложной подсистеме</li>
+      <li>Когда нужно уменьшить зависимость клиентского кода от подсистемы</li>
+      <li>Когда нужно разбить систему на слои (фасад — точка входа в каждый слой)</li>
+    </ul>
+  </section>
+
+  <section class="pros-cons">
+    <div class="pros">
+      <h3> Плюсы</h3>
+      <ul>
+        <li>Изолирует клиентов от сложности подсистемы</li>
+        <li>Упрощает использование сложных библиотек</li>
+        <li>Уменьшает связанность кода</li>
+      </ul>
+    </div>
+    <div class="cons">
+      <h3> Минусы</h3>
+      <ul>
+        <li>Фасад может стать «божественным объектом», знающим слишком много</li>
+        <li>Скрывает потенциально полезную функциональность подсистемы</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="related">
+    <h2> Связанные паттерны</h2>
+    <ul>
+      <li><a href="#" data-nav="pattern" data-path="structural/06-adapter">Adapter</a> — меняет интерфейс, Facade создаёт новый упрощённый интерфейс</li>
+      <li><a href="#" data-nav="pattern" data-path="structural/12-proxy">Proxy</a> — контролирует доступ, Facade скрывает сложность</li>
+    </ul>
+  </section>
+
+  <footer class="pattern-nav">
+    <a href="#" data-nav="pattern" data-path="structural/09-decorator" class="prev">← Предыдущий</a>
+    <a href="#" data-nav="home">На главную</a>
+    <a href="#" data-nav="pattern" data-path="structural/11-flyweight" class="next">Следующий →</a>
+  </footer>
+</section>

@@ -1,0 +1,145 @@
+<section class="pattern">
+  <nav class="breadcrumbs">
+    <a href="#" data-nav="home">Главная</a> /
+    <a href="#" data-nav="group" data-group="behavioral">Поведенческие</a> /
+    <span>Observer</span>
+  </nav>
+
+  <header class="pattern-header">
+    <span class="pattern-badge badge-behavioral">Поведенческий</span>
+    <h1>Observer (Наблюдатель)</h1>
+  </header>
+
+  <div class="pattern-meta">
+    <div class="meta-item">
+      <span class="meta-label">Также известен как</span>
+      Listener, Publisher-Subscriber
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Сложность</span>
+      ★★☆☆☆
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Популярность</span>
+      ★★★★★
+    </div>
+  </div>
+
+  <section class="intent">
+    <h2> Назначение</h2>
+    <p>Создаёт механизм подписки, позволяющий одним объектам (издателям) уведомлять другие объекты (подписчиков) об изменениях своего состояния.</p>
+  </section>
+
+  <section class="problem">
+    <h2> Проблема</h2>
+    <p>В приложении с курсом валют несколько виджетов должны обновляться при изменении курса: график, таблица, индикатор. Если жёстко связывать виджеты с источником данных, добавление нового виджета потребует изменения кода источника.</p>
+  </section>
+
+  <section class="solution">
+    <h2> Решение</h2>
+    <p>Издатель (Subject) хранит список подписчиков (Observers) и уведомляет их при изменении состояния. Подписчики реализуют общий интерфейс, а издатель не знает их конкретных типов. В Dart эта концепция реализована через StreamSubscription и ChangeNotifier.</p>
+  </section>
+
+  <section class="example">
+    <h2> Пример на Dart</h2>
+    <pre><code class="language-dart">abstract class Observer {
+  void update(double rate);
+}
+
+class CurrencyExchange {
+  final List<Observer> _observers = [];
+  double _rate = 0;
+
+  void subscribe(Observer observer) => _observers.add(observer);
+  void unsubscribe(Observer observer) => _observers.remove(observer);
+
+  void _notify() {
+    for (final observer in _observers) {
+      observer.update(_rate);
+    }
+  }
+
+  void setRate(double newRate) {
+    _rate = newRate;
+    _notify();
+  }
+}
+
+class ChartWidget implements Observer {
+  @override
+  void update(double rate) {
+    print('[Chart] Обновление графика: курс $rate');
+  }
+}
+
+class TableWidget implements Observer {
+  @override
+  void update(double rate) {
+    print('[Table] Обновление таблицы: курс $rate');
+  }
+}
+
+class IndicatorWidget implements Observer {
+  @override
+  void update(double rate) {
+    print('[Indicator] Новый курс: $rate');
+  }
+}
+
+void main() {
+  final exchange = CurrencyExchange();
+  final chart = ChartWidget();
+  final table = TableWidget();
+
+  exchange.subscribe(chart);
+  exchange.subscribe(table);
+  exchange.subscribe(IndicatorWidget());
+
+  exchange.setRate(92.45);
+  exchange.setRate(93.10);
+}
+</code></pre>
+  </section>
+
+  <section class="when-to-use">
+    <h2> Когда применять</h2>
+    <ul>
+      <li>Когда изменения одного объекта требуют обновления других объектов</li>
+      <li>Когда количество подписчиков неизвестно и может меняться динамически</li>
+      <li>Когда нужно слабое связывание между издателями и подписчиками</li>
+    </ul>
+  </section>
+
+  <section class="pros-cons">
+    <div class="pros">
+      <h3> Плюсы</h3>
+      <ul>
+        <li>Слабая связанность между издателями и подписчиками</li>
+        <li>Поддержка broadcast-уведомлений</li>
+        <li>Динамическое управление подписками</li>
+      </ul>
+    </div>
+    <div class="cons">
+      <h3> Минусы</h3>
+      <ul>
+        <li>Подписчики получают уведомления в случайном порядке</li>
+        <li>Утечки памяти при забытой отписке</li>
+        <li>Сложность отладки цепочек уведомлений</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="related">
+    <h2> Связанные паттерны</h2>
+    <ul>
+      <li><a href="#" data-nav="pattern" data-path="behavioral/17-mediator">Mediator</a> — посредник может использовать Observer для уведомления</li>
+      <li><a href="#" data-nav="pattern" data-path="behavioral/20-state">State</a> — может уведомлять об изменении состояния через Observer</li>
+    </ul>
+  </section>
+
+  <footer class="pattern-nav">
+    <a href="#" data-nav="pattern" data-path="behavioral/18-memento" class="prev">← Предыдущий</a>
+    <a href="#" data-nav="home">На главную</a>
+    <a href="#" data-nav="pattern" data-path="behavioral/20-state" class="next">Следующий →</a>
+  </footer>
+</section>

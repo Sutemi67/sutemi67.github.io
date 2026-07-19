@@ -1,0 +1,94 @@
+<section class="architecture">
+  <nav class="breadcrumbs">
+    <a href="#" data-nav="home">Главная</a> /
+    <a href="#" data-nav="group" data-group="principles">Принципы</a> /
+    <span>YAGNI</span>
+  </nav>
+
+  <header class="pattern-header">
+    <span class="pattern-badge badge-principles">Принципы</span>
+    <h1>YAGNI — You Ain't Gonna Need It (Вам это не понадобится)</h1>
+  </header>
+
+  <div class="pattern-meta">
+    <div class="meta-item">
+      <span class="meta-label">Происхождение</span>
+      Extreme Programming (XP)
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Сложность</span>
+      ★☆☆☆☆
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Применимость</span>
+      ★★★★★
+    </div>
+  </div>
+
+  <section class="intent">
+    <h2>Назначение</h2>
+    <p>Не добавляйте функциональность, пока она не понадобится. Создавайте только то, что требуется прямо сейчас. Большинство предположений о будущем не оправдываются, а лишний код становится обузой, которую нужно поддерживать, тестировать и понимать.</p>
+  </section>
+
+  <section class="problem">
+    <h2>Проблема</h2>
+    <p>Желание заложить архитектуру «на вырост» приводит к тому, что код обрастает абстракциями, интерфейсами и конфигурациями, которые никогда не используются. Каждая такая абстракция увеличивает сложность системы и когнитивную нагрузку на разработчиков.</p>
+  </section>
+
+  <section class="solution">
+    <h2>Решение</h2>
+    <p>Писать код, который решает текущую задачу, и только её. Если позже появится новая потребность — вы добавите функциональность в тот момент, когда она действительно понадобится, имея более полное понимание требований. Рефакторинг существующего кода обойдётся дешевле, чем поддержка невостребованных абстракций.</p>
+  </section>
+
+  <section class="example">
+    <h2>Пример на Dart</h2>
+    <p><strong>Плохо — преждевременная абстракция «на всякий случай»:</strong></p>
+    <pre><code class="language-dart">abstract class LoggerInterface {
+  void log(String message);
+}
+
+class ConsoleLogger implements LoggerInterface {
+  @override
+  void log(String message) => print(message);
+}
+
+// Абстракция не нужна, пока файловый логгер не потребовался</code></pre>
+    <p><strong>Хорошо — только то, что нужно сейчас:</strong></p>
+    <pre><code class="language-dart">void log(String message) => print(message);</code></pre>
+  </section>
+
+  <section class="pros-cons">
+    <div class="pros">
+      <h3>Плюсы</h3>
+      <ul>
+        <li>Меньше кода — меньше багов</li>
+        <li>Быстрее время разработки</li>
+        <li>Проще поддержка и рефакторинг</li>
+        <li>Низкая когнитивная нагрузка</li>
+      </ul>
+    </div>
+    <div class="cons">
+      <h3>Минусы</h3>
+      <ul>
+        <li>Строгий YAGNI может потребовать более крупного рефакторинга позже</li>
+        <li>В некоторых случаях предварительное проектирование дешевле переписывания</li>
+        <li>Требует дисциплины и умения прогнозировать, где абстракция оправдана</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="related">
+    <h2>Связанные принципы</h2>
+    <ul>
+      <li><a href="#" data-nav="item" data-path="principles/03-kiss">KISS</a> — YAGNI дополняет KISS: не усложняй и не делай лишнего</li>
+      <li><a href="#" data-nav="item" data-path="principles/02-dry">DRY</a> — баланс между YAGNI и DRY: абстрагируйся только когда появилось реальное дублирование</li>
+      <li><a href="#" data-nav="item" data-path="clean-architecture/01-intro">Clean Architecture</a> — YAGNI помогает не перепроектировать архитектуру заранее</li>
+    </ul>
+  </section>
+
+  <footer class="pattern-nav">
+    <a href="#" data-nav="item" data-path="principles/03-kiss" class="prev">← Предыдущий</a>
+    <a href="#" data-nav="home">На главную</a>
+    <a href="#" data-nav="item" data-path="clean-architecture/01-intro" class="next">Следующий →</a>
+  </footer>
+</section>

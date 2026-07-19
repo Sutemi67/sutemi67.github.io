@@ -1,0 +1,141 @@
+<section class="pattern">
+  <nav class="breadcrumbs">
+    <a href="#" data-nav="home">Главная</a> /
+    <a href="#" data-nav="group" data-group="creational">Порождающие</a> /
+    <span>Abstract Factory</span>
+  </nav>
+
+  <header class="pattern-header">
+    <span class="pattern-badge badge-creational">Порождающий</span>
+    <h1>Abstract Factory (Абстрактная фабрика)</h1>
+  </header>
+
+  <div class="pattern-meta">
+    <div class="meta-item">
+      <span class="meta-label">Также известен как</span>
+      Kit
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Сложность</span>
+      ★★★☆☆
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Популярность</span>
+      ★★★★☆
+    </div>
+  </div>
+
+  <section class="intent">
+    <h2> Назначение</h2>
+    <p>Предоставляет интерфейс для создания семейств взаимосвязанных или взаимозависимых объектов, не специфицируя их конкретные классы.</p>
+  </section>
+
+  <section class="problem">
+    <h2> Проблема</h2>
+    <p>Приложение должно работать с разными наборами UI-компонентов: кнопками, текстовыми полями, чекбоксами. Для каждой платформы (Material Design, Cupertino) нужен свой набор виджетов, но клиентский код не должен зависеть от конкретных реализаций.</p>
+  </section>
+
+  <section class="solution">
+    <h2> Решение</h2>
+    <p>Создаётся абстрактная фабрика с методами для создания каждого типа компонента. Для каждой платформы реализуется своя конкретная фабрика. Клиентский код получает фабрику и через неё создаёт компоненты, не зная их конкретных классов.</p>
+  </section>
+
+  <section class="example">
+    <h2> Пример на Dart</h2>
+    <pre><code class="language-dart">abstract class Button {
+  void paint();
+}
+
+abstract class TextField {
+  void render();
+}
+
+class MaterialButton implements Button {
+  @override
+  void paint() => print('Material Button');
+}
+
+class CupertinoButton implements Button {
+  @override
+  void paint() => print('Cupertino Button');
+}
+
+class MaterialTextField implements TextField {
+  @override
+  void render() => print('Material TextField');
+}
+
+class CupertinoTextField implements TextField {
+  @override
+  void render() => print('Cupertino TextField');
+}
+
+abstract class UIFactory {
+  Button createButton();
+  TextField createTextField();
+}
+
+class MaterialFactory implements UIFactory {
+  @override
+  Button createButton() => MaterialButton();
+  @override
+  TextField createTextField() => MaterialTextField();
+}
+
+class CupertinoFactory implements UIFactory {
+  @override
+  Button createButton() => CupertinoButton();
+  @override
+  TextField createTextField() => CupertinoTextField();
+}
+
+void main() {
+  UIFactory factory = MaterialFactory();
+  final button = factory.createButton();
+  final textField = factory.createTextField();
+  button.paint();
+  textField.render();
+}</code></pre>
+  </section>
+
+  <section class="when-to-use">
+    <h2> Когда применять</h2>
+    <ul>
+      <li>Когда система не должна зависеть от способа создания компонентов</li>
+      <li>Когда нужно создавать семейства взаимосвязанных объектов</li>
+      <li>Когда есть несколько семейств объектов, которые могут меняться местами</li>
+    </ul>
+  </section>
+
+  <section class="pros-cons">
+    <div class="pros">
+      <h3> Плюсы</h3>
+      <ul>
+        <li>Гарантирует совместимость создаваемых объектов</li>
+        <li>Избавляет от жёсткой привязки к конкретным классам</li>
+        <li>Упрощает замену целых семейств продуктов</li>
+      </ul>
+    </div>
+    <div class="cons">
+      <h3> Минусы</h3>
+      <ul>
+        <li>Сложно добавить новый тип продукта (нужно менять все фабрики)</li>
+        <li>Увеличивает количество классов и интерфейсов</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="related">
+    <h2> Связанные паттерны</h2>
+    <ul>
+      <li><a href="#" data-nav="pattern" data-path="creational/01-factory-method">Factory Method</a> — методы фабрики часто реализуются как Factory Method</li>
+      <li><a href="#" data-nav="pattern" data-path="creational/03-singleton">Singleton</a> — конкретная фабрика часто делается синглтоном</li>
+    </ul>
+  </section>
+
+  <footer class="pattern-nav">
+    <a href="#" data-nav="pattern" data-path="creational/01-factory-method" class="prev">← Предыдущий</a>
+    <a href="#" data-nav="home">На главную</a>
+    <a href="#" data-nav="pattern" data-path="creational/03-singleton" class="next">Следующий →</a>
+  </footer>
+</section>

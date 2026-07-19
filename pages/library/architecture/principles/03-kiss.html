@@ -1,0 +1,89 @@
+<section class="architecture">
+  <nav class="breadcrumbs">
+    <a href="#" data-nav="home">Главная</a> /
+    <a href="#" data-nav="group" data-group="principles">Принципы</a> /
+    <span>KISS</span>
+  </nav>
+
+  <header class="pattern-header">
+    <span class="pattern-badge badge-principles">Принципы</span>
+    <h1>KISS — Keep It Simple, Stupid (Будь проще)</h1>
+  </header>
+
+  <div class="pattern-meta">
+    <div class="meta-item">
+      <span class="meta-label">Также известен как</span>
+      Keep It Short and Simple
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Сложность</span>
+      ★☆☆☆☆
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Применимость</span>
+      ★★★★★
+    </div>
+  </div>
+
+  <section class="intent">
+    <h2>Назначение</h2>
+    <p>Большинство систем работают лучше всего, если они остаются простыми, а не усложняются. Простота должна быть ключевой целью в проектировании — излишняя сложность ведёт к ошибкам, дорогой поддержке и трудностям в развитии.</p>
+  </section>
+
+  <section class="problem">
+    <h2>Проблема</h2>
+    <p>Разработчики склонны усложнять решения: использовать паттерны там, где достаточно простой функции, строить многоуровневые абстракции для тривиальных задач, писать «на вырост». Сложный код тяжело читать, тестировать и изменять.</p>
+  </section>
+
+  <section class="solution">
+    <h2>Решение</h2>
+    <p>Начинать с самого простого рабочего варианта. Если решение кажется сложным — вероятно, вы что-то делаете не так. Задавайте себе вопрос: «Можно ли сделать это проще?». Простой код легче понять, протестировать и изменить.</p>
+    <p>KISS не означает «примитивно». Это означает «настолько просто, насколько возможно, но не проще».</p>
+  </section>
+
+  <section class="example">
+    <h2>Пример на Dart</h2>
+    <p><strong>Плохо — излишняя сложность для простой задачи:</strong></p>
+    <pre><code class="language-dart">class StringReverser {
+  String reverse(String input) {
+    return input.split('').fold('', (prev, c) => c + prev);
+  }
+}</code></pre>
+    <p><strong>Хорошо — простое и понятное решение:</strong></p>
+    <pre><code class="language-dart">String reverse(String input) => input.split('').reversed.join();</code></pre>
+  </section>
+
+  <section class="pros-cons">
+    <div class="pros">
+      <h3>Плюсы</h3>
+      <ul>
+        <li>Код легче читать и понимать</li>
+        <li>Меньше шансов допустить ошибку</li>
+        <li>Быстрее разрабатывать и поддерживать</li>
+        <li>Проще тестировать и отлаживать</li>
+      </ul>
+    </div>
+    <div class="cons">
+      <h3>Минусы</h3>
+      <ul>
+        <li>Чрезмерное упрощение может игнорировать необходимую гибкость</li>
+        <li>Не всегда очевидно, где проходит граница «достаточной простоты»</li>
+        <li>Простота в коде иногда требует более сложных размышлений при проектировании</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="related">
+    <h2>Связанные принципы</h2>
+    <ul>
+      <li><a href="#" data-nav="item" data-path="principles/04-yagni">YAGNI</a> — не усложняй решение тем, что не нужно прямо сейчас</li>
+      <li><a href="#" data-nav="item" data-path="principles/02-dry">DRY</a> — абстракция должна быть простой и очевидной</li>
+    </ul>
+  </section>
+
+  <footer class="pattern-nav">
+    <a href="#" data-nav="item" data-path="principles/02-dry" class="prev">← Предыдущий</a>
+    <a href="#" data-nav="home">На главную</a>
+    <a href="#" data-nav="item" data-path="principles/04-yagni" class="next">Следующий →</a>
+  </footer>
+</section>

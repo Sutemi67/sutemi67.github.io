@@ -1,0 +1,144 @@
+<section class="pattern">
+  <nav class="breadcrumbs">
+    <a href="#" data-nav="home">Главная</a> /
+    <a href="#" data-nav="group" data-group="behavioral">Поведенческие</a> /
+    <span>Chain of Responsibility</span>
+  </nav>
+
+  <header class="pattern-header">
+    <span class="pattern-badge badge-behavioral">Поведенческий</span>
+    <h1>Chain of Responsibility (Цепочка обязанностей)</h1>
+  </header>
+
+  <div class="pattern-meta">
+    <div class="meta-item">
+      <span class="meta-label">Также известен как</span>
+      CoR, Middleware
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Сложность</span>
+      ★★☆☆☆
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Популярность</span>
+      ★★★★☆
+    </div>
+  </div>
+
+  <section class="intent">
+    <h2> Назначение</h2>
+    <p>Позволяет передавать запросы последовательно по цепочке обработчиков, пока один из них не обработает запрос.</p>
+  </section>
+
+  <section class="problem">
+    <h2> Проблема</h2>
+    <p>Веб-сервер должен пропускать HTTP-запрос через цепочку middleware: логирование, аутентификация, сжатие, кеширование, роутинг. Каждый middleware может либо обработать запрос, либо передать его дальше. Добавление новых middleware не должно требовать изменения кода существующих.</p>
+  </section>
+
+  <section class="solution">
+    <h2> Решение</h2>
+    <p>Каждый обработчик реализует общий интерфейс и имеет ссылку на следующий обработчик в цепочке. Обработчик решает, обработать запрос или передать следующему. Цепочка строится динамически.</p>
+  </section>
+
+  <section class="example">
+    <h2> Пример на Dart</h2>
+    <pre><code class="language-dart">abstract class Middleware {
+  Middleware? _next;
+
+  void linkNext(Middleware next) => _next = next;
+
+  void handle(String request);
+
+  void next(String request) {
+    _next?.handle(request);
+  }
+}
+
+class LoggingMiddleware extends Middleware {
+  @override
+  void handle(String request) {
+    print('[LOG] Запрос: $request');
+    next(request);
+  }
+}
+
+class AuthMiddleware extends Middleware {
+  @override
+  void handle(String request) {
+    if (request.contains('token')) {
+      print('[AUTH] Доступ разрешён');
+      next(request);
+    } else {
+      print('[AUTH] Доступ запрещён');
+    }
+  }
+}
+
+class CacheMiddleware extends Middleware {
+  final Set<String> _cache = {};
+
+  @override
+  void handle(String request) {
+    if (_cache.contains(request)) {
+      print('[CACHE] Ответ из кеша');
+    } else {
+      _cache.add(request);
+      next(request);
+    }
+  }
+}
+
+void main() {
+  final logging = LoggingMiddleware();
+  final auth = AuthMiddleware();
+  final cache = CacheMiddleware();
+
+  logging.linkNext(auth);
+  auth.linkNext(cache);
+
+  logging.handle('GET /api/data?token=123');
+}
+</code></pre>
+  </section>
+
+  <section class="when-to-use">
+    <h2> Когда применять</h2>
+    <ul>
+      <li>Когда есть несколько обработчиков, которые могут обработать запрос</li>
+      <li>Когда порядок обработки важен и может меняться</li>
+      <li>Когда набор обработчиков должен формироваться динамически</li>
+    </ul>
+  </section>
+
+  <section class="pros-cons">
+    <div class="pros">
+      <h3> Плюсы</h3>
+      <ul>
+        <li>Уменьшает связанность отправителя и получателя</li>
+        <li>Гибкое добавление/изменение обработчиков</li>
+        <li>Реализует принцип единственной ответственности</li>
+      </ul>
+    </div>
+    <div class="cons">
+      <h3> Минусы</h3>
+      <ul>
+        <li>Нет гарантии, что запрос будет обработан</li>
+        <li>Сложно отслеживать прохождение запроса по цепочке</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="related">
+    <h2> Связанные паттерны</h2>
+    <ul>
+      <li><a href="#" data-nav="pattern" data-path="behavioral/14-command">Command</a> — может использоваться для инкапсуляции запроса</li>
+      <li><a href="#" data-nav="pattern" data-path="behavioral/17-mediator">Mediator</a> — управляет коммуникацией, а не передаёт по цепочке</li>
+    </ul>
+  </section>
+
+  <footer class="pattern-nav">
+    <a href="#" data-nav="pattern" data-path="structural/12-proxy" class="prev">← Предыдущий</a>
+    <a href="#" data-nav="home">На главную</a>
+    <a href="#" data-nav="pattern" data-path="behavioral/14-command" class="next">Следующий →</a>
+  </footer>
+</section>

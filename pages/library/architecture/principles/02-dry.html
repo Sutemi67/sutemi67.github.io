@@ -1,0 +1,102 @@
+<section class="architecture">
+  <nav class="breadcrumbs">
+    <a href="#" data-nav="home">Главная</a> /
+    <a href="#" data-nav="group" data-group="principles">Принципы</a> /
+    <span>DRY</span>
+  </nav>
+
+  <header class="pattern-header">
+    <span class="pattern-badge badge-principles">Принципы</span>
+    <h1>DRY — Don't Repeat Yourself (Не повторяй себя)</h1>
+  </header>
+
+  <div class="pattern-meta">
+    <div class="meta-item">
+      <span class="meta-label">Также известен как</span>
+      DIE — Duplication Is Evil
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Сложность</span>
+      ★☆☆☆☆
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Применимость</span>
+      ★★★★★
+    </div>
+  </div>
+
+  <section class="intent">
+    <h2>Назначение</h2>
+    <p>Каждая часть знания должна иметь единственное непротиворечивое представление в системе. DRY призывает избегать дублирования логики, данных и знаний, вынося повторяющийся код в единое место — функции, классы или модули.</p>
+  </section>
+
+  <section class="problem">
+    <h2>Проблема</h2>
+    <p>Когда один и тот же фрагмент логики повторяется в разных местах, изменение этого поведения требует правки в каждом из них. Это приводит к ошибкам (забыли обновить одно из мест), неконсистентности поведения и усложняет поддержку кода.</p>
+  </section>
+
+  <section class="solution">
+    <h2>Решение</h2>
+    <p>Выделить повторяющуюся логику в единую абстракцию: функцию, метод, класс или модуль. Все места, которым нужна эта логика, обращаются к единому источнику. Изменение в одном месте автоматически применяется везде.</p>
+    <p>Важно: DRY касается не только кода, но и знаний. Документация, конфигурация, схемы БД — всё должно иметь единственный источник истины.</p>
+  </section>
+
+  <section class="example">
+    <h2>Пример на Dart</h2>
+    <p><strong>Плохо — дублирование логики суммирования:</strong></p>
+    <pre><code class="language-dart">double calculateTotalWithTax(List<double> prices) {
+  double sum = 0;
+  for (final p in prices) { sum += p; }
+  return sum * 1.2;
+}
+
+double calculateTotalWithDiscount(List<double> prices) {
+  double sum = 0;
+  for (final p in prices) { sum += p; }
+  return sum * 0.9;
+}</code></pre>
+    <p><strong>Хорошо — единая функция суммирования:</strong></p>
+    <pre><code class="language-dart">double sum(List<double> values) =>
+    values.fold(0, (a, b) => a + b);
+
+double calculateTotalWithTax(List<double> prices) =>
+    sum(prices) * 1.2;
+
+double calculateTotalWithDiscount(List<double> prices) =>
+    sum(prices) * 0.9;</code></pre>
+  </section>
+
+  <section class="pros-cons">
+    <div class="pros">
+      <h3>Плюсы</h3>
+      <ul>
+        <li>Снижается количество ошибок при изменениях</li>
+        <li>Код проще поддерживать и рефакторить</li>
+        <li>Поведение системы консистентно</li>
+        <li>Упрощается понимание кода новыми разработчиками</li>
+      </ul>
+    </div>
+    <div class="cons">
+      <h3>Минусы</h3>
+      <ul>
+        <li>Чрезмерное применение приводит к преждевременной абстракции</li>
+        <li>Избыточное обобщение усложняет код там, где дублирование было бы уместно</li>
+        <li>Требует опыта, чтобы отличить «случайное» дублирование от «истинного»</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="related">
+    <h2>Связанные принципы</h2>
+    <ul>
+      <li><a href="#" data-nav="item" data-path="solid/01-single-responsibility">Single Responsibility</a> — DRY помогает соблюдать SRP</li>
+      <li><a href="#" data-nav="item" data-path="principles/04-yagni">YAGNI</a> — баланс между DRY и YAGNI: абстракция нужна, только когда дублирование реально возникло</li>
+    </ul>
+  </section>
+
+  <footer class="pattern-nav">
+    <a href="#" data-nav="item" data-path="solid/05-dependency-inversion" class="prev">← Предыдущий</a>
+    <a href="#" data-nav="home">На главную</a>
+    <a href="#" data-nav="item" data-path="principles/03-kiss" class="next">Следующий →</a>
+  </footer>
+</section>

@@ -1,0 +1,123 @@
+<section class="architecture">
+  <nav class="breadcrumbs">
+    <a href="#" data-nav="home">Главная</a> /
+    <a href="#" data-nav="group" data-group="solid">SOLID</a> /
+    <span>Open-Closed</span>
+  </nav>
+
+  <header class="pattern-header">
+    <span class="pattern-badge badge-solid">SOLID</span>
+    <h1>O. Open-Closed (Принцип открытости/закрытости)</h1>
+  </header>
+
+  <div class="pattern-meta">
+    <div class="meta-item">
+      <span class="meta-label">Также известен как</span>
+      OCP
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Сложность</span>
+      ★★☆☆☆
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Применимость</span>
+      ★★★★★
+    </div>
+  </div>
+
+  <section class="intent">
+    <h2> Назначение</h2>
+    <p>Классы должны быть открыты для расширения, но закрыты для изменения. Новую функциональность следует добавлять через новый код, не изменяя существующий.</p>
+  </section>
+
+  <section class="problem">
+    <h2> Проблема</h2>
+    <p>Представьте модуль расчёта площади фигур. При добавлении новой фигуры (например, треугольника) приходится изменять существующий код — добавлять новую ветку <code>if</code> или <code>switch</code>. Каждое такое изменение рискует сломать уже работающую логику.</p>
+  </section>
+
+  <section class="solution">
+    <h2> Решение</h2>
+    <p>Использовать абстракции (интерфейсы или абстрактные классы). Базовый код работает через общий интерфейс, а конкретная реализация добавляется новым классом, не затрагивая существующий.</p>
+  </section>
+
+  <section class="example">
+    <h2> Пример на Dart</h2>
+    <p>Нарушение OCP — при добавлении новой фигуры нужно менять <code>AreaCalculator</code>:</p>
+    <pre><code class="language-dart">class AreaCalculator {
+  double calculate(Object shape) {
+    if (shape is Circle) {
+      return 3.14 * shape.radius * shape.radius;
+    } else if (shape is Rectangle) {
+      return shape.width * shape.height;
+    }
+    throw ArgumentError('Неизвестная фигура');
+  }
+}</code></pre>
+    <p>После применения OCP — расширение через новые классы:</p>
+    <pre><code class="language-dart">abstract class Shape {
+  double area();
+}
+
+class Circle implements Shape {
+  final double radius;
+  Circle(this.radius);
+
+  @override
+  double area() => 3.14159 * radius * radius;
+}
+
+class Rectangle implements Shape {
+  final double width, height;
+  Rectangle(this.width, this.height);
+
+  @override
+  double area() => width * height;
+}
+
+// Новая фигура — без изменения существующего кода
+class Triangle implements Shape {
+  final double base, height;
+  Triangle(this.base, this.height);
+
+  @override
+  double area() => 0.5 * base * height;
+}
+
+class AreaCalculator {
+  double calculate(Shape shape) => shape.area();
+}</code></pre>
+  </section>
+
+  <section class="pros-cons">
+    <div class="pros">
+      <h3> Плюсы</h3>
+      <ul>
+        <li>Существующий код не изменяется — меньше риска регрессий</li>
+        <li>Новая функциональность добавляется изолированно</li>
+        <li>Упрощается тестирование (каждый класс тестируется отдельно)</li>
+      </ul>
+    </div>
+    <div class="cons">
+      <h3> Минусы</h3>
+      <ul>
+        <li>Требует проектирования абстракций заранее</li>
+        <li>Может привести к избыточному количеству классов</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="related">
+    <h2> Связанные принципы</h2>
+    <ul>
+      <li><a href="#" data-nav="item" data-path="solid/03-liskov-substitution">Liskov Substitution</a> — реализации должны быть взаимозаменяемы</li>
+      <li><a href="#" data-nav="item" data-path="solid/05-dependency-inversion">Dependency Inversion</a> — OCP тесно связан с инверсией зависимостей</li>
+      <li><a href="#" data-nav="item" data-path="patterns/behavioral/21-strategy">Strategy</a> — паттерн, реализующий OCP на практике</li>
+    </ul>
+  </section>
+
+  <footer class="pattern-nav">
+    <a href="#" data-nav="item" data-path="solid/01-single-responsibility" class="prev">← Предыдущий</a>
+    <a href="#" data-nav="home">На главную</a>
+    <a href="#" data-nav="item" data-path="solid/03-liskov-substitution" class="next">Следующий →</a>
+  </footer>
+</section>

@@ -1,0 +1,161 @@
+<section class="pattern">
+  <nav class="breadcrumbs">
+    <a href="#" data-nav="home">Главная</a> /
+    <a href="#" data-nav="group" data-group="creational">Порождающие</a> /
+    <span>Builder</span>
+  </nav>
+
+  <header class="pattern-header">
+    <span class="pattern-badge badge-creational">Порождающий</span>
+    <h1>Builder (Строитель)</h1>
+  </header>
+
+  <div class="pattern-meta">
+    <div class="meta-item">
+      <span class="meta-label">Также известен как</span>
+      Строитель
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Сложность</span>
+      ★★☆☆☆
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Популярность</span>
+      ★★★★☆
+    </div>
+  </div>
+
+  <section class="intent">
+    <h2> Назначение</h2>
+    <p>Отделяет конструирование сложного объекта от его представления, позволяя создавать разные представления с помощью одного и того же процесса построения.</p>
+  </section>
+
+  <section class="problem">
+    <h2> Проблема</h2>
+    <p>Класс HTTP-запроса может иметь множество необязательных параметров: заголовки, тело, параметры запроса, таймаут, авторизацию. Использование конструктора с десятком параметров неудобно и трудночитаемо. Решение — пошаговое построение объекта.</p>
+  </section>
+
+  <section class="solution">
+    <h2> Решение</h2>
+    <p>Builder позволяет конструировать объекты шаг за шагом, вызывая методы, каждый из которых устанавливает определённую часть продукта. Процесс построения можно сделать пошаговым и возвращать сам объект строителя для цепочки вызовов.</p>
+  </section>
+
+  <section class="example">
+    <h2> Пример на Dart</h2>
+    <pre><code class="language-dart">class HttpRequest {
+  final String url;
+  final String method;
+  final Map<String, String> headers;
+  final Map<String, String> queryParams;
+  final String? body;
+  final int timeout;
+
+  HttpRequest._({
+    required this.url,
+    required this.method,
+    required this.headers,
+    required this.queryParams,
+    this.body,
+    required this.timeout,
+  });
+}
+
+class HttpRequestBuilder {
+  String _url;
+  String _method = 'GET';
+  final Map<String, String> _headers = {};
+  final Map<String, String> _queryParams = {};
+  String? _body;
+  int _timeout = 30;
+
+  HttpRequestBuilder(this._url);
+
+  HttpRequestBuilder method(String method) {
+    _method = method;
+    return this;
+  }
+
+  HttpRequestBuilder header(String key, String value) {
+    _headers[key] = value;
+    return this;
+  }
+
+  HttpRequestBuilder queryParam(String key, String value) {
+    _queryParams[key] = value;
+    return this;
+  }
+
+  HttpRequestBuilder body(String body) {
+    _body = body;
+    return this;
+  }
+
+  HttpRequestBuilder timeout(int seconds) {
+    _timeout = seconds;
+    return this;
+  }
+
+  HttpRequest build() {
+    return HttpRequest._(
+      url: _url,
+      method: _method,
+      headers: Map.from(_headers),
+      queryParams: Map.from(_queryParams),
+      body: _body,
+      timeout: _timeout,
+    );
+  }
+}
+
+void main() {
+  final request = HttpRequestBuilder('https://api.example.com/users')
+    .method('POST')
+    .header('Content-Type', 'application/json')
+    .header('Authorization', 'Bearer token123')
+    .body('{"name": "John"}')
+    .timeout(10)
+    .build();
+}</code></pre>
+  </section>
+
+  <section class="when-to-use">
+    <h2> Когда применять</h2>
+    <ul>
+      <li>Когда объект имеет много необязательных параметров</li>
+      <li>Когда процесс создания состоит из нескольких шагов</li>
+      <li>Когда нужно создавать разные представления одного объекта</li>
+    </ul>
+  </section>
+
+  <section class="pros-cons">
+    <div class="pros">
+      <h3> Плюсы</h3>
+      <ul>
+        <li>Позволяет создавать объекты пошагово</li>
+        <li>Переиспользует код построения для разных представлений</li>
+        <li>Изолирует сложную логику конструирования</li>
+      </ul>
+    </div>
+    <div class="cons">
+      <h3> Минусы</h3>
+      <ul>
+        <li>Усложняет код из-за необходимости создавать отдельный класс строителя</li>
+        <li>Требует иммутабельности продукта</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="related">
+    <h2> Связанные паттерны</h2>
+    <ul>
+      <li><a href="#" data-nav="pattern" data-path="creational/01-factory-method">Factory Method</a> — может использоваться внутри строителя</li>
+      <li><a href="#" data-nav="pattern" data-path="structural/09-decorator">Decorator</a> — похож на цепочку вызовов, но с другой целью</li>
+    </ul>
+  </section>
+
+  <footer class="pattern-nav">
+    <a href="#" data-nav="pattern" data-path="creational/03-singleton" class="prev">← Предыдущий</a>
+    <a href="#" data-nav="home">На главную</a>
+    <a href="#" data-nav="pattern" data-path="creational/05-prototype" class="next">Следующий →</a>
+  </footer>
+</section>
