@@ -60,9 +60,9 @@ export const libraryData = {
             principles: {
                 title: 'Принципы',
                 items: [
-                    { num: 1, name: 'DRY', path: 'architecture/principles/02-dry' },
-                    { num: 2, name: 'KISS', path: 'architecture/principles/03-kiss' },
-                    { num: 3, name: 'YAGNI', path: 'architecture/principles/04-yagni' },
+                    { num: 2, name: 'DRY', path: 'architecture/principles/02-dry' },
+                    { num: 3, name: 'KISS', path: 'architecture/principles/03-kiss' },
+                    { num: 4, name: 'YAGNI', path: 'architecture/principles/04-yagni' },
                 ]
             },
             cleanArch: {
