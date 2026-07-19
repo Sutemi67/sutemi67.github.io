@@ -199,11 +199,17 @@
 }
 
 .library-content code {
+    font-family: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+}
+
+.library-content p code,
+.library-content li code,
+.library-content h2 code,
+.library-content h3 code {
     background: rgba(255, 255, 255, 0.08);
     padding: 0.15rem 0.35rem;
     border-radius: 4px;
     font-size: 0.85em;
-    font-family: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
     color: var(--accent-color);
 }
 
@@ -224,7 +230,6 @@
     border-radius: 0;
     font-size: 0.85rem;
     line-height: inherit;
-    color: var(--text-color);
 }
 
 .library-content .breadcrumbs {
