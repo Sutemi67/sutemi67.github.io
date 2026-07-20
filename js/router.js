@@ -1,16 +1,9 @@
+import { i18n } from './i18n.js';
+
 export class Navigation {
     constructor(options = {}) {
         this.currentSection = 'about';
-        this.sections = ['about', 'tech', 'projects', 'sport', 'photography', 'donate', 'library'];
-        this.sectionTitles = {
-            about: 'About',
-            tech: 'Tech Stack',
-            projects: 'Projects',
-            sport: 'Sport',
-            photography: 'Photography',
-            donate: 'Support',
-            library: 'Library'
-        };
+        this.sections = ['about', 'tech', 'sport', 'photography', 'donate', 'library'];
         this.sectionCache = {};
         this.afterLoad = options.afterLoad || {};
         this.init();
@@ -18,10 +11,33 @@ export class Navigation {
 
     init() {
         this.setupEventListeners();
+        this.setupLangChange();
         this.showSection(this.currentSection);
         this.updateActiveNavLink();
         this.updatePageTitle();
         this.loadSectionContent(this.currentSection);
+    }
+
+    setupLangChange() {
+        document.addEventListener('langchange', () => {
+            this.updatePageTitle();
+            this.updateNavLabels();
+            if (this.currentSection !== 'library') {
+                this.loadSectionContent(this.currentSection);
+            }
+        });
+    }
+
+    updateNavLabels() {
+        document.querySelectorAll('[data-section]').forEach(link => {
+            const section = link.getAttribute('data-section');
+            const span = link.querySelector('span');
+            const key = 'nav.' + section;
+            const translation = i18n.t(key);
+            if (translation && span) {
+                span.textContent = translation;
+            }
+        });
     }
 
     setupEventListeners() {
@@ -62,8 +78,16 @@ export class Navigation {
         });
     }
 
-    async loadSectionContent(sectionName) {
-        if (this.sectionCache[sectionName]) return;
+    async loadSectionContent(sectionName, force = false) {
+        if (!force && this.sectionCache[sectionName]) {
+            const target = document.getElementById(sectionName);
+            if (target && this.currentSection === sectionName) {
+                target.innerHTML = this.sectionCache[sectionName];
+                this.runAfterLoad(sectionName);
+                i18n.applyToElement(target);
+            }
+            return;
+        }
         try {
             const response = await fetch(`pages/${sectionName}.html`);
             if (response.ok) {
@@ -73,6 +97,7 @@ export class Navigation {
                     if (target) {
                         target.innerHTML = this.sectionCache[sectionName];
                         this.runAfterLoad(sectionName);
+                        i18n.applyToElement(target);
                     }
                 }
             }
@@ -111,6 +136,7 @@ export class Navigation {
             if (this.sectionCache[sectionName]) {
                 targetSection.innerHTML = this.sectionCache[sectionName];
                 this.runAfterLoad(sectionName);
+                i18n.applyToElement(targetSection);
             }
             targetSection.classList.add('active');
         }
@@ -129,9 +155,9 @@ export class Navigation {
     }
 
     updatePageTitle() {
-        const sectionTitle = this.sectionTitles[this.currentSection] || this.currentSection;
-        const siteName = 'Sergey Boykov';
-        document.title = `${sectionTitle} — ${siteName}`;
+        const sectionKey = 'section.' + this.currentSection;
+        const sectionTitle = i18n.t(sectionKey) || this.currentSection;
+        document.title = `${sectionTitle} — Sergey Boykov`;
     }
 
     toggleLibraryNav(show) {
@@ -153,7 +179,7 @@ export class Navigation {
 
             if (mobileMenuToggle) {
                 const isOpen = sidebar.classList.contains('active');
-                mobileMenuToggle.setAttribute('aria-label', isOpen ? 'Закрыть меню' : 'Открыть меню');
+                mobileMenuToggle.setAttribute('aria-label', isOpen ? i18n.t('menu.close') || 'Закрыть меню' : i18n.t('menu.open') || 'Открыть меню');
             }
         }
     }
@@ -168,7 +194,7 @@ export class Navigation {
             overlay.classList.remove('active');
 
             if (mobileMenuToggle) {
-                mobileMenuToggle.setAttribute('aria-label', 'Открыть меню');
+                mobileMenuToggle.setAttribute('aria-label', i18n.t('menu.open') || 'Открыть меню');
             }
         }
     }

@@ -1,47 +1,47 @@
-<section class="pattern">
+﻿<section class="pattern">
   <nav class="breadcrumbs">
-    <a href="#" data-nav="home">Главная</a> /
-    <a href="#" data-nav="group" data-group="behavioral">Поведенческие</a> /
+    <a href="#" data-nav="home" data-i18n="library.home">Главная</a> /
+    <a href="#" data-nav="group" data-group="behavioral" data-i18n="library.group.behavioral">Поведенческие</a> /
     <span>Command</span>
   </nav>
 
   <header class="pattern-header">
-    <span class="pattern-badge badge-behavioral">Поведенческий</span>
-    <h1>Command (Команда)</h1>
+    <span class="pattern-badge badge-behavioral" data-i18n="library.badge.behavioral">Поведенческий</span>
+    <h1 data-i18n="library.article.command.title">Command (Команда)</h1>
   </header>
 
   <div class="pattern-meta">
     <div class="meta-item">
-      <span class="meta-label">Также известен как</span>
+      <span class="meta-label" data-i18n="library.meta.also-known">Также известен как</span>
       Action, Transaction
     </div>
     <div class="meta-item">
-      <span class="meta-label">Сложность</span>
+      <span class="meta-label" data-i18n="library.meta.complexity">Сложность</span>
       ★★☆☆☆
     </div>
     <div class="meta-item">
-      <span class="meta-label">Популярность</span>
+      <span class="meta-label" data-i18n="library.meta.popularity">Популярность</span>
       ★★★★☆
     </div>
   </div>
 
   <section class="intent">
-    <h2> Назначение</h2>
+    <h2 data-i18n="library.section.intent"> Назначение</h2>
     <p>Превращает запросы в объекты, позволяя передавать их как аргументы, ставить в очередь, логировать, а также поддерживать отмену операций (undo).</p>
   </section>
 
   <section class="problem">
-    <h2> Проблема</h2>
+    <h2 data-i18n="library.section.problem"> Проблема</h2>
     <p>В текстовом редакторе есть операции: вставка текста, удаление, копирование, вставка. Нужно реализовать отмену (undo/redo) и историю действий. Если каждая операция напрямую вызывает методы редактора, сложно отслеживать историю.</p>
   </section>
 
   <section class="solution">
-    <h2> Решение</h2>
+    <h2 data-i18n="library.section.solution"> Решение</h2>
     <p>Каждая операция представляется отдельным объектом-командой с методами execute() и undo(). Команды хранятся в истории. Для отмены вызывается undo() последней команды. Команды можно ставить в очередь, логировать, передавать как параметры.</p>
   </section>
 
   <section class="example">
-    <h2> Пример на Dart</h2>
+    <h2 data-i18n="library.section.example"> Пример на Dart</h2>
     <pre><code class="language-dart">abstract class Command {
   void execute();
   void undo();
@@ -114,7 +114,7 @@ void main() {
   </section>
 
   <section class="when-to-use">
-    <h2> Когда применять</h2>
+    <h2 data-i18n="library.section.when-to-use"> Когда применять</h2>
     <ul>
       <li>Когда нужна отмена (undo/redo) операций</li>
       <li>Когда нужно ставить операции в очередь или логировать их</li>
@@ -124,7 +124,7 @@ void main() {
 
   <section class="pros-cons">
     <div class="pros">
-      <h3> Плюсы</h3>
+      <h3 data-i18n="library.section.pros"> Плюсы</h3>
       <ul>
         <li>Отделяет отправителя от получателя</li>
         <li>Поддержка undo/redo «из коробки»</li>
@@ -132,7 +132,7 @@ void main() {
       </ul>
     </div>
     <div class="cons">
-      <h3> Минусы</h3>
+      <h3 data-i18n="library.section.cons"> Минусы</h3>
       <ul>
         <li>Множество мелких классов команд</li>
         <li>Усложнение кода для простых операций</li>
@@ -141,7 +141,7 @@ void main() {
   </section>
 
   <section class="related">
-    <h2> Связанные паттерны</h2>
+    <h2 data-i18n="library.section.related"> Связанные паттерны</h2>
     <ul>
       <li><a href="#" data-nav="pattern" data-path="behavioral/18-memento">Memento</a> — альтернативный способ реализации undo</li>
       <li><a href="#" data-nav="pattern" data-path="behavioral/19-observer">Observer</a> — может уведомлять об изменении состояния после выполнения команды</li>
@@ -149,8 +149,8 @@ void main() {
   </section>
 
   <footer class="pattern-nav">
-    <a href="#" data-nav="pattern" data-path="behavioral/13-chain-of-responsibility" class="prev">← Предыдущий</a>
-    <a href="#" data-nav="home">На главную</a>
-    <a href="#" data-nav="pattern" data-path="behavioral/15-interpreter" class="next">Следующий →</a>
+    <a href="#" data-nav="pattern" data-path="behavioral/13-chain-of-responsibility" class="prev" data-i18n="library.nav.prev">← Предыдущий</a>
+    <a href="#" data-nav="home" data-i18n="library.home">На главную</a>
+    <a href="#" data-nav="pattern" data-path="behavioral/15-interpreter" class="next" data-i18n="library.nav.next">Следующий →</a>
   </footer>
 </section>

@@ -1,18 +1,18 @@
-<section class="architecture">
+﻿<section class="architecture">
   <nav class="breadcrumbs">
-    <a href="#" data-nav="home">Главная</a> /
+    <a href="#" data-nav="home" data-i18n="library.home">Главная</a> /
     <a href="#" data-nav="group" data-group="cleanArch">Clean Architecture</a> /
     <span>Clean Architecture</span>
   </nav>
 
   <header class="pattern-header">
     <span class="pattern-badge badge-arch">Архитектура</span>
-    <h1>Clean Architecture (Чистая архитектура)</h1>
+    <h1 data-i18n="library.article.clean-architecture.title">Clean Architecture (Чистая архитектура)</h1>
   </header>
 
   <div class="pattern-meta">
     <div class="meta-item">
-      <span class="meta-label">Также известен как</span>
+      <span class="meta-label" data-i18n="library.meta.also-known">Также известен как</span>
       Layered Architecture, Hexagonal Architecture
     </div>
     <div class="meta-item">
@@ -20,23 +20,23 @@
       Robert C. Martin (Uncle Bob)
     </div>
     <div class="meta-item">
-      <span class="meta-label">Применимость</span>
+      <span class="meta-label" data-i18n="library.meta.applicability">Применимость</span>
       ★★★★☆
     </div>
   </div>
 
   <section class="intent">
-    <h2> Назначение</h2>
+    <h2 data-i18n="library.section.intent"> Назначение</h2>
     <p>Создание архитектуры, независимой от фреймворков, баз данных и внешних библиотек. Бизнес-логика остаётся чистой и тестируемой, а детали реализации (UI, БД, API) становятся подключаемыми модулями.</p>
   </section>
 
   <section class="problem">
-    <h2> Проблема</h2>
+    <h2 data-i18n="library.section.problem"> Проблема</h2>
     <p>Традиционные приложения жёстко привязаны к фреймворку или базе данных. Смена БД или UI-фреймворка требует переписывания всего приложения. Тесты становятся медленными и хрупкими, так как требуют поднятия всей инфраструктуры. Бизнес-логика размазывается по слоям представления и данных.</p>
   </section>
 
   <section class="solution">
-    <h2> Решение</h2>
+    <h2 data-i18n="library.section.solution"> Решение</h2>
     <p>Архитектура разделяется на концентрические слои с железным правилом зависимости: <strong>внутренний слой не знает о внешнем</strong>. В центре — сущности и бизнес-правила (use cases), снаружи — фреймворки, драйверы, UI.</p>
     <ul>
       <li><strong>Entities</strong> — бизнес-сущности (Enterprise Business Rules)</li>
@@ -48,7 +48,7 @@
   </section>
 
   <section class="example">
-    <h2> Пример на Dart</h2>
+    <h2 data-i18n="library.section.example"> Пример на Dart</h2>
     <p>Структура проекта по Clean Architecture:</p>
     <pre><code class="language-dart">// ---- domain/entities ----
 class User {
@@ -114,7 +114,7 @@ class UserController {
 
   <section class="pros-cons">
     <div class="pros">
-      <h3> Плюсы</h3>
+      <h3 data-i18n="library.section.pros"> Плюсы</h3>
       <ul>
         <li>Независимость от фреймворков и библиотек</li>
         <li>Бизнес-логика тестируется без инфраструктуры</li>
@@ -123,7 +123,7 @@ class UserController {
       </ul>
     </div>
     <div class="cons">
-      <h3> Минусы</h3>
+      <h3 data-i18n="library.section.cons"> Минусы</h3>
       <ul>
         <li>Больше кода и файлов для простых приложений</li>
         <li>Требует дисциплины в соблюдении границ слоёв</li>
@@ -133,7 +133,7 @@ class UserController {
   </section>
 
   <section class="related">
-    <h2> Связанные принципы</h2>
+    <h2 data-i18n="library.section.related"> Связанные принципы</h2>
     <ul>
       <li><a href="#" data-nav="item" data-path="solid/05-dependency-inversion">Dependency Inversion</a> — основа Dependency Rule</li>
       <li><a href="#" data-nav="item" data-path="di/01-intro">Dependency Injection</a> — механизм реализации DIP</li>
@@ -142,8 +142,8 @@ class UserController {
   </section>
 
   <footer class="pattern-nav">
-    <a href="#" data-nav="item" data-path="principles/04-yagni" class="prev">← Предыдущий</a>
-    <a href="#" data-nav="home">На главную</a>
-    <a href="#" data-nav="item" data-path="cqrs/01-intro" class="next">Следующий →</a>
+    <a href="#" data-nav="item" data-path="principles/04-yagni" class="prev" data-i18n="library.nav.prev">← Предыдущий</a>
+    <a href="#" data-nav="home" data-i18n="library.home">На главную</a>
+    <a href="#" data-nav="item" data-path="cqrs/01-intro" class="next" data-i18n="library.nav.next">Следующий →</a>
   </footer>
 </section>

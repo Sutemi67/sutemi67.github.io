@@ -1,47 +1,47 @@
-<section class="pattern">
+﻿<section class="pattern">
   <nav class="breadcrumbs">
-    <a href="#" data-nav="home">Главная</a> /
-    <a href="#" data-nav="group" data-group="creational">Порождающие</a> /
+    <a href="#" data-nav="home" data-i18n="library.home">Главная</a> /
+    <a href="#" data-nav="group" data-group="creational" data-i18n="library.group.creational">Порождающие</a> /
     <span>Prototype</span>
   </nav>
 
   <header class="pattern-header">
-    <span class="pattern-badge badge-creational">Порождающий</span>
-    <h1>Prototype (Прототип)</h1>
+    <span class="pattern-badge badge-creational" data-i18n="library.badge.creational">Порождающий</span>
+    <h1 data-i18n="library.article.prototype.title">Prototype (Прототип)</h1>
   </header>
 
   <div class="pattern-meta">
     <div class="meta-item">
-      <span class="meta-label">Также известен как</span>
+      <span class="meta-label" data-i18n="library.meta.also-known">Также известен как</span>
       Клон
     </div>
     <div class="meta-item">
-      <span class="meta-label">Сложность</span>
+      <span class="meta-label" data-i18n="library.meta.complexity">Сложность</span>
       ★★☆☆☆
     </div>
     <div class="meta-item">
-      <span class="meta-label">Популярность</span>
+      <span class="meta-label" data-i18n="library.meta.popularity">Популярность</span>
       ★★★☆☆
     </div>
   </div>
 
   <section class="intent">
-    <h2> Назначение</h2>
+    <h2 data-i18n="library.section.intent"> Назначение</h2>
     <p>Позволяет копировать объекты, не вдаваясь в подробности их реализации, путём делегирования операции клонирования самим копируемым объектам.</p>
   </section>
 
   <section class="problem">
-    <h2> Проблема</h2>
+    <h2 data-i18n="library.section.problem"> Проблема</h2>
     <p>У вас есть сложный конфигурационный объект, который нужно использовать как шаблон для создания множества похожих объектов с небольшими отличиями. Создание каждого объекта с нуля через конструктор требует повторения одних и тех же шагов.</p>
   </section>
 
   <section class="solution">
-    <h2> Решение</h2>
+    <h2 data-i18n="library.section.solution"> Решение</h2>
     <p>Определяется общий интерфейс с методом clone(). Каждый класс реализует клонирование, создавая копию своего объекта. В Dart можно использовать встроенный оператор каскада или реализовать метод clone() вручную.</p>
   </section>
 
   <section class="example">
-    <h2> Пример на Dart</h2>
+    <h2 data-i18n="library.section.example"> Пример на Dart</h2>
     <pre><code class="language-dart">class AppConfig {
   String apiUrl;
   int timeout;
@@ -102,7 +102,7 @@ void main() {
   </section>
 
   <section class="when-to-use">
-    <h2> Когда применять</h2>
+    <h2 data-i18n="library.section.when-to-use"> Когда применять</h2>
     <ul>
       <li>Когда копирование объекта эффективнее создания нового через конструктор</li>
       <li>Когда нужно избежать множества подклассов фабрики</li>
@@ -112,7 +112,7 @@ void main() {
 
   <section class="pros-cons">
     <div class="pros">
-      <h3> Плюсы</h3>
+      <h3 data-i18n="library.section.pros"> Плюсы</h3>
       <ul>
         <li>Позволяет клонировать объекты без привязки к их конкретным классам</li>
         <li>Может быть альтернативой наследованию при создании объектов</li>
@@ -120,7 +120,7 @@ void main() {
       </ul>
     </div>
     <div class="cons">
-      <h3> Минусы</h3>
+      <h3 data-i18n="library.section.cons"> Минусы</h3>
       <ul>
         <li>Сложно клонировать объекты с циклическими ссылками</li>
         <li>Требует внимания при глубоком vs поверхностном копировании</li>
@@ -129,7 +129,7 @@ void main() {
   </section>
 
   <section class="related">
-    <h2> Связанные паттерны</h2>
+    <h2 data-i18n="library.section.related"> Связанные паттерны</h2>
     <ul>
       <li><a href="#" data-nav="pattern" data-path="creational/02-abstract-factory">Abstract Factory</a> — может хранить прототипы для клонирования</li>
       <li><a href="#" data-nav="pattern" data-path="structural/09-decorator">Decorator</a> — используется для динамического расширения клонов</li>
@@ -137,8 +137,8 @@ void main() {
   </section>
 
   <footer class="pattern-nav">
-    <a href="#" data-nav="pattern" data-path="creational/04-builder" class="prev">← Предыдущий</a>
-    <a href="#" data-nav="home">На главную</a>
-    <a href="#" data-nav="pattern" data-path="structural/06-adapter" class="next">Следующий →</a>
+    <a href="#" data-nav="pattern" data-path="creational/04-builder" class="prev" data-i18n="library.nav.prev">← Предыдущий</a>
+    <a href="#" data-nav="home" data-i18n="library.home">На главную</a>
+    <a href="#" data-nav="pattern" data-path="structural/06-adapter" class="next" data-i18n="library.nav.next">Следующий →</a>
   </footer>
 </section>

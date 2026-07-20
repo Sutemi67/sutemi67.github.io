@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -30,7 +30,7 @@
                     <img src="favicon.jpg" alt="Sergey" class="avatar-img">
                 </div>
                 <h2 class="profile-name">Sergey Boykov</h2>
-                <p class="profile-title">Code that solves. Photos that tell. Motion that balances.</p>
+                <p class="profile-title" data-i18n="profile.subtitle">Code that solves. Photos that tell. Motion that balances.</p>
             </div>
         </div>
 
@@ -41,7 +41,7 @@
                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                         <circle cx="12" cy="7" r="4"></circle>
                     </svg>
-                    <span>About me</span>
+                    <span data-i18n="nav.about">About me</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -51,15 +51,7 @@
                         <line x1="8" y1="21" x2="16" y2="21"></line>
                         <line x1="12" y1="17" x2="12" y2="21"></line>
                     </svg>
-                    <span>App Development</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#projects" class="nav-link" data-section="projects">
-                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-                    </svg>
-                    <span>Projects</span>
+                    <span data-i18n="nav.tech">App Development</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -67,7 +59,7 @@
                     <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
                     </svg>
-                    <span>Sport</span>
+                    <span data-i18n="nav.sport">Sport</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -76,7 +68,7 @@
                         <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
                         <circle cx="12" cy="13" r="4"></circle>
                     </svg>
-                    <span>Photography</span>
+                    <span data-i18n="nav.photography">Photography</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -84,7 +76,7 @@
                     <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
                     </svg>
-                    <span>Support</span>
+                    <span data-i18n="nav.donate">Support</span>
                 </a>
             </li>
 
@@ -96,7 +88,7 @@
                         <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
                         <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
                     </svg>
-                    <span>Library</span>
+                    <span data-i18n="nav.library">Library</span>
                     <span class="library-toggle-arrow">▶</span>
                 </a>
                 <div class="library-nav-tree" id="libraryNavTree"></div>
@@ -105,8 +97,12 @@
 
         <div class="sidebar-footer">
             <div class="time-display">
-                <div id="moscowTime">Today: 01.01.2024<br>Now: 00:00:00 MSK</div>
+                <div id="moscowTime" data-i18n="clock.display"><span data-i18n="clock.today">Today:</span> 01.01.2024<br><span data-i18n="clock.now">Now:</span> 00:00:00 MSK</div>
             </div>
+        </div>
+        <div class="lang-switcher">
+            <button class="lang-btn" data-lang="en" data-i18n="lang.en">EN</button>
+            <button class="lang-btn" data-lang="ru" data-i18n="lang.ru">RU</button>
         </div>
     </nav>
 
@@ -123,7 +119,6 @@
         <section id="tech" class="content-section"></section>
         <section id="sport" class="content-section"></section>
         <section id="photography" class="content-section"></section>
-        <section id="projects" class="content-section"></section>
         <section id="donate" class="content-section"></section>
         <section id="library" class="content-section"></section>
     </main>
@@ -132,7 +127,7 @@
 
     <div id="certificateModal" class="certificate-modal">
         <span class="certificate-modal-close" id="certificateModalClose">&times;</span>
-        <img class="certificate-modal-content" id="certificateModalImg" alt="Сертификат">
+        <img class="certificate-modal-content" id="certificateModalImg" alt="">
     </div>
 
     <div id="projectModal" class="project-modal">

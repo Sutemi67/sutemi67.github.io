@@ -1,47 +1,47 @@
-<section class="architecture">
+﻿<section class="architecture">
   <nav class="breadcrumbs">
-    <a href="#" data-nav="home">Главная</a> /
+    <a href="#" data-nav="home" data-i18n="library.home">Главная</a> /
     <a href="#" data-nav="group" data-group="solid">SOLID</a> /
     <span>Dependency Inversion</span>
   </nav>
 
   <header class="pattern-header">
     <span class="pattern-badge badge-solid">SOLID</span>
-    <h1>D. Dependency Inversion (Принцип инверсии зависимостей)</h1>
+    <h1 data-i18n="library.article.dependency-inversion.title">D. Dependency Inversion (Принцип инверсии зависимостей)</h1>
   </header>
 
   <div class="pattern-meta">
     <div class="meta-item">
-      <span class="meta-label">Также известен как</span>
+      <span class="meta-label" data-i18n="library.meta.also-known">Также известен как</span>
       DIP
     </div>
     <div class="meta-item">
-      <span class="meta-label">Сложность</span>
+      <span class="meta-label" data-i18n="library.meta.complexity">Сложность</span>
       ★★★☆☆
     </div>
     <div class="meta-item">
-      <span class="meta-label">Применимость</span>
+      <span class="meta-label" data-i18n="library.meta.applicability">Применимость</span>
       ★★★★★
     </div>
   </div>
 
   <section class="intent">
-    <h2> Назначение</h2>
+    <h2 data-i18n="library.section.intent"> Назначение</h2>
     <p>Модули верхнего уровня не должны зависеть от модулей нижнего уровня. Оба должны зависеть от абстракций. Абстракции не должны зависеть от деталей — детали должны зависеть от абстракций.</p>
   </section>
 
   <section class="problem">
-    <h2> Проблема</h2>
+    <h2 data-i18n="library.section.problem"> Проблема</h2>
     <p>Когда высокоуровневый модуль (бизнес-логика) напрямую зависит от низкоуровневого модуля (база данных, API), изменение низкоуровневого модуля ломает бизнес-логику. Такой код сложно тестировать, переиспользовать и изменять.</p>
   </section>
 
   <section class="solution">
-    <h2> Решение</h2>
+    <h2 data-i18n="library.section.solution"> Решение</h2>
     <p>Ввести абстракцию (интерфейс) между модулями. Высокоуровневый модуль работает через интерфейс, а низкоуровневый модуль реализует этот интерфейс. Направление зависимости «переворачивается»: оба модуля зависят от абстракции.</p>
   </section>
 
   <section class="example">
-    <h2> Пример на Dart</h2>
+    <h2 data-i18n="library.section.example"> Пример на Dart</h2>
     <p>Нарушение DIP — бизнес-логика зависит от конкретной БД:</p>
     <pre><code class="language-dart">class PostgresDatabase {
   void save(String data) => print('Сохранение в PostgreSQL: $data');
@@ -91,7 +91,7 @@ void main() {
 
   <section class="pros-cons">
     <div class="pros">
-      <h3> Плюсы</h3>
+      <h3 data-i18n="library.section.pros"> Плюсы</h3>
       <ul>
         <li>Снижается связанность между модулями</li>
         <li>Упрощается тестирование (легко подменять реализации)</li>
@@ -100,7 +100,7 @@ void main() {
       </ul>
     </div>
     <div class="cons">
-      <h3> Минусы</h3>
+      <h3 data-i18n="library.section.cons"> Минусы</h3>
       <ul>
         <li>Увеличивается сложность из-за дополнительных абстракций</li>
         <li>Требует использования DI-контейнеров или фабрик</li>
@@ -109,7 +109,7 @@ void main() {
   </section>
 
   <section class="related">
-    <h2> Связанные принципы</h2>
+    <h2 data-i18n="library.section.related"> Связанные принципы</h2>
     <ul>
       <li><a href="#" data-nav="item" data-path="di/01-intro">Dependency Injection</a> — практическая реализация DIP</li>
       <li><a href="#" data-nav="item" data-path="solid/02-open-closed">Open-Closed</a> — DIP является основой для OCP</li>
@@ -118,8 +118,8 @@ void main() {
   </section>
 
   <footer class="pattern-nav">
-    <a href="#" data-nav="item" data-path="solid/04-interface-segregation" class="prev">← Предыдущий</a>
-    <a href="#" data-nav="home">На главную</a>
-    <a href="#" data-nav="item" data-path="principles/02-dry" class="next">Следующий →</a>
+    <a href="#" data-nav="item" data-path="solid/04-interface-segregation" class="prev" data-i18n="library.nav.prev">← Предыдущий</a>
+    <a href="#" data-nav="home" data-i18n="library.home">На главную</a>
+    <a href="#" data-nav="item" data-path="principles/02-dry" class="next" data-i18n="library.nav.next">Следующий →</a>
   </footer>
 </section>

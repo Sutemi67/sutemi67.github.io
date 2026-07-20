@@ -1,47 +1,47 @@
-<section class="pattern">
+﻿<section class="pattern">
   <nav class="breadcrumbs">
-    <a href="#" data-nav="home">Главная</a> /
-    <a href="#" data-nav="group" data-group="structural">Структурные</a> /
+    <a href="#" data-nav="home" data-i18n="library.home">Главная</a> /
+    <a href="#" data-nav="group" data-group="structural" data-i18n="library.group.structural">Структурные</a> /
     <span>Composite</span>
   </nav>
 
   <header class="pattern-header">
-    <span class="pattern-badge badge-structural">Структурный</span>
-    <h1>Composite (Компоновщик)</h1>
+    <span class="pattern-badge badge-structural" data-i18n="library.badge.structural">Структурный</span>
+    <h1 data-i18n="library.article.composite.title">Composite (Компоновщик)</h1>
   </header>
 
   <div class="pattern-meta">
     <div class="meta-item">
-      <span class="meta-label">Также известен как</span>
+      <span class="meta-label" data-i18n="library.meta.also-known">Также известен как</span>
       Дерево
     </div>
     <div class="meta-item">
-      <span class="meta-label">Сложность</span>
+      <span class="meta-label" data-i18n="library.meta.complexity">Сложность</span>
       ★★★☆☆
     </div>
     <div class="meta-item">
-      <span class="meta-label">Популярность</span>
+      <span class="meta-label" data-i18n="library.meta.popularity">Популярность</span>
       ★★★★☆
     </div>
   </div>
 
   <section class="intent">
-    <h2> Назначение</h2>
+    <h2 data-i18n="library.section.intent"> Назначение</h2>
     <p>Позволяет сгруппировать объекты в древовидную структуру и работать с отдельными объектами и их группами единообразно.</p>
   </section>
 
   <section class="problem">
-    <h2> Проблема</h2>
+    <h2 data-i18n="library.section.problem"> Проблема</h2>
     <p>Нужно представить файловую систему: файлы и папки. Папки могут содержать как файлы, так и другие папки. Клиентский код должен одинаково работать и с файлами, и с папками — например, вычислять общий размер или выводить содержимое.</p>
   </section>
 
   <section class="solution">
-    <h2> Решение</h2>
+    <h2 data-i18n="library.section.solution"> Решение</h2>
     <p>Определяется общий интерфейс Component с методами, общими для листьев (файлов) и контейнеров (папок). Листья реализуют поведение напрямую, а контейнеры делегируют работу своим дочерним элементам.</p>
   </section>
 
   <section class="example">
-    <h2> Пример на Dart</h2>
+    <h2 data-i18n="library.section.example"> Пример на Dart</h2>
     <pre><code class="language-dart">abstract class FileSystemComponent {
   String get name;
   int getSize();
@@ -108,7 +108,7 @@ void main() {
   </section>
 
   <section class="when-to-use">
-    <h2> Когда применять</h2>
+    <h2 data-i18n="library.section.when-to-use"> Когда применять</h2>
     <ul>
       <li>Когда нужно представить иерархию «часть-целое»</li>
       <li>Когда клиенты должны единообразно работать с простыми и составными объектами</li>
@@ -118,7 +118,7 @@ void main() {
 
   <section class="pros-cons">
     <div class="pros">
-      <h3> Плюсы</h3>
+      <h3 data-i18n="library.section.pros"> Плюсы</h3>
       <ul>
         <li>Упрощает клиентский код (одинаковая работа с листьями и контейнерами)</li>
         <li>Позволяет легко добавлять новые типы компонентов</li>
@@ -126,7 +126,7 @@ void main() {
       </ul>
     </div>
     <div class="cons">
-      <h3> Минусы</h3>
+      <h3 data-i18n="library.section.cons"> Минусы</h3>
       <ul>
         <li>Может сделать систему слишком обобщённой</li>
         <li>Трудно наложить ограничения на типы дочерних элементов</li>
@@ -135,7 +135,7 @@ void main() {
   </section>
 
   <section class="related">
-    <h2> Связанные паттерны</h2>
+    <h2 data-i18n="library.section.related"> Связанные паттерны</h2>
     <ul>
       <li><a href="#" data-nav="pattern" data-path="structural/09-decorator">Decorator</a> — похож по структуре, но добавляет функциональность, а не группирует</li>
       <li><a href="#" data-nav="pattern" data-path="behavioral/16-iterator">Iterator</a> — часто используется для обхода дерева Composite</li>
@@ -143,8 +143,8 @@ void main() {
   </section>
 
   <footer class="pattern-nav">
-    <a href="#" data-nav="pattern" data-path="structural/07-bridge" class="prev">← Предыдущий</a>
-    <a href="#" data-nav="home">На главную</a>
-    <a href="#" data-nav="pattern" data-path="structural/09-decorator" class="next">Следующий →</a>
+    <a href="#" data-nav="pattern" data-path="structural/07-bridge" class="prev" data-i18n="library.nav.prev">← Предыдущий</a>
+    <a href="#" data-nav="home" data-i18n="library.home">На главную</a>
+    <a href="#" data-nav="pattern" data-path="structural/09-decorator" class="next" data-i18n="library.nav.next">Следующий →</a>
   </footer>
 </section>

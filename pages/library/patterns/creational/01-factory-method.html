@@ -1,47 +1,47 @@
 <section class="pattern">
   <nav class="breadcrumbs">
-    <a href="#" data-nav="home">Главная</a> /
-    <a href="#" data-nav="group" data-group="creational">Порождающие</a> /
+    <a href="#" data-nav="home" data-i18n="library.home">Главная</a> /
+    <a href="#" data-nav="group" data-group="creational" data-i18n="library.group.creational">Порождающие</a> /
     <span>Factory Method</span>
   </nav>
 
   <header class="pattern-header">
-    <span class="pattern-badge badge-creational">Порождающий</span>
-    <h1>Factory Method (Фабричный метод)</h1>
+    <span class="pattern-badge badge-creational" data-i18n="library.badge.creational">Порождающий</span>
+    <h1 data-i18n="library.article.factory-method.title">Factory Method (Фабричный метод)</h1>
   </header>
 
   <div class="pattern-meta">
     <div class="meta-item">
-      <span class="meta-label">Также известен как</span>
+      <span class="meta-label" data-i18n="library.meta.also-known">Также известен как</span>
       Virtual Constructor
     </div>
     <div class="meta-item">
-      <span class="meta-label">Сложность</span>
+      <span class="meta-label" data-i18n="library.meta.complexity">Сложность</span>
       ★★☆☆☆
     </div>
     <div class="meta-item">
-      <span class="meta-label">Популярность</span>
+      <span class="meta-label" data-i18n="library.meta.popularity">Популярность</span>
       ★★★★★
     </div>
   </div>
 
   <section class="intent">
-    <h2> Назначение</h2>
+    <h2 data-i18n="library.section.intent"> Назначение</h2>
     <p>Определяет интерфейс для создания объекта, но позволяет подклассам изменять тип создаваемых объектов.</p>
   </section>
 
   <section class="problem">
-    <h2> Проблема</h2>
+    <h2 data-i18n="library.section.problem"> Проблема</h2>
     <p>Представьте, что вы пишете приложение для управления логистикой. Сначала оно работало только с наземными перевозками (грузовики), но затем появляется потребность добавить морские и воздушные перевозки. Код создания всех видов транспорта размазан по всему приложению, и каждое добавление нового типа требует изменения существующего кода.</p>
   </section>
 
   <section class="solution">
-    <h2> Решение</h2>
+    <h2 data-i18n="library.section.solution"> Решение</h2>
     <p>Фабричный метод предлагает вынести код создания объектов в отдельный метод, объявленный в базовом классе (или интерфейсе). Подклассы могут переопределять этот метод, создавая объекты конкретных типов. Клиентский код работает через общий интерфейс и не зависит от конкретных классов.</p>
   </section>
 
   <section class="example">
-    <h2> Пример на Dart</h2>
+    <h2 data-i18n="library.section.example"> Пример на Dart</h2>
     <pre><code class="language-dart">abstract class Button {
   void render();
   void onClick(void Function() callback);
@@ -97,7 +97,7 @@ void main() {
   </section>
 
   <section class="when-to-use">
-    <h2> Когда применять</h2>
+    <h2 data-i18n="library.section.when-to-use"> Когда применять</h2>
     <ul>
       <li>Когда заранее неизвестно, экземпляры каких классов нужно создавать</li>
       <li>Когда класс хочет, чтобы его подклассы определяли создаваемые объекты</li>
@@ -107,7 +107,7 @@ void main() {
 
   <section class="pros-cons">
     <div class="pros">
-      <h3> Плюсы</h3>
+      <h3 data-i18n="library.section.pros"> Плюсы</h3>
       <ul>
         <li>Избавляет от жёсткой привязки к конкретным классам</li>
         <li>Код создания объектов собирается в одном месте</li>
@@ -116,7 +116,7 @@ void main() {
       </ul>
     </div>
     <div class="cons">
-      <h3> Минусы</h3>
+      <h3 data-i18n="library.section.cons"> Минусы</h3>
       <ul>
         <li>Может привести к появлению множества подклассов</li>
         <li>Усложняет код из-за дополнительных интерфейсов</li>
@@ -125,7 +125,7 @@ void main() {
   </section>
 
   <section class="related">
-    <h2> Связанные паттерны</h2>
+    <h2 data-i18n="library.section.related"> Связанные паттерны</h2>
     <ul>
       <li><a href="#" data-nav="pattern" data-path="creational/02-abstract-factory">Abstract Factory</a> — часто реализуется через Factory Method</li>
       <li><a href="#" data-nav="pattern" data-path="creational/03-singleton">Singleton</a> — можно сделать фабрику синглтоном</li>
@@ -133,8 +133,8 @@ void main() {
   </section>
 
   <footer class="pattern-nav">
-    <a href="#" data-nav="pattern" data-path="creational/05-prototype" class="prev">← Предыдущий</a>
-    <a href="#" data-nav="home">На главную</a>
-    <a href="#" data-nav="pattern" data-path="creational/02-abstract-factory" class="next">Следующий →</a>
+    <a href="#" data-nav="pattern" data-path="creational/05-prototype" class="prev" data-i18n="library.nav.prev">← Предыдущий</a>
+    <a href="#" data-nav="home" data-i18n="library.home">На главную</a>
+    <a href="#" data-nav="pattern" data-path="creational/02-abstract-factory" class="next" data-i18n="library.nav.next">Следующий →</a>
   </footer>
 </section>

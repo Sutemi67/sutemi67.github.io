@@ -1,42 +1,42 @@
-<section class="architecture">
+﻿<section class="architecture">
   <nav class="breadcrumbs">
-    <a href="#" data-nav="home">Главная</a> /
+    <a href="#" data-nav="home" data-i18n="library.home">Главная</a> /
     <a href="#" data-nav="group" data-group="di">Dependency Injection</a> /
     <span>Dependency Injection</span>
   </nav>
 
   <header class="pattern-header">
     <span class="pattern-badge badge-di">DI</span>
-    <h1>Dependency Injection (Внедрение зависимостей)</h1>
+    <h1 data-i18n="library.article.di.title">Dependency Injection (Внедрение зависимостей)</h1>
   </header>
 
   <div class="pattern-meta">
     <div class="meta-item">
-      <span class="meta-label">Также известен как</span>
+      <span class="meta-label" data-i18n="library.meta.also-known">Также известен как</span>
       DI, IoC (Inversion of Control)
     </div>
     <div class="meta-item">
-      <span class="meta-label">Сложность</span>
+      <span class="meta-label" data-i18n="library.meta.complexity">Сложность</span>
       ★★☆☆☆
     </div>
     <div class="meta-item">
-      <span class="meta-label">Применимость</span>
+      <span class="meta-label" data-i18n="library.meta.applicability">Применимость</span>
       ★★★★★
     </div>
   </div>
 
   <section class="intent">
-    <h2> Назначение</h2>
+    <h2 data-i18n="library.section.intent"> Назначение</h2>
     <p>Объекты не создают свои зависимости самостоятельно — они получают их извне. Это позволяет сделать код слабо связанным, тестируемым и гибким. DI — это реализация принципа инверсии зависимостей (DIP).</p>
   </section>
 
   <section class="problem">
-    <h2> Проблема</h2>
+    <h2 data-i18n="library.section.problem"> Проблема</h2>
     <p>Когда класс сам создаёт свои зависимости (через <code>new</code>), он жёстко привязывается к конкретным реализациям. Это делает невозможным: подмену реализации для тестов, переиспользование класса в другом контексте, изменение поведения без изменения кода класса.</p>
   </section>
 
   <section class="solution">
-    <h2> Решение</h2>
+    <h2 data-i18n="library.section.solution"> Решение</h2>
     <p>Зависимости «внедряются» в класс через конструктор, сеттер или интерфейс. Класс не знает о конкретной реализации — он работает через абстракцию. Сборкой зависимостей занимается специальный компонент: DI-контейнер или композиционный корень (composition root).</p>
     <p>Три способа внедрения:</p>
     <ul>
@@ -47,7 +47,7 @@
   </section>
 
   <section class="example">
-    <h2> Пример на Dart</h2>
+    <h2 data-i18n="library.section.example"> Пример на Dart</h2>
     <p>Без DI — класс сам создаёт зависимости:</p>
     <pre><code class="language-dart">class OrderService {
   final _logger = ConsoleLogger(); // жёсткая связь
@@ -138,7 +138,7 @@ void main() {
 
   <section class="pros-cons">
     <div class="pros">
-      <h3> Плюсы</h3>
+      <h3 data-i18n="library.section.pros"> Плюсы</h3>
       <ul>
         <li>Слабая связанность между классами</li>
         <li>Простое тестирование (замена реализаций)</li>
@@ -147,7 +147,7 @@ void main() {
       </ul>
     </div>
     <div class="cons">
-      <h3> Минусы</h3>
+      <h3 data-i18n="library.section.cons"> Минусы</h3>
       <ul>
         <li>Усложняет код на ранних этапах (нужен composition root)</li>
         <li>Может скрывать сложность графа зависимостей</li>
@@ -157,7 +157,7 @@ void main() {
   </section>
 
   <section class="related">
-    <h2> Связанные принципы</h2>
+    <h2 data-i18n="library.section.related"> Связанные принципы</h2>
     <ul>
       <li><a href="#" data-nav="item" data-path="solid/05-dependency-inversion">Dependency Inversion</a> — DI это реализация DIP</li>
       <li><a href="#" data-nav="item" data-path="clean-architecture/01-intro">Clean Architecture</a> — DI необходим для соблюдения Dependency Rule</li>
@@ -166,8 +166,8 @@ void main() {
   </section>
 
   <footer class="pattern-nav">
-    <a href="#" data-nav="item" data-path="cqrs/01-intro" class="prev">← Предыдущий</a>
-    <a href="#" data-nav="home">На главную</a>
-    <a href="#" data-nav="item" data-path="ddd/01-intro" class="next">Следующий →</a>
+    <a href="#" data-nav="item" data-path="cqrs/01-intro" class="prev" data-i18n="library.nav.prev">← Предыдущий</a>
+    <a href="#" data-nav="home" data-i18n="library.home">На главную</a>
+    <a href="#" data-nav="item" data-path="ddd/01-intro" class="next" data-i18n="library.nav.next">Следующий →</a>
   </footer>
 </section>

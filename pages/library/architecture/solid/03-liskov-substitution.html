@@ -1,47 +1,47 @@
-<section class="architecture">
+﻿<section class="architecture">
   <nav class="breadcrumbs">
-    <a href="#" data-nav="home">Главная</a> /
+    <a href="#" data-nav="home" data-i18n="library.home">Главная</a> /
     <a href="#" data-nav="group" data-group="solid">SOLID</a> /
     <span>Liskov Substitution</span>
   </nav>
 
   <header class="pattern-header">
     <span class="pattern-badge badge-solid">SOLID</span>
-    <h1>L. Liskov Substitution (Принцип подстановки Барбары Лисков)</h1>
+    <h1 data-i18n="library.article.liskov-substitution.title">L. Liskov Substitution (Принцип подстановки Барбары Лисков)</h1>
   </header>
 
   <div class="pattern-meta">
     <div class="meta-item">
-      <span class="meta-label">Также известен как</span>
+      <span class="meta-label" data-i18n="library.meta.also-known">Также известен как</span>
       LSP
     </div>
     <div class="meta-item">
-      <span class="meta-label">Сложность</span>
+      <span class="meta-label" data-i18n="library.meta.complexity">Сложность</span>
       ★★★☆☆
     </div>
     <div class="meta-item">
-      <span class="meta-label">Применимость</span>
+      <span class="meta-label" data-i18n="library.meta.applicability">Применимость</span>
       ★★★★☆
     </div>
   </div>
 
   <section class="intent">
-    <h2> Назначение</h2>
+    <h2 data-i18n="library.section.intent"> Назначение</h2>
     <p>Объекты базового класса должны быть заменяемы объектами его подклассов без нарушения корректности программы. Если код работает с базовым типом, он должен работать и с любым его подтипом, не зная об этом.</p>
   </section>
 
   <section class="problem">
-    <h2> Проблема</h2>
+    <h2 data-i18n="library.section.problem"> Проблема</h2>
     <p>Классический пример — иерархия <code>Rectangle</code> → <code>Square</code>. Квадрат является частным случаем прямоугольника, но изменение ширины квадрата меняет и высоту, что нарушает поведение, ожидаемое от прямоугольника. Клиентский код, работающий с <code>Rectangle</code>, сломается при подстановке <code>Square</code>.</p>
   </section>
 
   <section class="solution">
-    <h2> Решение</h2>
+    <h2 data-i18n="library.section.solution"> Решение</h2>
     <p>Не наследовать там, где нарушается контракт базового класса. Вместо наследования использовать композицию или общий абстрактный интерфейс. Контракт (предусловия и постусловия) базового класса должен соблюдаться всеми подклассами.</p>
   </section>
 
   <section class="example">
-    <h2> Пример на Dart</h2>
+    <h2 data-i18n="library.section.example"> Пример на Dart</h2>
     <p>Нарушение LSP:</p>
     <pre><code class="language-dart">class Rectangle {
   double width, height;
@@ -97,7 +97,7 @@ void processShape(Shape shape) {
 
   <section class="pros-cons">
     <div class="pros">
-      <h3> Плюсы</h3>
+      <h3 data-i18n="library.section.pros"> Плюсы</h3>
       <ul>
         <li>Гарантирует корректное поведение полиморфного кода</li>
         <li>Упрощает замену реализаций без побочных эффектов</li>
@@ -105,7 +105,7 @@ void processShape(Shape shape) {
       </ul>
     </div>
     <div class="cons">
-      <h3> Минусы</h3>
+      <h3 data-i18n="library.section.cons"> Минусы</h3>
       <ul>
         <li>Требует тщательного проектирования иерархий наследования</li>
         <li>Не всегда очевидно на ранних этапах разработки</li>
@@ -114,7 +114,7 @@ void processShape(Shape shape) {
   </section>
 
   <section class="related">
-    <h2> Связанные принципы</h2>
+    <h2 data-i18n="library.section.related"> Связанные принципы</h2>
     <ul>
       <li><a href="#" data-nav="item" data-path="solid/02-open-closed">Open-Closed</a> — LSP необходим для корректного расширения через OCP</li>
       <li><a href="#" data-nav="item" data-path="solid/04-interface-segregation">Interface Segregation</a> — узкие интерфейсы упрощают соблюдение LSP</li>
@@ -122,8 +122,8 @@ void processShape(Shape shape) {
   </section>
 
   <footer class="pattern-nav">
-    <a href="#" data-nav="item" data-path="solid/02-open-closed" class="prev">← Предыдущий</a>
-    <a href="#" data-nav="home">На главную</a>
-    <a href="#" data-nav="item" data-path="solid/04-interface-segregation" class="next">Следующий →</a>
+    <a href="#" data-nav="item" data-path="solid/02-open-closed" class="prev" data-i18n="library.nav.prev">← Предыдущий</a>
+    <a href="#" data-nav="home" data-i18n="library.home">На главную</a>
+    <a href="#" data-nav="item" data-path="solid/04-interface-segregation" class="next" data-i18n="library.nav.next">Следующий →</a>
   </footer>
 </section>

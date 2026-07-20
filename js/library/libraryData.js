@@ -1,10 +1,10 @@
 export const libraryData = {
     patterns: {
-        title: 'Паттерны',
+        titleKey: 'library.section.patterns',
         dir: 'patterns',
         groups: {
             creational: {
-                title: 'Порождающие',
+                titleKey: 'library.group.creational',
                 items: [
                     { num: 1, name: 'Factory Method', path: 'patterns/creational/01-factory-method' },
                     { num: 2, name: 'Abstract Factory', path: 'patterns/creational/02-abstract-factory' },
@@ -14,7 +14,7 @@ export const libraryData = {
                 ]
             },
             structural: {
-                title: 'Структурные',
+                titleKey: 'library.group.structural',
                 items: [
                     { num: 6, name: 'Adapter', path: 'patterns/structural/06-adapter' },
                     { num: 7, name: 'Bridge', path: 'patterns/structural/07-bridge' },
@@ -26,7 +26,7 @@ export const libraryData = {
                 ]
             },
             behavioral: {
-                title: 'Поведенческие',
+                titleKey: 'library.group.behavioral',
                 items: [
                     { num: 13, name: 'Chain of Responsibility', path: 'patterns/behavioral/13-chain-of-responsibility' },
                     { num: 14, name: 'Command', path: 'patterns/behavioral/14-command' },
@@ -44,11 +44,11 @@ export const libraryData = {
         }
     },
     architecture: {
-        title: 'Архитектура приложений',
+        titleKey: 'library.section.architecture',
         dir: 'architecture',
         groups: {
             solid: {
-                title: 'SOLID',
+                titleKey: 'library.group.solid',
                 items: [
                     { num: 1, name: 'Single Responsibility', path: 'architecture/solid/01-single-responsibility' },
                     { num: 2, name: 'Open-Closed', path: 'architecture/solid/02-open-closed' },
@@ -58,7 +58,7 @@ export const libraryData = {
                 ]
             },
             principles: {
-                title: 'Принципы',
+                titleKey: 'library.group.principles',
                 items: [
                     { num: 2, name: 'DRY', path: 'architecture/principles/02-dry' },
                     { num: 3, name: 'KISS', path: 'architecture/principles/03-kiss' },
@@ -66,25 +66,25 @@ export const libraryData = {
                 ]
             },
             cleanArch: {
-                title: 'Clean Architecture',
+                titleKey: 'library.group.clean-arch',
                 items: [
                     { num: 1, name: 'Clean Architecture', path: 'architecture/clean-architecture/01-intro' },
                 ]
             },
             cqrs: {
-                title: 'CQRS',
+                titleKey: 'library.group.cqrs',
                 items: [
-                    { num: 1, name: 'CQRS и Event Sourcing', path: 'architecture/cqrs/01-intro' },
+                    { num: 1, name: 'CQRS', path: 'architecture/cqrs/01-intro' },
                 ]
             },
             di: {
-                title: 'Dependency Injection',
+                titleKey: 'library.group.di',
                 items: [
                     { num: 1, name: 'Dependency Injection', path: 'architecture/di/01-intro' },
                 ]
             },
             ddd: {
-                title: 'Domain-Driven Design',
+                titleKey: 'library.group.ddd',
                 items: [
                     { num: 1, name: 'Domain-Driven Design', path: 'architecture/ddd/01-intro' },
                 ]

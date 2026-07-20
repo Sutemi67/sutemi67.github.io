@@ -1,47 +1,47 @@
-<section class="pattern">
+﻿<section class="pattern">
   <nav class="breadcrumbs">
-    <a href="#" data-nav="home">Главная</a> /
-    <a href="#" data-nav="group" data-group="behavioral">Поведенческие</a> /
+    <a href="#" data-nav="home" data-i18n="library.home">Главная</a> /
+    <a href="#" data-nav="group" data-group="behavioral" data-i18n="library.group.behavioral">Поведенческие</a> /
     <span>State</span>
   </nav>
 
   <header class="pattern-header">
-    <span class="pattern-badge badge-behavioral">Поведенческий</span>
-    <h1>State (Состояние)</h1>
+    <span class="pattern-badge badge-behavioral" data-i18n="library.badge.behavioral">Поведенческий</span>
+    <h1 data-i18n="library.article.state.title">State (Состояние)</h1>
   </header>
 
   <div class="pattern-meta">
     <div class="meta-item">
-      <span class="meta-label">Также известен как</span>
+      <span class="meta-label" data-i18n="library.meta.also-known">Также известен как</span>
       Finite State Machine
     </div>
     <div class="meta-item">
-      <span class="meta-label">Сложность</span>
+      <span class="meta-label" data-i18n="library.meta.complexity">Сложность</span>
       ★★★☆☆
     </div>
     <div class="meta-item">
-      <span class="meta-label">Популярность</span>
+      <span class="meta-label" data-i18n="library.meta.popularity">Популярность</span>
       ★★★☆☆
     </div>
   </div>
 
   <section class="intent">
-    <h2> Назначение</h2>
+    <h2 data-i18n="library.section.intent"> Назначение</h2>
     <p>Позволяет объекту изменять своё поведение в зависимости от внутреннего состояния, создавая иллюзию смены класса.</p>
   </section>
 
   <section class="problem">
-    <h2> Проблема</h2>
+    <h2 data-i18n="library.section.problem"> Проблема</h2>
     <p>Заказ в интернет-магазине проходит через несколько состояний: Новый → Оплачен → Отправлен → Доставлен. В каждом состоянии доступны разные действия. Реализация через условные операторы (if/switch) приводит к раздуванию кода и сложности поддержки.</p>
   </section>
 
   <section class="solution">
-    <h2> Решение</h2>
+    <h2 data-i18n="library.section.solution"> Решение</h2>
     <p>Каждое состояние выносится в отдельный класс. Контекст (заказ) делегирует выполнение действий текущему объекту-состоянию. Смена состояния — это подмена объекта состояния на другой.</p>
   </section>
 
   <section class="example">
-    <h2> Пример на Dart</h2>
+    <h2 data-i18n="library.section.example"> Пример на Dart</h2>
     <pre><code class="language-dart">abstract class OrderState {
   void pay(OrderContext context);
   void ship(OrderContext context);
@@ -139,7 +139,7 @@ void main() {
   </section>
 
   <section class="when-to-use">
-    <h2> Когда применять</h2>
+    <h2 data-i18n="library.section.when-to-use"> Когда применять</h2>
     <ul>
       <li>Когда поведение объекта зависит от его состояния и меняется во время выполнения</li>
       <li>Когда есть множество условных операторов, проверяющих состояние</li>
@@ -149,7 +149,7 @@ void main() {
 
   <section class="pros-cons">
     <div class="pros">
-      <h3> Плюсы</h3>
+      <h3 data-i18n="library.section.pros"> Плюсы</h3>
       <ul>
         <li>Избавляет от громоздких условных конструкций</li>
         <li>Каждое состояние — отдельный класс (SRP)</li>
@@ -157,7 +157,7 @@ void main() {
       </ul>
     </div>
     <div class="cons">
-      <h3> Минусы</h3>
+      <h3 data-i18n="library.section.cons"> Минусы</h3>
       <ul>
         <li>Может привести к большому количеству классов</li>
         <li>Усложняет код для простых конечных автоматов</li>
@@ -166,7 +166,7 @@ void main() {
   </section>
 
   <section class="related">
-    <h2> Связанные паттерны</h2>
+    <h2 data-i18n="library.section.related"> Связанные паттерны</h2>
     <ul>
       <li><a href="#" data-nav="pattern" data-path="behavioral/21-strategy">Strategy</a> — похожая структура, но разная цель: Strategy для взаимозаменяемых алгоритмов, State для управления состоянием</li>
       <li><a href="#" data-nav="pattern" data-path="behavioral/19-observer">Observer</a> — может уведомлять об изменении состояния</li>
@@ -174,8 +174,8 @@ void main() {
   </section>
 
   <footer class="pattern-nav">
-    <a href="#" data-nav="pattern" data-path="behavioral/19-observer" class="prev">← Предыдущий</a>
-    <a href="#" data-nav="home">На главную</a>
-    <a href="#" data-nav="pattern" data-path="behavioral/21-strategy" class="next">Следующий →</a>
+    <a href="#" data-nav="pattern" data-path="behavioral/19-observer" class="prev" data-i18n="library.nav.prev">← Предыдущий</a>
+    <a href="#" data-nav="home" data-i18n="library.home">На главную</a>
+    <a href="#" data-nav="pattern" data-path="behavioral/21-strategy" class="next" data-i18n="library.nav.next">Следующий →</a>
   </footer>
 </section>

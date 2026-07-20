@@ -1,3 +1,4 @@
+import { i18n } from './i18n.js';
 import { Navigation } from './router.js';
 import { LibraryManager } from './library/LibraryManager.js';
 import { setupProjectCards } from './components/projectModal.js';
@@ -8,12 +9,13 @@ import { optimizePerformance } from './utils/performance.js';
 
 const library = new LibraryManager();
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+    await i18n.init();
     initClock();
 
     const navigation = new Navigation({
         afterLoad: {
-            projects: setupProjectCards,
+            tech: setupProjectCards,
             sport: setupCertificateModal,
             library: () => {
                 if (library.currentPath) {

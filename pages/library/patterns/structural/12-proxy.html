@@ -1,47 +1,47 @@
-<section class="pattern">
+﻿<section class="pattern">
   <nav class="breadcrumbs">
-    <a href="#" data-nav="home">Главная</a> /
-    <a href="#" data-nav="group" data-group="structural">Структурные</a> /
+    <a href="#" data-nav="home" data-i18n="library.home">Главная</a> /
+    <a href="#" data-nav="group" data-group="structural" data-i18n="library.group.structural">Структурные</a> /
     <span>Proxy</span>
   </nav>
 
   <header class="pattern-header">
-    <span class="pattern-badge badge-structural">Структурный</span>
-    <h1>Proxy (Заместитель)</h1>
+    <span class="pattern-badge badge-structural" data-i18n="library.badge.structural">Структурный</span>
+    <h1 data-i18n="library.article.proxy.title">Proxy (Заместитель)</h1>
   </header>
 
   <div class="pattern-meta">
     <div class="meta-item">
-      <span class="meta-label">Также известен как</span>
+      <span class="meta-label" data-i18n="library.meta.also-known">Также известен как</span>
       Surrogate
     </div>
     <div class="meta-item">
-      <span class="meta-label">Сложность</span>
+      <span class="meta-label" data-i18n="library.meta.complexity">Сложность</span>
       ★★☆☆☆
     </div>
     <div class="meta-item">
-      <span class="meta-label">Популярность</span>
+      <span class="meta-label" data-i18n="library.meta.popularity">Популярность</span>
       ★★★★☆
     </div>
   </div>
 
   <section class="intent">
-    <h2> Назначение</h2>
+    <h2 data-i18n="library.section.intent"> Назначение</h2>
     <p>Предоставляет объект-заместитель, который контролирует доступ к другому объекту (реальному субъекту), позволяя перехватывать вызовы и добавлять дополнительную логику.</p>
   </section>
 
   <section class="problem">
-    <h2> Проблема</h2>
+    <h2 data-i18n="library.section.problem"> Проблема</h2>
     <p>Приложение отображает изображения в документе. Загрузка всех изображений сразу при открытии документа делает его запуск слишком медленным. Нужно отложить загрузку до момента, когда пользователь действительно увидит изображение.</p>
   </section>
 
   <section class="solution">
-    <h2> Решение</h2>
+    <h2 data-i18n="library.section.solution"> Решение</h2>
     <p>Создаётся прокси-объект с тем же интерфейсом, что и реальный объект. Прокси перехватывает вызовы и выполняет дополнительную логику (ленивая загрузка, проверка доступа, кеширование) до или после делегирования реальному объекту.</p>
   </section>
 
   <section class="example">
-    <h2> Пример на Dart</h2>
+    <h2 data-i18n="library.section.example"> Пример на Dart</h2>
     <pre><code class="language-dart">abstract class Image {
   void display();
 }
@@ -102,7 +102,7 @@ void main() {
   </section>
 
   <section class="when-to-use">
-    <h2> Когда применять</h2>
+    <h2 data-i18n="library.section.when-to-use"> Когда применять</h2>
     <ul>
       <li>Ленивая инициализация (виртуальный прокси) — создание объекта по требованию</li>
       <li>Защита доступа (защитный прокси) — контроль прав доступа</li>
@@ -113,7 +113,7 @@ void main() {
 
   <section class="pros-cons">
     <div class="pros">
-      <h3> Плюсы</h3>
+      <h3 data-i18n="library.section.pros"> Плюсы</h3>
       <ul>
         <li>Контроль доступа к объекту без изменения его кода</li>
         <li>Возможность добавлять логику до/после вызова</li>
@@ -121,7 +121,7 @@ void main() {
       </ul>
     </div>
     <div class="cons">
-      <h3> Минусы</h3>
+      <h3 data-i18n="library.section.cons"> Минусы</h3>
       <ul>
         <li>Добавляет прослойку, что может незначительно снизить производительность</li>
         <li>Усложняет код из-за дополнительных классов</li>
@@ -130,7 +130,7 @@ void main() {
   </section>
 
   <section class="related">
-    <h2> Связанные паттерны</h2>
+    <h2 data-i18n="library.section.related"> Связанные паттерны</h2>
     <ul>
       <li><a href="#" data-nav="pattern" data-path="structural/06-adapter">Adapter</a> — предоставляет другой интерфейс; Proxy — тот же интерфейс</li>
       <li><a href="#" data-nav="pattern" data-path="structural/09-decorator">Decorator</a> — похож по структуре, но добавляет поведение, а не контролирует доступ</li>
@@ -138,8 +138,8 @@ void main() {
   </section>
 
   <footer class="pattern-nav">
-    <a href="#" data-nav="pattern" data-path="structural/11-flyweight" class="prev">← Предыдущий</a>
-    <a href="#" data-nav="home">На главную</a>
-    <a href="#" data-nav="pattern" data-path="behavioral/13-chain-of-responsibility" class="next">Следующий →</a>
+    <a href="#" data-nav="pattern" data-path="structural/11-flyweight" class="prev" data-i18n="library.nav.prev">← Предыдущий</a>
+    <a href="#" data-nav="home" data-i18n="library.home">На главную</a>
+    <a href="#" data-nav="pattern" data-path="behavioral/13-chain-of-responsibility" class="next" data-i18n="library.nav.next">Следующий →</a>
   </footer>
 </section>

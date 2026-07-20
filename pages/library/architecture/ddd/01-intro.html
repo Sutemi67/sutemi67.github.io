@@ -1,18 +1,18 @@
-<section class="architecture">
+﻿<section class="architecture">
   <nav class="breadcrumbs">
-    <a href="#" data-nav="home">Главная</a> /
+    <a href="#" data-nav="home" data-i18n="library.home">Главная</a> /
     <a href="#" data-nav="group" data-group="ddd">Domain-Driven Design</a> /
     <span>Domain-Driven Design</span>
   </nav>
 
   <header class="pattern-header">
     <span class="pattern-badge badge-ddd">DDD</span>
-    <h1>Domain-Driven Design (Предметно-ориентированное проектирование)</h1>
+    <h1 data-i18n="library.article.ddd.title">Domain-Driven Design (Предметно-ориентированное проектирование)</h1>
   </header>
 
   <div class="pattern-meta">
     <div class="meta-item">
-      <span class="meta-label">Также известен как</span>
+      <span class="meta-label" data-i18n="library.meta.also-known">Также известен как</span>
       DDD
     </div>
     <div class="meta-item">
@@ -20,23 +20,23 @@
       Eric Evans
     </div>
     <div class="meta-item">
-      <span class="meta-label">Применимость</span>
+      <span class="meta-label" data-i18n="library.meta.applicability">Применимость</span>
       ★★★☆☆
     </div>
   </div>
 
   <section class="intent">
-    <h2> Назначение</h2>
+    <h2 data-i18n="library.section.intent"> Назначение</h2>
     <p>DDD — это подход к проектированию сложного программного обеспечения, в котором основной фокус направлен на предметную область (domain) и её логику. Код строится вокруг модели предметной области, а не вокруг технических деталей.</p>
   </section>
 
   <section class="problem">
-    <h2> Проблема</h2>
+    <h2 data-i18n="library.section.problem"> Проблема</h2>
     <p>Сложные бизнес-приложения часто страдают от разрыва между моделью в голове экспертов и реализацией в коде. Разработчики и бизнес-эксперты говорят на разных языках. Технические детали (БД, UI) смешиваются с бизнес-логикой, делая её непонятной и хрупкой.</p>
   </section>
 
   <section class="solution">
-    <h2> Решение</h2>
+    <h2 data-i18n="library.section.solution"> Решение</h2>
     <p>DDD предлагает набор стратегических и тактических паттернов:</p>
     <ul>
       <li><strong>Ubiquitous Language (Единый язык)</strong> — единая терминология между разработчиками и экспертами</li>
@@ -51,7 +51,7 @@
   </section>
 
   <section class="example">
-    <h2> Пример на Dart</h2>
+    <h2 data-i18n="library.section.example"> Пример на Dart</h2>
     <p>Модель заказа в интернет-магазине с использованием DDD:</p>
     <pre><code class="language-dart">// ---- Value Object ----
 class Money {
@@ -172,7 +172,7 @@ class OrderService {
 
   <section class="pros-cons">
     <div class="pros">
-      <h3> Плюсы</h3>
+      <h3 data-i18n="library.section.pros"> Плюсы</h3>
       <ul>
         <li>Код отражает реальную бизнес-логику</li>
         <li>Единый язык между разработчиками и экспертами</li>
@@ -181,7 +181,7 @@ class OrderService {
       </ul>
     </div>
     <div class="cons">
-      <h3> Минусы</h3>
+      <h3 data-i18n="library.section.cons"> Минусы</h3>
       <ul>
         <li>Избыточен для простых CRUD-приложений</li>
         <li>Требует тесного взаимодействия с экспертами домена</li>
@@ -192,7 +192,7 @@ class OrderService {
   </section>
 
   <section class="related">
-    <h2> Связанные принципы</h2>
+    <h2 data-i18n="library.section.related"> Связанные принципы</h2>
     <ul>
       <li><a href="#" data-nav="item" data-path="clean-architecture/01-intro">Clean Architecture</a> — DDD и Clean Architecture отлично дополняют друг друга</li>
       <li><a href="#" data-nav="item" data-path="cqrs/01-intro">CQRS / Event Sourcing</a> — часто применяются вместе с DDD</li>
@@ -201,7 +201,7 @@ class OrderService {
   </section>
 
   <footer class="pattern-nav">
-    <a href="#" data-nav="item" data-path="di/01-intro" class="prev">← Предыдущий</a>
-    <a href="#" data-nav="home">На главную</a>
+    <a href="#" data-nav="item" data-path="di/01-intro" class="prev" data-i18n="library.nav.prev">← Предыдущий</a>
+    <a href="#" data-nav="home" data-i18n="library.home">На главную</a>
   </footer>
 </section>

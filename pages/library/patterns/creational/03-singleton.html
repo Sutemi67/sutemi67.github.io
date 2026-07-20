@@ -1,47 +1,47 @@
-<section class="pattern">
+﻿<section class="pattern">
   <nav class="breadcrumbs">
-    <a href="#" data-nav="home">Главная</a> /
-    <a href="#" data-nav="group" data-group="creational">Порождающие</a> /
+    <a href="#" data-nav="home" data-i18n="library.home">Главная</a> /
+    <a href="#" data-nav="group" data-group="creational" data-i18n="library.group.creational">Порождающие</a> /
     <span>Singleton</span>
   </nav>
 
   <header class="pattern-header">
-    <span class="pattern-badge badge-creational">Порождающий</span>
-    <h1>Singleton (Одиночка)</h1>
+    <span class="pattern-badge badge-creational" data-i18n="library.badge.creational">Порождающий</span>
+    <h1 data-i18n="library.article.singleton.title">Singleton (Одиночка)</h1>
   </header>
 
   <div class="pattern-meta">
     <div class="meta-item">
-      <span class="meta-label">Также известен как</span>
+      <span class="meta-label" data-i18n="library.meta.also-known">Также известен как</span>
       Одиночка
     </div>
     <div class="meta-item">
-      <span class="meta-label">Сложность</span>
+      <span class="meta-label" data-i18n="library.meta.complexity">Сложность</span>
       ★☆☆☆☆
     </div>
     <div class="meta-item">
-      <span class="meta-label">Популярность</span>
+      <span class="meta-label" data-i18n="library.meta.popularity">Популярность</span>
       ★★★★★
     </div>
   </div>
 
   <section class="intent">
-    <h2> Назначение</h2>
+    <h2 data-i18n="library.section.intent"> Назначение</h2>
     <p>Гарантирует, что класс имеет только один экземпляр, и предоставляет глобальную точку доступа к этому экземпляру.</p>
   </section>
 
   <section class="problem">
-    <h2> Проблема</h2>
+    <h2 data-i18n="library.section.problem"> Проблема</h2>
     <p>В приложении нужен единый объект для управления конфигурацией, логированием или подключением к базе данных. Если создать несколько экземпляров, это приведёт к конфликтам, избыточному использованию ресурсов или несогласованному состоянию.</p>
   </section>
 
   <section class="solution">
-    <h2> Решение</h2>
+    <h2 data-i18n="library.section.solution"> Решение</h2>
     <p>Класс сам контролирует создание своего единственного экземпляра. Конструктор делается приватным, а доступ к экземпляру — через статический метод. В Dart это можно реализовать через factory-конструктор или статическое поле.</p>
   </section>
 
   <section class="example">
-    <h2> Пример на Dart</h2>
+    <h2 data-i18n="library.section.example"> Пример на Dart</h2>
     <pre><code class="language-dart">class AppConfig {
   static final AppConfig _instance = AppConfig._internal();
 
@@ -103,7 +103,7 @@ void main() {
   </section>
 
   <section class="when-to-use">
-    <h2> Когда применять</h2>
+    <h2 data-i18n="library.section.when-to-use"> Когда применять</h2>
     <ul>
       <li>Когда нужен ровно один экземпляр класса (логгер, конфиг, пул соединений)</li>
       <li>Когда требуется строгий контроль над доступом к общему ресурсу</li>
@@ -113,7 +113,7 @@ void main() {
 
   <section class="pros-cons">
     <div class="pros">
-      <h3> Плюсы</h3>
+      <h3 data-i18n="library.section.pros"> Плюсы</h3>
       <ul>
         <li>Гарантирует единственность экземпляра</li>
         <li>Ленивая инициализация (создание при первом обращении)</li>
@@ -121,7 +121,7 @@ void main() {
       </ul>
     </div>
     <div class="cons">
-      <h3> Минусы</h3>
+      <h3 data-i18n="library.section.cons"> Минусы</h3>
       <ul>
         <li>Нарушает принцип единственной ответственности</li>
         <li>Создаёт глобальное состояние, усложняя тестирование</li>
@@ -131,7 +131,7 @@ void main() {
   </section>
 
   <section class="related">
-    <h2> Связанные паттерны</h2>
+    <h2 data-i18n="library.section.related"> Связанные паттерны</h2>
     <ul>
       <li><a href="#" data-nav="pattern" data-path="creational/01-factory-method">Factory Method</a> — фабрика может быть реализована как синглтон</li>
       <li><a href="#" data-nav="pattern" data-path="structural/12-proxy">Proxy</a> — может управлять доступом к объекту-одиночке</li>
@@ -139,8 +139,8 @@ void main() {
   </section>
 
   <footer class="pattern-nav">
-    <a href="#" data-nav="pattern" data-path="creational/02-abstract-factory" class="prev">← Предыдущий</a>
-    <a href="#" data-nav="home">На главную</a>
-    <a href="#" data-nav="pattern" data-path="creational/04-builder" class="next">Следующий →</a>
+    <a href="#" data-nav="pattern" data-path="creational/02-abstract-factory" class="prev" data-i18n="library.nav.prev">← Предыдущий</a>
+    <a href="#" data-nav="home" data-i18n="library.home">На главную</a>
+    <a href="#" data-nav="pattern" data-path="creational/04-builder" class="next" data-i18n="library.nav.next">Следующий →</a>
   </footer>
 </section>

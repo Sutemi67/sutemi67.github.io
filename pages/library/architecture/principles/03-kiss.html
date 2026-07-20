@@ -1,48 +1,48 @@
-<section class="architecture">
+﻿<section class="architecture">
   <nav class="breadcrumbs">
-    <a href="#" data-nav="home">Главная</a> /
-    <a href="#" data-nav="group" data-group="principles">Принципы</a> /
+    <a href="#" data-nav="home" data-i18n="library.home">Главная</a> /
+    <a href="#" data-nav="group" data-group="principles" data-i18n="library.group.principles">Принципы</a> /
     <span>KISS</span>
   </nav>
 
   <header class="pattern-header">
-    <span class="pattern-badge badge-principles">Принципы</span>
-    <h1>KISS — Keep It Simple, Stupid (Будь проще)</h1>
+    <span class="pattern-badge badge-principles" data-i18n="library.badge.principles">Принципы</span>
+    <h1 data-i18n="library.article.kiss.title">KISS — Keep It Simple, Stupid (Будь проще)</h1>
   </header>
 
   <div class="pattern-meta">
     <div class="meta-item">
-      <span class="meta-label">Также известен как</span>
+      <span class="meta-label" data-i18n="library.meta.also-known">Также известен как</span>
       Keep It Short and Simple
     </div>
     <div class="meta-item">
-      <span class="meta-label">Сложность</span>
+      <span class="meta-label" data-i18n="library.meta.complexity">Сложность</span>
       ★☆☆☆☆
     </div>
     <div class="meta-item">
-      <span class="meta-label">Применимость</span>
+      <span class="meta-label" data-i18n="library.meta.applicability">Применимость</span>
       ★★★★★
     </div>
   </div>
 
   <section class="intent">
-    <h2>Назначение</h2>
+    <h2 data-i18n="library.section.intent">Назначение</h2>
     <p>Большинство систем работают лучше всего, если они остаются простыми, а не усложняются. Простота должна быть ключевой целью в проектировании — излишняя сложность ведёт к ошибкам, дорогой поддержке и трудностям в развитии.</p>
   </section>
 
   <section class="problem">
-    <h2>Проблема</h2>
+    <h2 data-i18n="library.section.problem">Проблема</h2>
     <p>Разработчики склонны усложнять решения: использовать паттерны там, где достаточно простой функции, строить многоуровневые абстракции для тривиальных задач, писать «на вырост». Сложный код тяжело читать, тестировать и изменять.</p>
   </section>
 
   <section class="solution">
-    <h2>Решение</h2>
+    <h2 data-i18n="library.section.solution">Решение</h2>
     <p>Начинать с самого простого рабочего варианта. Если решение кажется сложным — вероятно, вы что-то делаете не так. Задавайте себе вопрос: «Можно ли сделать это проще?». Простой код легче понять, протестировать и изменить.</p>
     <p>KISS не означает «примитивно». Это означает «настолько просто, насколько возможно, но не проще».</p>
   </section>
 
   <section class="example">
-    <h2>Пример на Dart</h2>
+    <h2 data-i18n="library.section.example">Пример на Dart</h2>
     <p><strong>Плохо — излишняя сложность для простой задачи:</strong></p>
     <pre><code class="language-dart">class StringReverser {
   String reverse(String input) {
@@ -55,7 +55,7 @@
 
   <section class="pros-cons">
     <div class="pros">
-      <h3>Плюсы</h3>
+      <h3 data-i18n="library.section.pros">Плюсы</h3>
       <ul>
         <li>Код легче читать и понимать</li>
         <li>Меньше шансов допустить ошибку</li>
@@ -64,7 +64,7 @@
       </ul>
     </div>
     <div class="cons">
-      <h3>Минусы</h3>
+      <h3 data-i18n="library.section.cons">Минусы</h3>
       <ul>
         <li>Чрезмерное упрощение может игнорировать необходимую гибкость</li>
         <li>Не всегда очевидно, где проходит граница «достаточной простоты»</li>
@@ -74,7 +74,7 @@
   </section>
 
   <section class="related">
-    <h2>Связанные принципы</h2>
+    <h2 data-i18n="library.section.related">Связанные принципы</h2>
     <ul>
       <li><a href="#" data-nav="item" data-path="principles/04-yagni">YAGNI</a> — не усложняй решение тем, что не нужно прямо сейчас</li>
       <li><a href="#" data-nav="item" data-path="principles/02-dry">DRY</a> — абстракция должна быть простой и очевидной</li>
@@ -82,8 +82,8 @@
   </section>
 
   <footer class="pattern-nav">
-    <a href="#" data-nav="item" data-path="principles/02-dry" class="prev">← Предыдущий</a>
-    <a href="#" data-nav="home">На главную</a>
-    <a href="#" data-nav="item" data-path="principles/04-yagni" class="next">Следующий →</a>
+    <a href="#" data-nav="item" data-path="principles/02-dry" class="prev" data-i18n="library.nav.prev">← Предыдущий</a>
+    <a href="#" data-nav="home" data-i18n="library.home">На главную</a>
+    <a href="#" data-nav="item" data-path="principles/04-yagni" class="next" data-i18n="library.nav.next">Следующий →</a>
   </footer>
 </section>

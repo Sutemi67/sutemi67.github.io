@@ -1,9 +1,22 @@
+import { i18n } from '../i18n.js';
 import { libraryData } from './libraryData.js';
 
 export class LibraryManager {
     constructor() {
         this.currentPath = null;
         this.buildNavTree();
+        this.setupLangChange();
+    }
+
+    setupLangChange() {
+        document.addEventListener('langchange', () => {
+            this.buildNavTree();
+            if (this.currentPath) {
+                this.navigateTo(this.currentPath);
+            } else {
+                this.showWelcome();
+            }
+        });
     }
 
     buildNavTree() {
@@ -18,7 +31,8 @@ export class LibraryManager {
 
             const sectionHeader = document.createElement('div');
             sectionHeader.className = 'lib-nav-section-header';
-            sectionHeader.innerHTML = `<span class="lib-arrow">▶</span> ${section.title}`;
+            const sectionTitle = i18n.t(section.titleKey) || section.titleKey;
+            sectionHeader.innerHTML = `<span class="lib-arrow">▶</span> ${sectionTitle}`;
             sectionHeader.addEventListener('click', () => {
                 sectionHeader.classList.toggle('open');
                 const groups = sectionHeader.nextElementSibling;
@@ -38,7 +52,8 @@ export class LibraryManager {
 
                 const groupHeader = document.createElement('div');
                 groupHeader.className = 'lib-nav-group-header';
-                groupHeader.innerHTML = `<span class="lib-arrow">▶</span> ${group.title} <span class="lib-count">(${group.items.length})</span>`;
+                const groupTitle = i18n.t(group.titleKey) || group.titleKey;
+                groupHeader.innerHTML = `<span class="lib-arrow">▶</span> ${groupTitle} <span class="lib-count">(${group.items.length})</span>`;
                 groupHeader.addEventListener('click', (e) => {
                     e.stopPropagation();
                     groupHeader.classList.toggle('open');
@@ -91,7 +106,8 @@ export class LibraryManager {
         if (activeLink) activeLink.classList.add('active');
 
         const fullPath = `pages/library/${path}.html`;
-        content.innerHTML = '<div class="library-loading">Loading...</div>';
+        content.innerHTML = `<div class="library-loading" data-i18n="library.loading">Loading...</div>`;
+        i18n.applyToElement(content);
 
         fetch(fullPath)
             .then(response => {
@@ -100,6 +116,7 @@ export class LibraryManager {
             })
             .then(html => {
                 content.innerHTML = html;
+                i18n.applyToElement(content);
                 if (typeof hljs !== 'undefined') {
                     content.querySelectorAll('pre code').forEach(block => {
                         hljs.highlightElement(block);
@@ -111,10 +128,11 @@ export class LibraryManager {
                 content.innerHTML = `
                     <div class="library-welcome">
                         <h2>404</h2>
-                        <p class="lead">Страница не найдена</p>
-                        <a href="#" class="lib-home-link" id="libHomeLink">На главную</a>
+                        <p class="lead" data-i18n="library.not-found">Страница не найдена</p>
+                        <a href="#" class="lib-home-link" id="libHomeLink" data-i18n="library.home">На главную</a>
                     </div>
                 `;
+                i18n.applyToElement(content);
                 const homeLink = document.getElementById('libHomeLink');
                 if (homeLink) {
                     homeLink.addEventListener('click', (e) => {
@@ -134,20 +152,22 @@ export class LibraryManager {
 
         content.innerHTML = `
             <div class="library-welcome">
-                <h2>Design Patterns & Architecture</h2>
-                <p class="lead">GoF паттерны проектирования и принципы архитектуры приложений с примерами на Dart</p>
+                <h2 data-i18n="library.welcome.title">Design Patterns & Architecture</h2>
+                <p class="lead" data-i18n="library.welcome.subtitle">GoF паттерны проектирования и принципы архитектуры приложений с примерами на Dart</p>
                 <div class="library-welcome-cards">
                     <div class="library-welcome-card" data-nav-path="patterns/creational/01-factory-method">
-                        <h3>Паттерны проектирования</h3>
-                        <p>23 классических паттерна GoF с примерами на Dart</p>
+                        <h3 data-i18n="library.welcome.patterns.title">Паттерны проектирования</h3>
+                        <p data-i18n="library.welcome.patterns.desc">23 классических паттерна GoF с примерами на Dart</p>
                     </div>
                     <div class="library-welcome-card" data-nav-path="architecture/solid/01-single-responsibility">
-                        <h3>Архитектура приложений</h3>
-                        <p>Принципы SOLID, Clean Architecture, CQRS, DI, DDD</p>
+                        <h3 data-i18n="library.welcome.architecture.title">Архитектура приложений</h3>
+                        <p data-i18n="library.welcome.architecture.desc">Принципы SOLID, Clean Architecture, CQRS, DI, DDD</p>
                     </div>
                 </div>
             </div>
         `;
+
+        i18n.applyToElement(content);
 
         content.querySelectorAll('.library-welcome-card').forEach(card => {
             card.addEventListener('click', () => {

@@ -1,47 +1,47 @@
-<section class="pattern">
+﻿<section class="pattern">
   <nav class="breadcrumbs">
-    <a href="#" data-nav="home">Главная</a> /
-    <a href="#" data-nav="group" data-group="structural">Структурные</a> /
+    <a href="#" data-nav="home" data-i18n="library.home">Главная</a> /
+    <a href="#" data-nav="group" data-group="structural" data-i18n="library.group.structural">Структурные</a> /
     <span>Bridge</span>
   </nav>
 
   <header class="pattern-header">
-    <span class="pattern-badge badge-structural">Структурный</span>
-    <h1>Bridge (Мост)</h1>
+    <span class="pattern-badge badge-structural" data-i18n="library.badge.structural">Структурный</span>
+    <h1 data-i18n="library.article.bridge.title">Bridge (Мост)</h1>
   </header>
 
   <div class="pattern-meta">
     <div class="meta-item">
-      <span class="meta-label">Также известен как</span>
+      <span class="meta-label" data-i18n="library.meta.also-known">Также известен как</span>
       Handle/Body
     </div>
     <div class="meta-item">
-      <span class="meta-label">Сложность</span>
+      <span class="meta-label" data-i18n="library.meta.complexity">Сложность</span>
       ★★★☆☆
     </div>
     <div class="meta-item">
-      <span class="meta-label">Популярность</span>
+      <span class="meta-label" data-i18n="library.meta.popularity">Популярность</span>
       ★★★☆☆
     </div>
   </div>
 
   <section class="intent">
-    <h2> Назначение</h2>
+    <h2 data-i18n="library.section.intent"> Назначение</h2>
     <p>Разделяет абстракцию и реализацию так, чтобы они могли изменяться независимо друг от друга.</p>
   </section>
 
   <section class="problem">
-    <h2> Проблема</h2>
+    <h2 data-i18n="library.section.problem"> Проблема</h2>
     <p>Есть пульт дистанционного управления, который должен работать с разными устройствами: TV, Radio, проектором. Если наследовать пульты для каждого устройства, получится взрыв классов. Изменение пульта потребует правок во всех наследниках.</p>
   </section>
 
   <section class="solution">
-    <h2> Решение</h2>
+    <h2 data-i18n="library.section.solution"> Решение</h2>
     <p>Вместо наследования абстракция (Remote) хранит ссылку на реализацию (Device). Абстракция делегирует вызовы методам реализации. Теперь иерархии пультов и устройств независимы — можно добавлять новые типы пультов и устройств без изменения друг друга.</p>
   </section>
 
   <section class="example">
-    <h2> Пример на Dart</h2>
+    <h2 data-i18n="library.section.example"> Пример на Dart</h2>
     <pre><code class="language-dart">abstract class Device {
   bool isEnabled();
   void enable();
@@ -109,7 +109,7 @@ void main() {
   </section>
 
   <section class="when-to-use">
-    <h2> Когда применять</h2>
+    <h2 data-i18n="library.section.when-to-use"> Когда применять</h2>
     <ul>
       <li>Когда нужно избежать жёсткой привязки абстракции к реализации</li>
       <li>Когда абстракция и реализация должны расширяться независимо</li>
@@ -119,7 +119,7 @@ void main() {
 
   <section class="pros-cons">
     <div class="pros">
-      <h3> Плюсы</h3>
+      <h3 data-i18n="library.section.pros"> Плюсы</h3>
       <ul>
         <li>Независимое расширение абстракций и реализаций</li>
         <li>Соблюдение принципа единственной ответственности</li>
@@ -127,7 +127,7 @@ void main() {
       </ul>
     </div>
     <div class="cons">
-      <h3> Минусы</h3>
+      <h3 data-i18n="library.section.cons"> Минусы</h3>
       <ul>
         <li>Усложняет код из-за дополнительных интерфейсов</li>
         <li>Требует продуманного разделения на абстракцию и реализацию</li>
@@ -136,7 +136,7 @@ void main() {
   </section>
 
   <section class="related">
-    <h2> Связанные паттерны</h2>
+    <h2 data-i18n="library.section.related"> Связанные паттерны</h2>
     <ul>
       <li><a href="#" data-nav="pattern" data-path="structural/06-adapter">Adapter</a> — делает совместимыми интерфейсы; Bridge разделяет абстракцию и реализацию</li>
       <li><a href="#" data-nav="pattern" data-path="structural/08-composite">Composite</a> — может использоваться вместе с Bridge</li>
@@ -144,8 +144,8 @@ void main() {
   </section>
 
   <footer class="pattern-nav">
-    <a href="#" data-nav="pattern" data-path="structural/06-adapter" class="prev">← Предыдущий</a>
-    <a href="#" data-nav="home">На главную</a>
-    <a href="#" data-nav="pattern" data-path="structural/08-composite" class="next">Следующий →</a>
+    <a href="#" data-nav="pattern" data-path="structural/06-adapter" class="prev" data-i18n="library.nav.prev">← Предыдущий</a>
+    <a href="#" data-nav="home" data-i18n="library.home">На главную</a>
+    <a href="#" data-nav="pattern" data-path="structural/08-composite" class="next" data-i18n="library.nav.next">Следующий →</a>
   </footer>
 </section>

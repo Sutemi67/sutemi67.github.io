@@ -1,47 +1,47 @@
-<section class="architecture">
+﻿<section class="architecture">
   <nav class="breadcrumbs">
-    <a href="#" data-nav="home">Главная</a> /
+    <a href="#" data-nav="home" data-i18n="library.home">Главная</a> /
     <a href="#" data-nav="group" data-group="solid">SOLID</a> /
     <span>Open-Closed</span>
   </nav>
 
   <header class="pattern-header">
     <span class="pattern-badge badge-solid">SOLID</span>
-    <h1>O. Open-Closed (Принцип открытости/закрытости)</h1>
+    <h1 data-i18n="library.article.open-closed.title">O. Open-Closed (Принцип открытости/закрытости)</h1>
   </header>
 
   <div class="pattern-meta">
     <div class="meta-item">
-      <span class="meta-label">Также известен как</span>
+      <span class="meta-label" data-i18n="library.meta.also-known">Также известен как</span>
       OCP
     </div>
     <div class="meta-item">
-      <span class="meta-label">Сложность</span>
+      <span class="meta-label" data-i18n="library.meta.complexity">Сложность</span>
       ★★☆☆☆
     </div>
     <div class="meta-item">
-      <span class="meta-label">Применимость</span>
+      <span class="meta-label" data-i18n="library.meta.applicability">Применимость</span>
       ★★★★★
     </div>
   </div>
 
   <section class="intent">
-    <h2> Назначение</h2>
+    <h2 data-i18n="library.section.intent"> Назначение</h2>
     <p>Классы должны быть открыты для расширения, но закрыты для изменения. Новую функциональность следует добавлять через новый код, не изменяя существующий.</p>
   </section>
 
   <section class="problem">
-    <h2> Проблема</h2>
+    <h2 data-i18n="library.section.problem"> Проблема</h2>
     <p>Представьте модуль расчёта площади фигур. При добавлении новой фигуры (например, треугольника) приходится изменять существующий код — добавлять новую ветку <code>if</code> или <code>switch</code>. Каждое такое изменение рискует сломать уже работающую логику.</p>
   </section>
 
   <section class="solution">
-    <h2> Решение</h2>
+    <h2 data-i18n="library.section.solution"> Решение</h2>
     <p>Использовать абстракции (интерфейсы или абстрактные классы). Базовый код работает через общий интерфейс, а конкретная реализация добавляется новым классом, не затрагивая существующий.</p>
   </section>
 
   <section class="example">
-    <h2> Пример на Dart</h2>
+    <h2 data-i18n="library.section.example"> Пример на Dart</h2>
     <p>Нарушение OCP — при добавлении новой фигуры нужно менять <code>AreaCalculator</code>:</p>
     <pre><code class="language-dart">class AreaCalculator {
   double calculate(Object shape) {
@@ -90,7 +90,7 @@ class AreaCalculator {
 
   <section class="pros-cons">
     <div class="pros">
-      <h3> Плюсы</h3>
+      <h3 data-i18n="library.section.pros"> Плюсы</h3>
       <ul>
         <li>Существующий код не изменяется — меньше риска регрессий</li>
         <li>Новая функциональность добавляется изолированно</li>
@@ -98,7 +98,7 @@ class AreaCalculator {
       </ul>
     </div>
     <div class="cons">
-      <h3> Минусы</h3>
+      <h3 data-i18n="library.section.cons"> Минусы</h3>
       <ul>
         <li>Требует проектирования абстракций заранее</li>
         <li>Может привести к избыточному количеству классов</li>
@@ -107,7 +107,7 @@ class AreaCalculator {
   </section>
 
   <section class="related">
-    <h2> Связанные принципы</h2>
+    <h2 data-i18n="library.section.related"> Связанные принципы</h2>
     <ul>
       <li><a href="#" data-nav="item" data-path="solid/03-liskov-substitution">Liskov Substitution</a> — реализации должны быть взаимозаменяемы</li>
       <li><a href="#" data-nav="item" data-path="solid/05-dependency-inversion">Dependency Inversion</a> — OCP тесно связан с инверсией зависимостей</li>
@@ -116,8 +116,8 @@ class AreaCalculator {
   </section>
 
   <footer class="pattern-nav">
-    <a href="#" data-nav="item" data-path="solid/01-single-responsibility" class="prev">← Предыдущий</a>
-    <a href="#" data-nav="home">На главную</a>
-    <a href="#" data-nav="item" data-path="solid/03-liskov-substitution" class="next">Следующий →</a>
+    <a href="#" data-nav="item" data-path="solid/01-single-responsibility" class="prev" data-i18n="library.nav.prev">← Предыдущий</a>
+    <a href="#" data-nav="home" data-i18n="library.home">На главную</a>
+    <a href="#" data-nav="item" data-path="solid/03-liskov-substitution" class="next" data-i18n="library.nav.next">Следующий →</a>
   </footer>
 </section>

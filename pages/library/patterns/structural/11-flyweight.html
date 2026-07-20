@@ -1,47 +1,47 @@
-<section class="pattern">
+﻿<section class="pattern">
   <nav class="breadcrumbs">
-    <a href="#" data-nav="home">Главная</a> /
-    <a href="#" data-nav="group" data-group="structural">Структурные</a> /
+    <a href="#" data-nav="home" data-i18n="library.home">Главная</a> /
+    <a href="#" data-nav="group" data-group="structural" data-i18n="library.group.structural">Структурные</a> /
     <span>Flyweight</span>
   </nav>
 
   <header class="pattern-header">
-    <span class="pattern-badge badge-structural">Структурный</span>
-    <h1>Flyweight (Легковес)</h1>
+    <span class="pattern-badge badge-structural" data-i18n="library.badge.structural">Структурный</span>
+    <h1 data-i18n="library.article.flyweight.title">Flyweight (Легковес)</h1>
   </header>
 
   <div class="pattern-meta">
     <div class="meta-item">
-      <span class="meta-label">Также известен как</span>
+      <span class="meta-label" data-i18n="library.meta.also-known">Также известен как</span>
       Кэш
     </div>
     <div class="meta-item">
-      <span class="meta-label">Сложность</span>
+      <span class="meta-label" data-i18n="library.meta.complexity">Сложность</span>
       ★★★☆☆
     </div>
     <div class="meta-item">
-      <span class="meta-label">Популярность</span>
+      <span class="meta-label" data-i18n="library.meta.popularity">Популярность</span>
       ★★☆☆☆
     </div>
   </div>
 
   <section class="intent">
-    <h2> Назначение</h2>
+    <h2 data-i18n="library.section.intent"> Назначение</h2>
     <p>Позволяет вместить большее количество объектов в выделенную оперативную память за счёт разделения общего внутреннего состояния между многими объектами.</p>
   </section>
 
   <section class="problem">
-    <h2> Проблема</h2>
+    <h2 data-i18n="library.section.problem"> Проблема</h2>
     <p>В текстовом редакторе каждый символ представлен объектом, содержащим информацию о шрифте, размере, цвете и позиции. При открытии большого документа (100 000+ символов) создаётся огромное количество объектов, что приводит к нехватке памяти.</p>
   </section>
 
   <section class="solution">
-    <h2> Решение</h2>
+    <h2 data-i18n="library.section.solution"> Решение</h2>
     <p>Разделяем состояние на внутреннее (шрифт, размер, цвет) и внешнее (позиция на экране). Внутреннее состояние выносится в отдельные объекты-легковесы и переиспользуется. Внешнее состояние остаётся в контексте и передаётся при необходимости.</p>
   </section>
 
   <section class="example">
-    <h2> Пример на Dart</h2>
+    <h2 data-i18n="library.section.example"> Пример на Dart</h2>
     <pre><code class="language-dart">class TextStyle {
   final String font;
   final int size;
@@ -105,7 +105,7 @@ void main() {
   </section>
 
   <section class="when-to-use">
-    <h2> Когда применять</h2>
+    <h2 data-i18n="library.section.when-to-use"> Когда применять</h2>
     <ul>
       <li>Когда приложение использует большое количество однотипных объектов</li>
       <li>Когда бóльшая часть состояния объектов является общей</li>
@@ -115,14 +115,14 @@ void main() {
 
   <section class="pros-cons">
     <div class="pros">
-      <h3> Плюсы</h3>
+      <h3 data-i18n="library.section.pros"> Плюсы</h3>
       <ul>
         <li>Существенно экономит память при большом количестве объектов</li>
         <li>Уменьшает количество создаваемых объектов</li>
       </ul>
     </div>
     <div class="cons">
-      <h3> Минусы</h3>
+      <h3 data-i18n="library.section.cons"> Минусы</h3>
       <ul>
         <li>Усложняет код разделением на внутреннее и внешнее состояние</li>
         <li>Требует дополнительных затрат на поиск/создание легковеса</li>
@@ -131,7 +131,7 @@ void main() {
   </section>
 
   <section class="related">
-    <h2> Связанные паттерны</h2>
+    <h2 data-i18n="library.section.related"> Связанные паттерны</h2>
     <ul>
       <li><a href="#" data-nav="pattern" data-path="structural/08-composite">Composite</a> — может использоваться вместе с Flyweight</li>
       <li><a href="#" data-nav="pattern" data-path="structural/12-proxy">Proxy</a> — может управлять созданием легковесов</li>
@@ -139,8 +139,8 @@ void main() {
   </section>
 
   <footer class="pattern-nav">
-    <a href="#" data-nav="pattern" data-path="structural/10-facade" class="prev">← Предыдущий</a>
-    <a href="#" data-nav="home">На главную</a>
-    <a href="#" data-nav="pattern" data-path="structural/12-proxy" class="next">Следующий →</a>
+    <a href="#" data-nav="pattern" data-path="structural/10-facade" class="prev" data-i18n="library.nav.prev">← Предыдущий</a>
+    <a href="#" data-nav="home" data-i18n="library.home">На главную</a>
+    <a href="#" data-nav="pattern" data-path="structural/12-proxy" class="next" data-i18n="library.nav.next">Следующий →</a>
   </footer>
 </section>

@@ -1,47 +1,47 @@
-<section class="pattern">
+﻿<section class="pattern">
   <nav class="breadcrumbs">
-    <a href="#" data-nav="home">Главная</a> /
-    <a href="#" data-nav="group" data-group="structural">Структурные</a> /
+    <a href="#" data-nav="home" data-i18n="library.home">Главная</a> /
+    <a href="#" data-nav="group" data-group="structural" data-i18n="library.group.structural">Структурные</a> /
     <span>Adapter</span>
   </nav>
 
   <header class="pattern-header">
-    <span class="pattern-badge badge-structural">Структурный</span>
-    <h1>Adapter (Адаптер)</h1>
+    <span class="pattern-badge badge-structural" data-i18n="library.badge.structural">Структурный</span>
+    <h1 data-i18n="library.article.adapter.title">Adapter (Адаптер)</h1>
   </header>
 
   <div class="pattern-meta">
     <div class="meta-item">
-      <span class="meta-label">Также известен как</span>
+      <span class="meta-label" data-i18n="library.meta.also-known">Также известен как</span>
       Wrapper
     </div>
     <div class="meta-item">
-      <span class="meta-label">Сложность</span>
+      <span class="meta-label" data-i18n="library.meta.complexity">Сложность</span>
       ★★☆☆☆
     </div>
     <div class="meta-item">
-      <span class="meta-label">Популярность</span>
+      <span class="meta-label" data-i18n="library.meta.popularity">Популярность</span>
       ★★★★★
     </div>
   </div>
 
   <section class="intent">
-    <h2> Назначение</h2>
+    <h2 data-i18n="library.section.intent"> Назначение</h2>
     <p>Преобразует интерфейс одного класса в другой интерфейс, ожидаемый клиентом. Адаптер обеспечивает совместную работу классов, невозможную в обычных условиях из-за несовместимости интерфейсов.</p>
   </section>
 
   <section class="problem">
-    <h2> Проблема</h2>
+    <h2 data-i18n="library.section.problem"> Проблема</h2>
     <p>Ваше приложение использует единый интерфейс для работы с данными, но нужно интегрировать стороннюю XML-библиотеку, которая имеет совершенно другой API. Переписывать библиотеку нельзя, менять интерфейс приложения — дорого.</p>
   </section>
 
   <section class="solution">
-    <h2> Решение</h2>
+    <h2 data-i18n="library.section.solution"> Решение</h2>
     <p>Создаётся адаптер — класс-прослойка, который преобразует вызовы методов целевого интерфейса в вызовы методов адаптируемого класса. Клиент работает с адаптером через знакомый интерфейс, не зная о несовместимости.</p>
   </section>
 
   <section class="example">
-    <h2> Пример на Dart</h2>
+    <h2 data-i18n="library.section.example"> Пример на Dart</h2>
     <pre><code class="language-dart">// Целевой интерфейс
 abstract class DataProvider {
   List<Map<String, dynamic>> fetchData();
@@ -84,7 +84,7 @@ void main() {
   </section>
 
   <section class="when-to-use">
-    <h2> Когда применять</h2>
+    <h2 data-i18n="library.section.when-to-use"> Когда применять</h2>
     <ul>
       <li>Когда нужно использовать сторонний класс с несовместимым интерфейсом</li>
       <li>Когда нужно заменить одну библиотеку на другую без изменения клиентского кода</li>
@@ -94,7 +94,7 @@ void main() {
 
   <section class="pros-cons">
     <div class="pros">
-      <h3> Плюсы</h3>
+      <h3 data-i18n="library.section.pros"> Плюсы</h3>
       <ul>
         <li>Изолирует клиента от несовместимых интерфейсов</li>
         <li>Не требует изменения существующего кода</li>
@@ -102,7 +102,7 @@ void main() {
       </ul>
     </div>
     <div class="cons">
-      <h3> Минусы</h3>
+      <h3 data-i18n="library.section.cons"> Минусы</h3>
       <ul>
         <li>Увеличивает сложность системы дополнительными классами</li>
         <li>Может снижать производительность из-за прослойки</li>
@@ -111,7 +111,7 @@ void main() {
   </section>
 
   <section class="related">
-    <h2> Связанные паттерны</h2>
+    <h2 data-i18n="library.section.related"> Связанные паттерны</h2>
     <ul>
       <li><a href="#" data-nav="pattern" data-path="structural/07-bridge">Bridge</a> — похож по структуре, но решает другую задачу</li>
       <li><a href="#" data-nav="pattern" data-path="structural/09-decorator">Decorator</a> — тоже обёртка, но для расширения функциональности</li>
@@ -119,8 +119,8 @@ void main() {
   </section>
 
   <footer class="pattern-nav">
-    <a href="#" data-nav="pattern" data-path="creational/05-prototype" class="prev">← Предыдущий</a>
-    <a href="#" data-nav="home">На главную</a>
-    <a href="#" data-nav="pattern" data-path="structural/07-bridge" class="next">Следующий →</a>
+    <a href="#" data-nav="pattern" data-path="creational/05-prototype" class="prev" data-i18n="library.nav.prev">← Предыдущий</a>
+    <a href="#" data-nav="home" data-i18n="library.home">На главную</a>
+    <a href="#" data-nav="pattern" data-path="structural/07-bridge" class="next" data-i18n="library.nav.next">Следующий →</a>
   </footer>
 </section>
