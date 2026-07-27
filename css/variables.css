@@ -14,7 +14,9 @@
     --glass-border: rgba(255, 255, 255, 0.1);
     --shadow-color: rgba(0, 0, 0, 0.3);
     --shadow-light: rgba(108, 99, 255, 0.1);
-    --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --gradient-primary: linear-gradient(135deg, #667eeaec 0%, #764ba2 100%);
+    --gradient-ozon: linear-gradient(135deg, #667eeade 0%, #242daa 100%);
+    --gradient-t: linear-gradient(135deg, #757960fd 0%, #dab40f 100%);
     --sidebar-width: 280px;
     --border-radius: 12px;
     --border-radius-sm: 8px;

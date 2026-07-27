@@ -1,31 +1,24 @@
 {
   "meta.description": "Личный сайт Сергея Бойкова",
-
   "lang.en": "EN",
   "lang.ru": "RU",
-
   "nav.about": "Обо мне",
   "nav.tech": "Разработка",
   "nav.sport": "Спорт",
   "nav.photography": "Фотография",
   "nav.donate": "Поддержка",
   "nav.library": "Библиотека",
-
   "section.about": "Обо мне",
   "section.tech": "Разработка",
   "section.sport": "Спорт",
   "section.photography": "Фотография",
   "section.donate": "Поддержка",
   "section.library": "Библиотека",
-
   "profile.subtitle": "Делаю, что важно. Двигаюсь, куда нужно",
-
   "menu.open": "Открыть меню",
   "menu.close": "Закрыть меню",
-
   "clock.today": "Сегодня:",
   "clock.now": "Сейчас:",
-
   "about.heading": "Привет, я Сергей",
   "about.subtitle": "Разработчик, спортсмен и фотограф",
   "about.bio": "Привет! Это моя личная страница, посвящённая моим возможностям и увлечениям. Мой путь включает разработку мобильных приложений, активный спорт и увлечение фотографией. По любым вопросам и предложениям вы можете связаться со мной любым из представленных способов.",
@@ -34,7 +27,6 @@
   "about.contact.telegram": "Telegram",
   "about.contact.github": "GitHub",
   "about.contact.linkedin": "LinkedIn",
-
   "tech.heading": "Разработка приложений",
   "tech.subtitle": "Android и Flutter разработка с full-stack подходом — от Kotlin и Dart до backend API и Linux-серверов.",
   "tech.milestones.title": "Вехи",
@@ -46,7 +38,6 @@
   "tech.milestone.2024.text": "Углубляюсь в разработку, прохожу школу от Яндекса по мобильной разработке. Стек дополнился XML, Clean Architecture, MVI. Dependency Injection (Koin, Dagger Hilt), асинхронность (Coroutines, Flow), локальные БД (Room, SQL). Публикация в RuStore: Working Hours, Task Time, Feeling Diary, AppCradle Player. Беру заказы на фриланс, выпускаю собственные приложения, начинаю изучение кроссплатформенных приложений. Начинаю писать бекенд на знакомом стеке: Ktor, Shelf.",
   "tech.milestone.2026.title": "Full-stack & Multiplatform",
   "tech.milestone.2026.text": "Работа над большими проектами в МЭИ, углубление в десктоп, Linux-сервера. Углубленное изучение AI и использование агентов в работе. Изучение Rust для внедрения высоконагруженных модулей в приложения.",
-
   "projects.title": "Проекты",
   "projects.available": "Доступно",
   "projects.soon": "Скоро",
@@ -59,11 +50,9 @@
   "projects.feeling-diary.desc": "Записывайте все чувства, которые вы испытываете в данный момент. Ведите дневник эмоций, отслеживайте паттерны настроения и получайте инсайты о вашем эмоциональном состоянии.",
   "projects.appcradle-player.desc": "Плеер для прослушивания локальных треков на устройстве. Создавайте плейлисты, организуйте музыкальную библиотеку и наслаждайтесь качественным воспроизведением с чистым интуитивным интерфейсом.",
   "projects.money-everyday.desc": "Ваши расходы на экране. Без усилий. Приложение для автоматического учёта личных финансов и контроля расходов через входящие уведомления. Отслеживайте категории трат, устанавливайте бюджеты и визуализируйте финансовые привычки.",
-
   "project-modal.open-rustore": "Открыть в RuStore",
   "project-modal.coming-soon": "Скоро",
   "project-modal.screenshot": " скриншот ",
-
   "sport.heading": "Спорт",
   "sport.subtitle": "О моей активности",
   "sport.intro": "Спорт — неотъемлемая часть моей жизни. Регулярные тренировки помогают мне поддерживать форму, развивать дисциплину и находить баланс между работой и личной жизнью. Буду рад составить компанию тем, кто хочет поддержать меня.",
@@ -81,17 +70,16 @@
   "sport.certificate.alt.2": "Сертификат 2",
   "sport.certificate.alt.3": "Сертификат 3",
   "sport.intro-image-alt": "Спортивная активность",
-
   "photography.heading": "Фотография",
   "photography.subtitle": "Мой взгляд на мир через объектив",
   "photography.intro": "Фотография для меня — это способ запечатлеть моменты, которые хочется помнить. Замечать детали и наслаждаться текущим мгновением позволяет иначе чувствовать суету делового мира.\u003Cbr\u003EЯ могу помочь вам запечатлеть то, что вы сами захотите запомнить и пережить снова.",
   "photography.gallery": "Галерея",
-
   "donate.heading": "Поддержка",
   "donate.subtitle": "Если вам нравятся мои проекты, вы можете поддержать их развитие",
   "donate.text": "Мои приложения полностью бесплатны и не содержат рекламы, поэтому вы можете поддержать меня, используя кнопку ниже",
-  "donate.button": "Поддержать через YooMoney",
-
+  "donate.button": "Юmoney",
+  "donate.button1": "OZON",
+  "donate.button2": "Т-банк",
   "library.heading": "Библиотека",
   "library.subtitle": "Паттерны проектирования, принципы архитектуры и лучшие практики",
   "library.welcome.title": "Design Patterns & Architecture",
@@ -103,7 +91,6 @@
   "library.not-found": "Страница не найдена",
   "library.home": "На главную",
   "library.loading": "Загрузка...",
-
   "library.section.patterns": "Паттерны",
   "library.section.architecture": "Архитектура приложений",
   "library.group.creational": "Порождающие",
@@ -115,7 +102,6 @@
   "library.group.cqrs": "CQRS",
   "library.group.di": "Dependency Injection",
   "library.group.ddd": "Domain-Driven Design",
-
   "library.badge.creational": "Порождающий",
   "library.badge.structural": "Структурный",
   "library.badge.behavioral": "Поведенческий",
@@ -135,7 +121,6 @@
   "library.meta.applicability": "Применимость",
   "library.nav.prev": "← Предыдущий",
   "library.nav.next": "Следующий →",
-
   "library.article.factory-method.title": "Factory Method (Фабричный метод)",
   "library.article.abstract-factory.title": "Abstract Factory (Абстрактная фабрика)",
   "library.article.singleton.title": "Singleton (Одиночка)",

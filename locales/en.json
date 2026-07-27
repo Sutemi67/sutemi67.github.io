@@ -1,31 +1,24 @@
 {
   "meta.description": "Sergey's personal website",
-
   "lang.en": "EN",
   "lang.ru": "RU",
-
   "nav.about": "About me",
   "nav.tech": "App Development",
   "nav.sport": "Sport",
   "nav.photography": "Photography",
   "nav.donate": "Support",
   "nav.library": "Library",
-
   "section.about": "About",
   "section.tech": "App Development",
   "section.sport": "Sport",
   "section.photography": "Photography",
   "section.donate": "Support",
   "section.library": "Library",
-
   "profile.subtitle": "I do what matters. I move where it’s needed.",
-
   "menu.open": "Open menu",
   "menu.close": "Close menu",
-
   "clock.today": "Today:",
   "clock.now": "Now:",
-
   "about.heading": "Hi, I am Sergey",
   "about.subtitle": "Developer, athlete and photographer",
   "about.bio": "Hello! This is my personal page dedicated to my capabilities and interests. My path includes mobile application development, active sports and passion for photography. For any questions and suggestions, you can contact me in any of the ways presented.",
@@ -34,7 +27,6 @@
   "about.contact.telegram": "Telegram",
   "about.contact.github": "GitHub",
   "about.contact.linkedin": "LinkedIn",
-
   "tech.heading": "App Development",
   "tech.subtitle": "Android & Flutter development with a full-stack mindset — from Kotlin and Dart to backend APIs and Linux servers.",
   "tech.milestones.title": "Milestones",
@@ -46,7 +38,6 @@
   "tech.milestone.2024.text": "Diving deeper into development, completing Yandex's mobile development school. The stack expanded with XML, Clean Architecture, MVI. Dependency Injection (Koin, Dagger Hilt), async (Coroutines, Flow), local DBs (Room, SQL). Published on RuStore: Working Hours, Task Time, Feeling Diary, AppCradle Player. Taking freelance orders, releasing my own apps, starting to learn cross-platform development. Beginning to write backends with familiar tech: Ktor, Shelf.",
   "tech.milestone.2026.title": "Full-stack & Multiplatform",
   "tech.milestone.2026.text": "Working on large projects at MPEI, diving deeper into desktop and Linux servers. In-depth study of AI and using agents in development. Learning Rust to implement high-load modules in applications.",
-
   "projects.title": "Projects",
   "projects.available": "Available",
   "projects.soon": "Soon",
@@ -59,11 +50,9 @@
   "projects.feeling-diary.desc": "Write down all the feelings you are experiencing at the moment. Keep a daily journal of your emotions, track mood patterns over time, and gain insights into your emotional wellbeing.",
   "projects.appcradle-player.desc": "Player for listening your own local tracks on the device. Create playlists, organize your music library, and enjoy high-quality audio playback with a clean, intuitive interface.",
   "projects.money-everyday.desc": "Your expenses on the screen. Without effort. An application for automatic accounting of personal finances and control of expenses using incoming notifications. Track spending categories, set budgets, and visualize your financial habits.",
-
   "project-modal.open-rustore": "Open in RuStore",
   "project-modal.coming-soon": "Coming soon",
   "project-modal.screenshot": " screenshot ",
-
   "sport.heading": "Sport",
   "sport.subtitle": "About my activity",
   "sport.intro": "Sport is an integral part of my life. Regular training helps me to stay in shape, develop discipline and find a balance between work and personal life. I am happy to help those who want to keep me company.",
@@ -81,17 +70,16 @@
   "sport.certificate.alt.2": "Certificate 2",
   "sport.certificate.alt.3": "Certificate 3",
   "sport.intro-image-alt": "Sport activity",
-
   "photography.heading": "Photography",
   "photography.subtitle": "My view of the world through the lens",
   "photography.intro": "Photography for me is a way to capture moments that you want to remember. Noticing details and enjoying the current moment makes the hustle and bustle of the business world feel different.\u003Cbr\u003EI can help you capture what you yourself want to remember and relive.",
   "photography.gallery": "Gallery",
-
   "donate.heading": "Support",
   "donate.subtitle": "If you like my projects, you can support their development",
   "donate.text": "My apps are completely free and have no ads, so you can support me using the button below",
-  "donate.button": "Support with YooMoney",
-
+  "donate.button": "YooMoney",
+  "donate.button1": "OZON",
+  "donate.button2": "T-bank",
   "library.heading": "Library",
   "library.subtitle": "Design patterns, architecture principles, and best practices",
   "library.welcome.title": "Design Patterns & Architecture",
@@ -103,7 +91,6 @@
   "library.not-found": "Page not found",
   "library.home": "Back to Home",
   "library.loading": "Loading...",
-
   "library.section.patterns": "Patterns",
   "library.section.architecture": "Application Architecture",
   "library.group.creational": "Creational",
@@ -115,7 +102,6 @@
   "library.group.cqrs": "CQRS",
   "library.group.di": "Dependency Injection",
   "library.group.ddd": "Domain-Driven Design",
-
   "library.badge.creational": "Creational",
   "library.badge.structural": "Structural",
   "library.badge.behavioral": "Behavioral",
@@ -135,7 +121,6 @@
   "library.meta.applicability": "Applicability",
   "library.nav.prev": "← Previous",
   "library.nav.next": "Next →",
-
   "library.article.factory-method.title": "Factory Method",
   "library.article.abstract-factory.title": "Abstract Factory",
   "library.article.singleton.title": "Singleton",
