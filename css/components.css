@@ -44,6 +44,7 @@
     line-height: 1.8;
     margin-bottom: 1.5rem;
     color: var(--text-color);
+    text-align: center;
 }
 
 .contact-section {
@@ -599,11 +600,22 @@
     line-height: 1.8;
     color: var(--text-color);
     margin-bottom: 1.5rem;
+    text-align: center;
 }
 
 .photography-content {
     display: grid;
     gap: 2rem;
+}
+
+/* Page-specific: gap between milestones and gallery on mech page */
+.mech-content .photography-content {
+    margin-top: 2rem;
+}
+
+.mech-content .smart-gallery {
+    column-count: 2;
+    column-gap: 1rem;
 }
 
 .photo-category-title {
