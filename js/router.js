@@ -3,7 +3,7 @@ import { i18n } from './i18n.js';
 export class Navigation {
     constructor(options = {}) {
         this.currentSection = 'about';
-        this.sections = ['about', 'tech', 'sport', 'photography', 'donate', 'library'];
+        this.sections = ['about', 'tech', 'sport', 'photography','mech', 'donate', 'library'];
         this.sectionCache = {};
         this.afterLoad = options.afterLoad || {};
         this.init();
