@@ -73,7 +73,7 @@
     <path id="mainBE2" d="M636,40 H683 Q703,40 703,60 V615 H795 Q815,615 815,635 V670 Q815,690 835,690 H1150"/>
   </defs>
 
-  <rect class="bg" x="0.5" y="0.5" width="1291" height="789" rx="16"/>
+  <!-- <rect class="bg" x="0.5" y="0.5" width="1291" height="789" rx="16"/> -->
 
   <!-- ============ EDGES ============ -->
   <g marker-end="url(#ar)">
@@ -132,13 +132,33 @@
 
   <!-- ============ TRAVELLING PULSES (SMIL) — below nodes so they "pass through" boxes ============ -->
   <g>
-    <circle class="glow" r="9"><animateMotion dur="5s" begin="2.4s" repeatCount="indefinite"><mpath href="#mainUI"/></animateMotion></circle>
-    <circle class="pulse" r="4"><animateMotion dur="5s" begin="2.4s" repeatCount="indefinite"><mpath href="#mainUI"/></animateMotion></circle>
-    <circle class="glow" r="9"><animateMotion dur="8s" begin="3.2s" repeatCount="indefinite"><mpath href="#mainBE"/></animateMotion></circle>
-    <circle class="pulse" r="4"><animateMotion dur="8s" begin="3.2s" repeatCount="indefinite"><mpath href="#mainBE"/></animateMotion></circle>
-    <circle class="glow" r="9"><animateMotion dur="8s" begin="7.2s" repeatCount="indefinite"><mpath href="#mainBE2"/></animateMotion></circle>
-    <circle class="pulse" r="4"><animateMotion dur="8s" begin="7.2s" repeatCount="indefinite"><mpath href="#mainBE2"/></animateMotion></circle>
-  </g>
+  <circle class="glow" r="9" visibility="hidden">
+    <set attributeName="visibility" to="visible" begin="2.4s"/>
+    <animateMotion dur="5s" begin="2.4s" repeatCount="indefinite"><mpath href="#mainUI"/></animateMotion>
+  </circle>
+  <circle class="pulse" r="4" visibility="hidden">
+    <set attributeName="visibility" to="visible" begin="2.4s"/>
+    <animateMotion dur="5s" begin="2.4s" repeatCount="indefinite"><mpath href="#mainUI"/></animateMotion>
+  </circle>
+
+  <circle class="glow" r="9" visibility="hidden">
+    <set attributeName="visibility" to="visible" begin="3.2s"/>
+    <animateMotion dur="8s" begin="3.2s" repeatCount="indefinite"><mpath href="#mainBE"/></animateMotion>
+  </circle>
+  <circle class="pulse" r="4" visibility="hidden">
+    <set attributeName="visibility" to="visible" begin="3.2s"/>
+    <animateMotion dur="8s" begin="3.2s" repeatCount="indefinite"><mpath href="#mainBE"/></animateMotion>
+  </circle>
+
+  <circle class="glow" r="9" visibility="hidden">
+    <set attributeName="visibility" to="visible" begin="7.2s"/>
+    <animateMotion dur="8s" begin="7.2s" repeatCount="indefinite"><mpath href="#mainBE2"/></animateMotion>
+  </circle>
+  <circle class="pulse" r="4" visibility="hidden">
+    <set attributeName="visibility" to="visible" begin="7.2s"/>
+    <animateMotion dur="8s" begin="7.2s" repeatCount="indefinite"><mpath href="#mainBE2"/></animateMotion>
+  </circle>
+</g>
 
   <!-- ============ NODES ============ -->
   <!-- root -->
@@ -182,15 +202,15 @@
 
   <g class="n dart" style="--d:1.4s">
     <rect x="977" y="188" width="257" height="84" rx="6"/>
-    <text x="993" y="209">1. Fast startup, MVP speed</text>
+    <text x="993" y="209">1. Fast startup / MVP</text>
     <text x="993" y="230">2. Shared code with Flutter</text>
     <text x="993" y="251">3. One language end-to-end</text>
   </g>
   <g class="n kotlin" style="--d:1.4s">
     <rect x="977" y="293" width="298" height="103" rx="6"/>
-    <text x="993" y="319">1. Type-safe, long-lived projects</text>
+    <text x="993" y="319">1. Long-lived projects</text>
     <text x="993" y="344">2. Coroutines &amp; concurrency</text>
-    <text x="993" y="369">3. High load · Ktor</text>
+    <text x="993" y="369">3. High load</text>
   </g>
   <g class="n rust planned" style="--d:1.6s">
     <rect x="977" y="420" width="223" height="56" rx="8"/>
@@ -221,7 +241,7 @@
   </g>
   <g class="n infra" style="--d:2.1s">
     <rect x="1000" y="533" width="100" height="54" rx="8"/>
-    <text class="c" x="1050" y="551">GHCR</text>
+    <text class="c" x="1050" y="551">DockerHub</text>
     <text class="c small" x="1050" y="571">registry</text>
   </g>
   <g class="n infra" style="--d:2.3s">
@@ -244,8 +264,8 @@
   </g>
   <g class="n infra" style="--d:2.3s">
     <rect x="1150" y="663" width="120" height="54" rx="8"/>
-    <text class="c" x="1210" y="681">systemd</text>
-    <text class="c small" x="1210" y="701">chmod +x</text>
+    <text class="c" x="1210" y="681">systemctl</text>
+    <text class="c small" x="1210" y="701">service</text>
   </g>
 
   <!-- legend -->
@@ -253,6 +273,6 @@
     <rect x="0" y="0" width="22" height="14" rx="4" style="fill:transparent;stroke:var(--stroke)"/>
     <text class="small" x="30" y="8">current</text>
     <rect x="110" y="0" width="22" height="14" rx="4" style="fill:transparent;stroke:var(--stroke);stroke-dasharray:3 4;stroke-linecap:round"/>
-    <text class="small" x="140" y="8">planned</text>
+    <text class="small" x="140" y="8">diving in</text>
   </g>
 </svg>
